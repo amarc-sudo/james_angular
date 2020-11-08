@@ -8,6 +8,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
+import { AuthGuard} from './auth.guard';
+import {AuthService} from './auth.service';
 
 @NgModule({
   declarations: [
@@ -27,14 +29,15 @@ import { FormsModule } from '@angular/forms';
       },
       {
         path: 'admin',
-        component: AdminComponent
+        component: AdminComponent,
+        canActivate: [AuthGuard]
       },  {
         path: '',
         component: HomeComponent
       }
     ])
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

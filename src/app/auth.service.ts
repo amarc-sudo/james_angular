@@ -8,7 +8,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  loggedInStatus = false;
 
+  get isLoggedIn(){
+    return true;
+  }
 
   // tslint:disable-next-line:typedef
   getUserDetails(email, password){
