@@ -10,8 +10,17 @@ export class AuthService {
 
   loggedInStatus = false;
 
+  // tslint:disable-next-line:typedef
   get isLoggedIn(){
-    return true;
+    return this.loggedInStatus;
+  }
+  // tslint:disable-next-line:typedef
+  loggedIn(value: boolean, email: string){
+    this.loggedInStatus = value;
+    if (value) {
+      sessionStorage.setItem("loggedIn", 'true');
+      sessionStorage.setItem("email", email);
+    }
   }
 
   // tslint:disable-next-line:typedef

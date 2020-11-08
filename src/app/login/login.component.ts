@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth.service';
 import {NgForm} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import {Router, RouterModule} from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService) { }
+  constructor(private Auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,13 +19,15 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm){
     const email = form.value['email'];
     const password = form.value['password'];
-
+    console.log(password);
     this.Auth.getUserDetails(email, password).subscribe(data => {
       // @ts-ignore
       if (data){
-        window.alert('bon');
+        this.Auth.loggedIn(true, email);
+        this.router.navigate(['admin']);
       } else {
-        window.alert('pas bon');
+        sessionStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("email");
       }
     });
   }
