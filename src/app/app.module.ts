@@ -2,14 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './pages/admin/admin.component';
 import { FormsModule } from '@angular/forms';
-import { AuthGuard} from './auth.guard';
-import {AuthService} from './auth.service';
+import { AuthGuard} from './service/auth/auth.guard';
+import {AuthService} from './service/auth/auth.service';
 
 @NgModule({
   declarations: [
