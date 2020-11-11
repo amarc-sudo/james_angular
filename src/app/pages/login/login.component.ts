@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm){
     const email = form.value.email;
     const password = form.value.password;
-    console.log(password);
     this.Auth.getUserDetails(email, password).subscribe(data => {
       // @ts-ignore
       if (data){

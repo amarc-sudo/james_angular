@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,14 @@ export class AuthService {
   loggedIn(value: boolean, email: string){
     this.loggedInStatus = value;
     if (value) {
-      sessionStorage.setItem("loggedIn", 'true');
-      sessionStorage.setItem("email", email);
+      sessionStorage.setItem('loggedIn', 'true');
+      sessionStorage.setItem('email', email);
     }
   }
 
   // tslint:disable-next-line:typedef
   getUserDetails(email, password){
-    return this.http.post('http://localhost:8080/rest/api/secretaire/correctLogin', {
+    return this.http.post(environment.apiUrl + +'/rest/api/secretaire/correctLogin', {
       email,
       password
     });
