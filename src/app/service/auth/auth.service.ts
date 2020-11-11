@@ -26,7 +26,7 @@ export class AuthService {
 
   // tslint:disable-next-line:typedef
   getUserDetails(email, password){
-    return this.http.post(environment.apiUrl + +'/rest/api/secretaire/correctLogin', {
+    return this.http.post(environment.apiUrl + '/rest/api/secretaire/correctLogin', {
       email,
       password
     });
