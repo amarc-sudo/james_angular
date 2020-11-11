@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://146.59.234.40:8080'
+  apiUrl: 'https://stark-up-dabtion:8080'
 };
