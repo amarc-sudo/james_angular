@@ -10,6 +10,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard} from './service/auth/auth.guard';
 import {AuthService} from './service/auth/auth.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {AuthService} from './service/auth/auth.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     RouterModule.forRoot([
       {
         path: 'login',

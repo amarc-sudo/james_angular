@@ -24,11 +24,27 @@ export class AuthService {
     }
   }
 
+  /**
+   * Fonction qui appelle l'API qui permet de vérifier que l'email et le mdp sont bon
+   * @param email email de la secrétaire
+   * @param password mot de passe de la secrétaire
+   */
   // tslint:disable-next-line:typedef
   getUserDetails(email, password){
     return this.http.post(environment.apiUrl + '/rest/api/secretaire/correctLogin', {
       email,
       password
+    });
+  }
+
+  /**
+   * Fonction qui appelle l'API qui reset le password
+   * @param email email du mot de passe a reset
+   */
+  // tslint:disable-next-line:typedef
+  public resetPassword(email){
+    return this.http.post(environment.apiUrl + '/rest/api/secretaire/resetPassword', {
+      email
     });
   }
 }
