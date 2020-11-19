@@ -43,7 +43,7 @@ export class AuthService {
    */
   // tslint:disable-next-line:typedef
   public resetPassword(email){
-    return this.http.post(environment.apiUrl + '/rest/api/secretaire/resetPassword', {
+    return this.http.post(environment.apiUrl + '/rest/api/contact/resetPassword', {
       email
     });
   }
