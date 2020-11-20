@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,22 @@ export class AuthService {
   public resetPassword(email){
     return this.http.post(environment.apiUrl + '/rest/api/contact/resetPassword', {
       email
+    });
+  }
+
+  /**
+   * Fonction permettant de savoir si le token est correct ou non
+   * @param token qyi est le token unique que l'on donne à l'URL
+   */
+  public correctToken(token): Observable<boolean>{
+    // @ts-ignore
+    return this.http.get(environment.apiUrl + '/rest/api/contact/correctToken?token=' + token);
+  }
+
+  // @ts-ignore
+  public changePassword(password: string, token: string): Observable<any>{
+    return this.http.post(environment.apiUrl + '/rest/api/contact/changePassword', {
+      password, token
     });
   }
 }
