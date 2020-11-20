@@ -11,13 +11,15 @@ import { FormsModule } from '@angular/forms';
 import { AuthGuard} from './service/auth/auth.guard';
 import {AuthService} from './service/auth/auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ResetComponent } from './pages/reset/reset.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule,
     RouterModule.forRoot([
+      {
+        path: 'reset',
+        component: ResetComponent
+      },
       {
         path: 'login',
         component: LoginComponent

@@ -9,10 +9,13 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'James';
   constructor(private router: Router) {
-    if (sessionStorage.getItem("loggedIn")){
+   /* if (sessionStorage.getItem("loggedIn")){
       this.router.navigate(['admin']);
-    }else{
-      this.router.navigate(['login']);
+      // tslint:disable-next-line:align
     }
+    console.log(this.router.url);
+    if (this.router.url !== 'reset'){
+      this.router.navigate(['login']);
+    }*/
   }
 }
