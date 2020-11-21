@@ -12,6 +12,7 @@ import { AuthGuard} from './service/auth/auth.guard';
 import {AuthService} from './service/auth/auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ResetComponent } from './pages/reset/reset.component';
+import {ModalDemandeComponent} from './modal/demandeReset/modal-demande.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ResetComponent } from './pages/reset/reset.component';
     LoginComponent,
     HomeComponent,
     AdminComponent,
-    ResetComponent
+    ResetComponent,
+    ModalDemandeComponent
   ],
   imports: [
     BrowserModule,
