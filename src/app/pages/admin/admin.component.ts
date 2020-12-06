@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  private prenom: string;
+  private nom: string;
+
+  constructor() {
+    this.prenom = sessionStorage.getItem('prenom');
+    this.nom = sessionStorage.getItem('nom');
+  }
 
   ngOnInit(): void {
+  }
+
+  getPrenom(): string {
+    console.log(sessionStorage.getItem('formations'));
+    return this.prenom + " " + this.nom;
   }
 
 }
