@@ -17,11 +17,16 @@ export class AuthService {
     return this.loggedInStatus;
   }
   // tslint:disable-next-line:typedef
-  loggedIn(value: boolean, email: string){
+  loggedIn(value: boolean, email: string, idProf: string, formation: object[],  personne: object[], poste: string){
     this.loggedInStatus = value;
     if (value) {
+
       sessionStorage.setItem('loggedIn', 'true');
       sessionStorage.setItem('email', email);
+      sessionStorage.setItem('nom', personne['nom']);
+      sessionStorage.setItem('formations', JSON.stringify(formation));
+      sessionStorage.setItem('prenom', personne['prenom']);
+      sessionStorage.setItem('poste', poste);
     }
   }
 
@@ -35,8 +40,8 @@ export class AuthService {
    * @param email email de la secrétaire
    * @param password mot de passe de la secrétaire
    */
-  // tslint:disable-next-line:typedef
-  getUserDetails(email, password){
+
+  getUserDetails(email, password): Observable<any>{
     return this.http.post(environment.apiUrl + '/rest/api/secretaire/correctLogin', {
       email,
       password
