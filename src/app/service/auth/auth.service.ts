@@ -25,6 +25,11 @@ export class AuthService {
     }
   }
 
+  // tslint:disable-next-line:typedef
+  loggedOut(){
+    sessionStorage.clear();
+  }
+
   /**
    * Fonction qui appelle l'API qui permet de vérifier que l'email et le mdp sont bon
    * @param email email de la secrétaire
