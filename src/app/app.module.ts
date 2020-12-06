@@ -13,6 +13,10 @@ import {AuthService} from './service/auth/auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ResetComponent } from './pages/reset/reset.component';
 import {ModalDemandeComponent} from './modal/demandeReset/modal-demande.component';
+import { HistoryComponent } from './pages/history/history.component';
+import { AppGestionAdmComponent } from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
+import { AppGestionAbsComponent } from './pages/gestion-abs/app-gestion-abs/app-gestion-abs.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,13 +25,17 @@ import {ModalDemandeComponent} from './modal/demandeReset/modal-demande.componen
     HomeComponent,
     AdminComponent,
     ResetComponent,
-    ModalDemandeComponent
+    ModalDemandeComponent,
+    HistoryComponent,
+    AppGestionAdmComponent,
+    AppGestionAbsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     NgbModule,
+    FontAwesomeModule,
     RouterModule.forRoot([
       {
         path: 'reset',
@@ -41,7 +49,23 @@ import {ModalDemandeComponent} from './modal/demandeReset/modal-demande.componen
         path: 'admin',
         component: AdminComponent,
         canActivate: [AuthGuard]
-      },  {
+      },
+      {
+        path: 'admin/historique',
+        component: HistoryComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'admin/gestion-adm',
+        component: AppGestionAdmComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'admin/gestion-abs',
+        component: AppGestionAbsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
         path: '',
         component: HomeComponent
       }

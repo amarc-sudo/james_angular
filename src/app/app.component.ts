@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
+import Popper from 'popper.js';
+import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +11,10 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'James';
   constructor(private router: Router) {
-   /* if (sessionStorage.getItem("loggedIn")){
-      this.router.navigate(['admin']);
-      // tslint:disable-next-line:align
-    }
-    console.log(this.router.url);
-    if (this.router.url !== 'reset'){
-      this.router.navigate(['login']);
-    }*/
+  }
+  faBars = faBars;
+  // tslint:disable-next-line:typedef
+  logged(){
+    return sessionStorage.getItem('loggedIn');
   }
 }
