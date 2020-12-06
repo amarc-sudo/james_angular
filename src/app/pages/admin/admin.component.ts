@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +11,7 @@ export class AdminComponent implements OnInit {
   private prenom: string;
   private nom: string;
 
-  constructor() {
+  constructor(private router: Router) {
     this.prenom = sessionStorage.getItem('prenom');
     this.nom = sessionStorage.getItem('nom');
   }
@@ -21,6 +22,11 @@ export class AdminComponent implements OnInit {
   getPrenom(): string {
     console.log(sessionStorage.getItem('formations'));
     return this.prenom + " " + this.nom;
+  }
+
+  // tslint:disable-next-line:typedef
+  change(s: string) {
+    this.router.navigate([s]);
   }
 
 }

@@ -27,6 +27,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
       if ( sessionStorage.getItem('loggedIn')){
         return true;
       }
+      else{
+        sessionStorage.setItem('failLogged', 'true');
+        return false;
+      }
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
