@@ -35,8 +35,8 @@ export class AuthService {
    * @param email email de la secrétaire
    * @param password mot de passe de la secrétaire
    */
-  // tslint:disable-next-line:typedef
-  getUserDetails(email, password){
+
+  getUserDetails(email, password): Observable<any>{
     return this.http.post(environment.apiUrl + '/rest/api/secretaire/correctLogin', {
       email,
       password
