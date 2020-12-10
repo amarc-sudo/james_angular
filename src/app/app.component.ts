@@ -13,8 +13,8 @@ export class AppComponent {
   constructor(private router: Router) {
   }
   faBars = faBars;
-  // tslint:disable-next-line:typedef
-  logged(){
+
+  logged(): any{
     return sessionStorage.getItem('loggedIn');
   }
 }

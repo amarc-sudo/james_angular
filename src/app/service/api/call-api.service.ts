@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class CallAPIService {
 
-  private api = environment.apiUrl;
+  api = environment.apiUrl;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {TableService} from '../../service/table/table.service';
 import {CallAPIService} from '../../service/api/call-api.service';
 import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -14,19 +13,17 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 export class AdminComponent implements OnInit{
 
-  private prenom: string;
-  private nom: string;
-  private table: TableService;
-  private entete: string[];
-  private enteteTaille: string[];
-  private html: string;
-  public elementTable: any;
-  private bool: boolean;
+  prenom: string;
+  nom: string;
+  entete: string[];
+  enteteTaille: string[];
+  html: string;
+  elementTable: any;
+  bool: boolean;
 
-  constructor(private router: Router, private api: CallAPIService, private sanitizer: DomSanitizer) {
+  constructor(private router: Router, private api: CallAPIService) {
     this.prenom = sessionStorage.getItem('prenom');
     this.nom = sessionStorage.getItem('nom');
-    // tslint:disable-next-line:label-position
     this.entete = [
       'formation',
       'date',
@@ -34,15 +31,13 @@ export class AdminComponent implements OnInit{
       'en retard'
     ];
     this.enteteTaille = [
-      'style="width :30%"',
-      'style="width :30%"',
-      'style="width :10%"',
-      'style="width :30%"'
+      'width :30%',
+      'width :30%',
+      'width :10%',
+      'width :30%'
     ];
-    this.table = new TableService(this.entete, this.enteteTaille);
     this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) }).subscribe(data => {
         this.elementTable = data;
-        this.createTable();
     });
 
   }
@@ -56,19 +51,8 @@ export class AdminComponent implements OnInit{
     return this.prenom + ' ' + this.nom;
   }
 
-  // tslint:disable-next-line:typedef
-  change(s: string) {
+  change(s: string): void {
     this.router.navigate([s]);
-  }
-
-  getTable(): any{
-    return this.sanitizer.bypassSecurityTrustHtml(this.html);
-  }
-
-  createTable(): void{
-    this.table.debutTable();
-    this.table.addContenu(this.elementTable);
-    this.html = this.table.finTable();
   }
 
 }

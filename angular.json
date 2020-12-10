@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "jamesAngular"
+    }
+  },
+  "defaultProject": "jamesAngular",
+  "cli": {
+    "analytics": false
+  }
 }

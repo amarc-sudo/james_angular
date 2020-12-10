@@ -13,13 +13,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // tslint:disable-next-line:typedef
-  change(s: string) {
+
+  change(s: string): void {
     this.router.navigate([s]);
   }
 
-  // tslint:disable-next-line:typedef
-  logged(){
+
+  logged(): any{
     return sessionStorage.getItem('loggedIn');
   }
 }
