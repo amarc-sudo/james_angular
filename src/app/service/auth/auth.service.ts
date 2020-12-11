@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,7 @@ export class AuthService {
       sessionStorage.setItem('formations', JSON.stringify(formation));
       sessionStorage.setItem('prenom', personne['prenom']);
       sessionStorage.setItem('poste', poste);
+      sessionStorage.setItem('id', idProf);
     }
   }
 

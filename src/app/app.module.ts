@@ -10,26 +10,31 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard} from './service/auth/auth.guard';
 import {AuthService} from './service/auth/auth.service';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ResetComponent } from './pages/reset/reset.component';
-import {ModalDemandeComponent} from './modal/demandeReset/modal-demande.component';
+import {ModalDemandeComponent} from './annexe-component/modal/demandeReset/modal-demande.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { AppGestionAdmComponent } from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
 import { AppGestionAbsComponent } from './pages/gestion-abs/app-gestion-abs/app-gestion-abs.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {safe} from './service/SafeHTML/safe';
+import { TableComponent } from './annexe-component/table/table.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    AdminComponent,
-    ResetComponent,
-    ModalDemandeComponent,
-    HistoryComponent,
-    AppGestionAdmComponent,
-    AppGestionAbsComponent,
-  ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        HomeComponent,
+        AdminComponent,
+        ResetComponent,
+        ModalDemandeComponent,
+        HistoryComponent,
+        AppGestionAdmComponent,
+        AppGestionAbsComponent,
+        safe,
+        TableComponent,
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,

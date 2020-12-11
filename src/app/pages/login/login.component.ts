@@ -18,26 +18,23 @@ export class LoginComponent implements OnInit {
     this.loading = false;
   }
 
-  // tslint:disable-next-line:typedef
+
   error: boolean;
   loading: boolean;
 
   ngOnInit(): void {
   }
-  // tslint:disable-next-line:typedef
-  onSubmit(form: NgForm){
+
+  onSubmit(form: NgForm): void{
     const email = form.value.email;
     const password = form.value.password;
     this.Auth.getUserDetails(email, password).subscribe(data => {
-      // @ts-ignore
       if (data != null){
-        // tslint:disable-next-line:triple-equals
-        if (data[0] == 'secretaire'){
+        if (data[0] === 'secretaire'){
           this.Auth.loggedIn(true, email, data[1]['idSecretaire'], data[1]['formations'], data[1]['personne'], 'sec');
         }
-        // tslint:disable-next-line:triple-equals
-        else if (data[0] == 'professeur') {
-          this.Auth.loggedIn(true, email, data[2]['idProfesseur'], data[1], data[2]['personne'], 'prof');
+        else if (data[0] === 'professeur') {
+          this.Auth.loggedIn(true, email, data[2].idProfesseur, data[1], data[2].personne, 'prof');
         }
         this.router.navigate(['admin']);
       } else {
@@ -48,17 +45,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line:typedef
-  open(content) {
+
+  open(content): void {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
-  // tslint:disable-next-line:typedef
-  sendReset(form: NgForm){
+  sendReset(form: NgForm): void{
     const email = form.value.email;
     this.loading = true;
     this.Auth.resetPassword(email).subscribe(data => {
-      if(data){
+      if (data){
         this.loading = false;
         this.modalService.dismissAll();
       }
