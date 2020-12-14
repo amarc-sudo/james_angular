@@ -2,22 +2,25 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
+import {ParentApiService} from './parent.api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends ParentApiService{
 
-  constructor(private http: HttpClient) { }
 
+  constructor(private httpClient: HttpClient) {
+    super();
+  }
   loggedInStatus = false;
 
-  // tslint:disable-next-line:typedef
-  get isLoggedIn(){
+
+  get isLoggedIn(): boolean{
     return this.loggedInStatus;
   }
-  // tslint:disable-next-line:typedef
-  loggedIn(value: boolean, email: string, idProf: string, formation: object[],  personne: object[], poste: string){
+
+  loggedIn(value: boolean, email: string, idProf: string, formation: object[],  personne: object[], poste: string): void{
     this.loggedInStatus = value;
     if (value) {
 
@@ -31,8 +34,8 @@ export class AuthService {
     }
   }
 
-  // tslint:disable-next-line:typedef
-  loggedOut(){
+
+  loggedOut(): void{
     sessionStorage.clear();
   }
 
@@ -43,7 +46,7 @@ export class AuthService {
    */
 
   getUserDetails(email, password): Observable<any>{
-    return this.http.post(environment.apiUrl + '/rest/api/secretaire/correctLogin', {
+    return this.httpClient.post(environment.apiUrl + '/rest/api/secretaire/correctLogin', {
       email,
       password
     });
@@ -53,9 +56,9 @@ export class AuthService {
    * Fonction qui appelle l'API qui reset le password
    * @param email email du mot de passe a reset
    */
-  // tslint:disable-next-line:typedef
-  public resetPassword(email){
-    return this.http.post(environment.apiUrl + '/rest/api/contact/resetPassword', {
+
+  public resetPassword(email): any{
+    return this.httpClient.post(environment.apiUrl + '/rest/api/contact/resetPassword', {
       email
     });
   }
@@ -64,14 +67,13 @@ export class AuthService {
    * Fonction permettant de savoir si le token est correct ou non
    * @param token qyi est le token unique que l'on donne à l'URL
    */
-  public correctToken(token): Observable<boolean>{
-    // @ts-ignore
-    return this.http.get(environment.apiUrl + '/rest/api/contact/correctToken?token=' + token);
+  public correctToken(token): Observable<any>{
+    return this.httpClient.get(environment.apiUrl + '/rest/api/contact/correctToken?token=' + token);
   }
 
-  // @ts-ignore
+
   public changePassword(password: string, token: string): Observable<any>{
-    return this.http.post(environment.apiUrl + '/rest/api/contact/changePassword', {
+    return this.httpClient.post(environment.apiUrl + '/rest/api/contact/changePassword', {
       password, token
     });
   }
