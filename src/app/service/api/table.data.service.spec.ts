@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CallAPIService } from './call-api.service';
+import { TableDataService } from './table.data.service';
 
 describe('CallAPIService', () => {
-  let service: CallAPIService;
+  let service: TableDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CallAPIService);
+    service = TestBed.inject(TableDataService);
   });
 
   it('should be created', () => {

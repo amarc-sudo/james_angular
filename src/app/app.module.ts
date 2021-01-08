@@ -8,8 +8,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { AdminComponent } from './pages/admin/admin.component';
 import { FormsModule } from '@angular/forms';
-import { AuthGuard} from './service/auth/auth.guard';
-import {AuthService} from './service/auth/auth.service';
+import { AuthGuard} from './service/auth-session/auth.guard';
+import {AuthService} from './service/api/auth.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ResetComponent } from './pages/reset/reset.component';
@@ -18,7 +18,7 @@ import { HistoryComponent } from './pages/history/history.component';
 import { AppGestionAdmComponent } from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
 import { AppGestionAbsComponent } from './pages/gestion-abs/app-gestion-abs/app-gestion-abs.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {safe} from './service/SafeHTML/safe';
+import {Safe} from './service/SafeHTML/safe';
 import { TableComponent } from './annexe-component/table/table.component';
 
 @NgModule({
@@ -32,7 +32,7 @@ import { TableComponent } from './annexe-component/table/table.component';
         HistoryComponent,
         AppGestionAdmComponent,
         AppGestionAbsComponent,
-        safe,
+        Safe,
         TableComponent,
     ],
   imports: [
