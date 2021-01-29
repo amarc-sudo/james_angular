@@ -1,0 +1,8 @@
+<div *ngIf="listCours$ | async as listCours">
+  <div *ngFor="let cours of listCours">
+    <p> {{cours.matiere.intitule}} : de {{cours.begin}} à {{cours.end}} par {{cours.professeur.personne.nom}} {{cours.professeur.personne.prenom}}</p>
+    <div *ngFor="let presence of cours.presences">
+      <p> {{presence.etudiant.personne.nom}} {{presence.etudiant.personne.prenom}} : {{presence.etatPresence.donnees}}</p>
+    </div>
+  </div>
+</div>
