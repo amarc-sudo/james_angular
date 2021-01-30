@@ -8,8 +8,8 @@ export class Cours{
   idCours: number;
   matiere: Matiere;
   date: Date;
-  begin: Time;
-  end: Time;
+  begin: string;
+  end: string;
   professeur: Professeur;
   etat: TableData;
   presences: Presence[];

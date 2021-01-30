@@ -1,0 +1,45 @@
+table{
+  margin-left:50px;
+}
+
+.intitule{
+  font-weight: bold;
+  padding-right: 20px;
+}
+td{
+  vertical-align: top;
+}
+.absence{
+  color: red;
+}
+
+.retard{
+  color:darkorange;
+}
+
+table td ul{
+  padding: 0;
+}
+
+ul{
+  list-style: none;
+}
+
+button{
+  margin-top: 50px;
+}
+
+#gauche{
+  float: left;
+}
+
+#droite{
+  float: right;
+}
+
+
+
+
+
+
+

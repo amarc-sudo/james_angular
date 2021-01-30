@@ -1,8 +1,52 @@
 <div *ngIf="listCours$ | async as listCours">
-  <div *ngFor="let cours of listCours">
-    <p> {{cours.matiere.intitule}} : de {{cours.begin}} à {{cours.end}} par {{cours.professeur.personne.nom}} {{cours.professeur.personne.prenom}}</p>
-    <div *ngFor="let presence of cours.presences">
-      <p> {{presence.etudiant.personne.nom}} {{presence.etudiant.personne.prenom}} : {{presence.etatPresence.donnees}}</p>
+  <div class="row" style="width: 1920px;margin: 0px;padding: 40px;">
+    <div class="col" style="width: 400px;margin: 0 20px 0 0px;height: auto; ">
+      <h4>Liste des cours du {{this.date}} en {{this.formation.intitule}}</h4>
+      <br>
+      <ul>
+        <li *ngFor="let cours of listCours">
+          {{cours.matiere.intitule}}   ({{cours.begin.substring(0, 5)}}
+          à {{cours.end.substring(0, 5)}})
+        </li>
+      </ul>
+      <button class="btn btn-primary" id="gauche" type="button" (click)="pdfGeneration()">GENERER FICHE DE PRESENCE
+      </button>
+      <button class="btn btn-primary" id="droite" type="button" (click)="pdfGeneration()">MODIFIER LES INFORMATIONS
+      </button>
+    </div>
+    <div class="col-xl-8" style="margin: 0 0 0 20px; height: auto;">
+      <div *ngFor="let cours of listCours">
+        <h2 id="{{cours.idCours}}"> {{cours.matiere.intitule}}   ({{cours.begin.substring(0, 5)}}
+          à {{cours.end.substring(0, 5)}}) </h2>
+        <table class="infoCours">
+          <tr>
+            <td class="intitule"> Professeur:</td>
+            <td>{{cours.professeur.personne.nom}} {{cours.professeur.personne.prenom}} </td>
+          </tr>
+          <tr>
+            <td class="intitule">Nombre retards:</td>
+            <td>{{nombreRetards(cours.presences)}}</td>
+          </tr>
+          <tr>
+            <td class="intitule">Nombre absents:</td>
+            <td>{{nombreAbsents(cours.presences)}}</td>
+          </tr>
+          <tr *ngIf="nombreRetards(cours.presences) + nombreAbsents(cours.presences)>0">
+            <td class="intitule">Détails:</td>
+            <td>
+              <ul *ngFor="let presence of cours.presences">
+                <li *ngIf="presence.etatPresence.code==='ret'"
+                    class="retard"> {{presence.etudiant.personne.nom}} {{presence.etudiant.personne.prenom}}
+                  : {{presence.etatPresence.donnees}} </li>
+                <li *ngIf="presence.etatPresence.code==='abs'"
+                    class="absence"> {{presence.etudiant.personne.nom}} {{presence.etudiant.personne.prenom}}
+                  : {{presence.etatPresence.donnees}} </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>
+
