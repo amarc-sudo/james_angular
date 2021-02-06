@@ -7,6 +7,7 @@ import {Time} from '@angular/common';
 import {Presence} from '../../api/objects/Presence';
 import {tap} from 'rxjs/operators';
 import {Formation} from '../../api/objects/Formation';
+import {faSpinner} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-fiche-preview',
@@ -23,8 +24,10 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
   formation: Formation;
 
+  loadingPDF = false;
 
   subscriptions: Subscription[] = [];
+  spinner = faSpinner;
 
   constructor(private coursService: CoursService, private route: ActivatedRoute) {
   }
@@ -58,11 +61,13 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   }
 
   pdfGeneration(): void {
+    this.loadingPDF = true;
     this.subscriptions.push(this.coursService.readFichePresence(this.idFormation, this.date).pipe(
       tap(response => {
         const file = new Blob([response], {type: 'application/pdf'});
         const fileURL = URL.createObjectURL(file);
         window.open(fileURL);
+        this.loadingPDF = false;
       })
     ).subscribe());
   }

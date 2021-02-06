@@ -9,9 +9,11 @@
           à {{cours.end.substring(0, 5)}})
         </li>
       </ul>
-      <button class="btn btn-primary" id="gauche" type="button" (click)="pdfGeneration()">GENERER FICHE DE PRESENCE
+      <button class="btn btn-primary" id="gauche" type="button" (click)="pdfGeneration()"><span *ngIf="!loadingPDF">GENERER FICHE DE PRESENCE</span>
+        <div *ngIf="loadingPDF" class="spinner-border text-dark" role="status">
+        </div>
       </button>
-      <button class="btn btn-primary" id="droite" type="button" (click)="pdfGeneration()">MODIFIER LES INFORMATIONS
+      <button class="btn btn-primary" id="droite" type="button">MODIFIER LES INFORMATIONS
       </button>
     </div>
     <div class="col-xl-8" style="margin: 0 0 0 20px; height: auto;">
