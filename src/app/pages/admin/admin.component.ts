@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {CallAPIService} from '../../service/api/call-api.service';
+import {TableDataService} from '../../service/api/table.data.service';
 import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit{
   elementTable: any;
   bool: boolean;
 
-  constructor(private router: Router, private api: CallAPIService) {
+  constructor(private router: Router, private api: TableDataService) {
     this.prenom = sessionStorage.getItem('prenom');
     this.nom = sessionStorage.getItem('nom');
     this.entete = [
@@ -47,7 +47,6 @@ export class AdminComponent implements OnInit{
   }
 
   getPrenom(): string {
-    console.log(sessionStorage.getItem('formations'));
     return this.prenom + ' ' + this.nom;
   }
 
