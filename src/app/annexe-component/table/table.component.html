@@ -6,8 +6,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let element of donneesTable">
-        <td *ngFor="let colonne of element"> {{colonne}}</td>
+      <tr *ngFor="let element of donneesTable" style="cursor: pointer" (click)="goToFiche(element[1],element[4])" >
+        <td *ngFor="let colonne of  element.slice(0,4)"  >{{colonne}}</td>
       </tr>
     </tbody>
   </table>

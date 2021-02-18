@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TableDataService} from '../../service/api/table.data.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-history',
@@ -13,8 +14,13 @@ export class HistoryComponent implements OnInit {
   entete: string[];
   enteteTaille: string[];
   elementTable: any;
+  observable$: Observable<any>;
 
   constructor(private router: Router, private api: TableDataService) {
+
+  }
+
+  ngOnInit(): void {
     this.entete = [
       'formation',
       'date',
@@ -27,12 +33,7 @@ export class HistoryComponent implements OnInit {
       'width :10%',
       'width :30%'
     ];
-    this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) }).subscribe(data => {
-      this.elementTable = data;
-    });
-  }
-
-  ngOnInit(): void {
+    this.observable$ = this.api.getData('/rest/api/cours/getCoursSend', { id : Number(sessionStorage.getItem('id')) });
   }
 
   onSubmit(form: NgForm): void {
