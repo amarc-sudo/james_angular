@@ -20,6 +20,8 @@ import { AppGestionAbsComponent } from './pages/gestion-abs/app-gestion-abs/app-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {Safe} from './service/SafeHTML/safe';
 import { TableComponent } from './annexe-component/table/table.component';
+import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
+import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +36,8 @@ import { TableComponent } from './annexe-component/table/table.component';
         AppGestionAbsComponent,
         Safe,
         TableComponent,
+        AdminPanelComponent,
+        AdminCardComponent,
     ],
   imports: [
     BrowserModule,
@@ -68,6 +72,11 @@ import { TableComponent } from './annexe-component/table/table.component';
       {
         path: 'admin/gestion-abs',
         component: AppGestionAbsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'admin-panel',
+        component: AdminPanelComponent,
         canActivate: [AuthGuard]
       },
       {
