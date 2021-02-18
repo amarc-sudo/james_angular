@@ -83,23 +83,19 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   }
 
   increasePositionDiapo(): void {
-    if (this.positionDiapo === this.nombreCours - 1) {
-      this.positionDiapo = 0;
-    } else {
       this.positionDiapo++;
-    }
   }
 
 
   decreasePositionDiapo(): void {
-    if (this.positionDiapo === 0) {
-      this.positionDiapo = this.nombreCours - 1;
-    } else {
       this.positionDiapo--;
-    }
   }
 
   goToModification(idCours: number): void {
     this.router.navigate(['/admin/gestion-abs/fiche-presence/modification'], {queryParams: {idCours: idCours.toString()}});
+  }
+
+  changementPositionDiapo(indice: number): void {
+    this.positionDiapo = indice;
   }
 }

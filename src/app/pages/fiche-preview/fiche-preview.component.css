@@ -1,19 +1,12 @@
 table{
   text-align: left;
+
 }
 
-.recap{
-  padding-top: 30px;
+td{
+  height: 50px;
 }
 
-.titre{
-  display: flex;
-  align-content: center;
-  text-align: center;
-  width: 100%;
-  padding-right: 40px;
-  padding-left: 40px;
-}
 
 h1{
   width: 100%;
