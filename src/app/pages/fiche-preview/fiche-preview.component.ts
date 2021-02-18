@@ -3,11 +3,11 @@ import {Observable, Subscription} from 'rxjs';
 import {Cours} from '../../api/objects/Cours';
 import {CoursService} from '../../service/api/cours.service';
 import {ActivatedRoute} from '@angular/router';
-import {Time} from '@angular/common';
 import {Presence} from '../../api/objects/Presence';
 import {tap} from 'rxjs/operators';
 import {Formation} from '../../api/objects/Formation';
-import {faSpinner} from '@fortawesome/free-solid-svg-icons';
+import {faAngleRight, faSpinner} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
 
 @Component({
   selector: 'app-fiche-preview',
@@ -22,12 +22,20 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
   date: string;
 
+  positionDiapo: number;
+
+  faFlecheDroite = faAngleRight;
+
+  faFlecheGauche = faAngleLeft;
+
   formation: Formation;
 
   loadingPDF = false;
 
   subscriptions: Subscription[] = [];
   spinner = faSpinner;
+
+  nombreCours: number;
 
   constructor(private coursService: CoursService, private route: ActivatedRoute) {
   }
@@ -43,6 +51,8 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
       this.subscriptions.push(this.listCours$.pipe(tap(list => {
         if (list.length > 0) {
           this.formation = list[0].matiere.formation;
+          this.positionDiapo = 0;
+          this.nombreCours = list.length;
         }
       })).subscribe());
     }
@@ -72,5 +82,21 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
     ).subscribe());
   }
 
+  increasePositionDiapo(): void {
+    if (this.positionDiapo === this.nombreCours - 1) {
+      this.positionDiapo = 0;
+    } else {
+      this.positionDiapo++;
+    }
+  }
 
+
+  decreasePositionDiapo(): void {
+    if (this.positionDiapo === 0){
+      this.positionDiapo = this.nombreCours - 1;
+    }
+    else{
+      this.positionDiapo--;
+    }
+  }
 }

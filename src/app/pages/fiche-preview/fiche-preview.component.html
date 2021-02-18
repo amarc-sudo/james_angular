@@ -1,54 +1,57 @@
-<div *ngIf="listCours$ | async as listCours">
-  <div class="row" style="width: 1920px;margin: 0px;padding: 40px;">
-    <div class="col" style="width: 400px;margin: 0 20px 0 0px;height: auto; ">
-      <h4>Liste des cours du {{this.date}} en {{this.formation.intitule}}</h4>
-      <br>
-      <ul>
-        <li *ngFor="let cours of listCours">
-          {{cours.matiere.intitule}}   ({{cours.begin.substring(0, 5)}}
-          à {{cours.end.substring(0, 5)}})
-        </li>
-      </ul>
-      <button class="btn btn-primary" id="gauche" type="button" (click)="pdfGeneration()"><span *ngIf="!loadingPDF">GENERER FICHE DE PRESENCE</span>
-        <div *ngIf="loadingPDF" class="spinner-border text-dark" role="status">
+<div class="recap" *ngIf="positionDiapo!=null && listCours$ | async as listCours">
+  <div class="titre">
+    <h1 style="text-align: center;"> {{formation.intitule}}, le {{date | date:'dd/MM/yyyy'}}</h1>
+    <button class="btn btn-primary" id="gauche" type="button" (click)="pdfGeneration()"><span *ngIf="!loadingPDF">GENERER FICHE DE PRESENCE</span>
+      <div *ngIf="loadingPDF" class="spinner-border text-dark" role="status">
+      </div>
+    </button>
+  </div>
+
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-xl-1">
+          <button class="btn btn-primary align-self-center" type="button" (click)="decreasePositionDiapo()">
+            <fa-icon [icon]="faFlecheGauche"></fa-icon>
+          </button>
         </div>
-      </button>
-      <button class="btn btn-primary" id="droite" type="button">MODIFIER LES INFORMATIONS
-      </button>
-    </div>
-    <div class="col-xl-8" style="margin: 0 0 0 20px; height: auto;">
-      <div *ngFor="let cours of listCours">
-        <h2 id="{{cours.idCours}}"> {{cours.matiere.intitule}}   ({{cours.begin.substring(0, 5)}}
-          à {{cours.end.substring(0, 5)}}) </h2>
-        <table class="infoCours">
-          <tr>
-            <td class="intitule"> Professeur:</td>
-            <td>{{cours.professeur.personne.nom}} {{cours.professeur.personne.prenom}} </td>
-          </tr>
-          <tr>
-            <td class="intitule">Nombre retards:</td>
-            <td>{{nombreRetards(cours.presences)}}</td>
-          </tr>
-          <tr>
-            <td class="intitule">Nombre absents:</td>
-            <td>{{nombreAbsents(cours.presences)}}</td>
-          </tr>
-          <tr *ngIf="nombreRetards(cours.presences) + nombreAbsents(cours.presences)>0">
-            <td class="intitule">Détails:</td>
-            <td>
-              <ul *ngFor="let presence of cours.presences">
-                <li *ngIf="presence.etatPresence.code==='ret'"
-                    class="retard"> {{presence.etudiant.personne.nom}} {{presence.etudiant.personne.prenom}}
-                  : {{presence.etatPresence.donnees}} </li>
-                <li *ngIf="presence.etatPresence.code==='abs'"
-                    class="absence"> {{presence.etudiant.personne.nom}} {{presence.etudiant.personne.prenom}}
-                  : {{presence.etatPresence.donnees}} </li>
-              </ul>
-            </td>
-          </tr>
-        </table>
+        <div class="col-md-4 col-xl-10" style="text-align: center;font-size: 14px;">
+          <div class="row">
+            <div class="col-md-4 col-xl-10">
+              <h2>{{listCours[positionDiapo].matiere.intitule}} de {{listCours[positionDiapo].begin.substring(0, 5)}}
+                à {{listCours[positionDiapo].end.substring(0, 5)}}</h2>
+            </div>
+            <div class="col-md-4 col-xl-1">
+
+              <button class="btn btn-primary" type="button" style="text-align: center;">MODIFIER</button>
+            </div>
+          </div>
+          <h3>
+            Professeur: {{listCours[positionDiapo].professeur.personne.nom | uppercase}} {{listCours[positionDiapo].professeur.personne.prenom}}</h3>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>ETUDIANTS</th>
+                <th>STATUT</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let presence of listCours[positionDiapo].presences | orderBy: 'etudiant.personne.nom': false">
+                <td>{{presence.etudiant.personne.nom |uppercase}} {{presence.etudiant.personne.prenom}}</td>
+                <td>{{presence.etatPresence.donnees}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4 col-xl-1">
+          <button class="btn btn-primary align-self-center" type="button" (click)="increasePositionDiapo()">
+            <fa-icon [icon]="faFlecheDroite"></fa-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+</div>
