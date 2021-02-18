@@ -22,6 +22,7 @@ import {Safe} from './service/SafeHTML/safe';
 import {TableComponent} from './annexe-component/table/table.component';
 import {FichePreviewComponent} from './pages/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
+import { ModifFicheComponent } from './pages/modif-fiche/modif-fiche.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {OrderModule} from 'ngx-order-pipe';
     Safe,
     TableComponent,
     FichePreviewComponent,
+    ModifFicheComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +78,11 @@ import {OrderModule} from 'ngx-order-pipe';
       {
         path: 'admin/gestion-abs/fiche-presence',
         component: FichePreviewComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'admin/gestion-abs/fiche-presence/modification',
+        component: ModifFicheComponent,
         canActivate: [AuthGuard]
       },
       {

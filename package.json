@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
     "bootstrap": "^4.5.3",
+    "moment-timezone": "^0.5.33",
     "ng": "^0.0.0",
     "ng-bootstrap": "^1.6.3",
     "ngx-bootstrap": "^6.2.0",

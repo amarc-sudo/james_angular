@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {Cours} from '../../api/objects/Cours';
 import {CoursService} from '../../service/api/cours.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Presence} from '../../api/objects/Presence';
 import {tap} from 'rxjs/operators';
 import {Formation} from '../../api/objects/Formation';
@@ -37,7 +37,7 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
   nombreCours: number;
 
-  constructor(private coursService: CoursService, private route: ActivatedRoute) {
+  constructor(private coursService: CoursService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -92,11 +92,14 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
 
   decreasePositionDiapo(): void {
-    if (this.positionDiapo === 0){
+    if (this.positionDiapo === 0) {
       this.positionDiapo = this.nombreCours - 1;
-    }
-    else{
+    } else {
       this.positionDiapo--;
     }
+  }
+
+  goToModification(idCours: number): void {
+    this.router.navigate(['/admin/gestion-abs/fiche-presence/modification'], {queryParams: {idCours: idCours.toString()}});
   }
 }
