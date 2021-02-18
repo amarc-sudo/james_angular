@@ -1,0 +1,72 @@
+<div class="recap" *ngIf="positionDiapo!=null && listCours$ | async as listCours">
+  <div class="container">
+    <div class="row justify-content-center align-items-center" style="text-align: left">
+      <div class="col col-xl-7">
+        <h1> {{formation.intitule}}, le {{date | date:'dd/MM/yyyy'}}</h1>
+        <h3>{{listCours[positionDiapo].matiere.intitule}} <br/>
+          Professeur: {{listCours[positionDiapo].professeur.personne.nom | uppercase}} {{listCours[positionDiapo].professeur.personne.prenom}}
+          <br/>
+          Horaires: {{listCours[positionDiapo].begin.substring(0, 5)}}
+          à {{listCours[positionDiapo].end.substring(0, 5)}} <br/>
+        </h3>
+      </div>
+      <div class="col col-xl-2 offset-2">
+        <button class="btn btn-primary" type="button" style="text-align: center;"
+                (click)="goToModification(listCours[positionDiapo].idCours)">MODIFIER
+        </button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-3 col-xl-3" style="margin-top: 20px;">
+            <ul class="list-group">
+              <li class="list-group-item" style="cursor: pointer" *ngFor="let cours of listCours"
+                  (click)="changementPositionDiapo(listCours.indexOf(cours))"><span>{{cours.matiere.intitule}}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-xl-1">
+            <button class="btn btn-primary align-self-center" type="button" (click)="decreasePositionDiapo()"
+                    [disabled]="positionDiapo==0">
+              <fa-icon [icon]="faFlecheGauche"></fa-icon>
+            </button>
+          </div>
+          <div class="col-md-3 col-xl-7" style="text-align: center;font-size: 14px">
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>ETUDIANTS</th>
+                  <th>STATUT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                  *ngFor="let presence of listCours[positionDiapo].presences | orderBy: 'etudiant.personne.nom': false"
+                  [style]="presence.etatPresence.idData >= 2 ? (presence.etatPresence.idData == 3? 'color: red':'color :orange'): ''">
+                  <td>{{presence.etudiant.personne.nom |uppercase}} {{presence.etudiant.personne.prenom}}</td>
+                  <td>{{presence.etatPresence.donnees}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-3 col-xl-1">
+            <button class="btn btn-primary align-self-center" type="button" (click)="increasePositionDiapo()"
+                    [disabled]="positionDiapo==listCours.length-1">
+              <fa-icon [icon]="faFlecheDroite"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center align-items-center" style="margin-top: 20px">
+      <button class="btn btn-primary " id="gauche" type="button" (click)="pdfGeneration()"><span *ngIf="!loadingPDF">GENERER FICHE DE PRESENCE</span>
+        <div *ngIf="loadingPDF" class="spinner-border text-dark" role="status">
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
