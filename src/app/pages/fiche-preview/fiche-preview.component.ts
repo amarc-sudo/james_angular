@@ -8,6 +8,8 @@ import {tap} from 'rxjs/operators';
 import {Formation} from '../../api/objects/Formation';
 import {faAngleRight, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
+import {TableData} from '../../api/objects/TableData';
+import {TableDataService} from '../../service/api/table.data.service';
 
 @Component({
   selector: 'app-fiche-preview',
@@ -35,9 +37,13 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   spinner = faSpinner;
 
+
+
+  envoye: TableData;
+
   nombreCours: number;
 
-  constructor(private coursService: CoursService, private route: ActivatedRoute, private router: Router) {
+  constructor(private coursService: CoursService, private tableDataService: TableDataService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -55,6 +61,8 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
           this.nombreCours = list.length;
         }
       })).subscribe());
+
+      this.subscriptions.push(this.tableDataService.readByCode('env').subscribe(result => this.envoye = result));
     }
   }
 
@@ -70,8 +78,14 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
     return (presences.filter(presence => presence.etatPresence.code === 'ret')).length;
   }
 
-  pdfGeneration(): void {
+  pdfGeneration(listCours: Cours[]): void {
     this.loadingPDF = true;
+    listCours.forEach(cours => {
+      cours.etat = this.envoye;
+      this.subscriptions.push(this.coursService.update(cours).subscribe());
+    }
+  )
+    ;
     this.subscriptions.push(this.coursService.readFichePresence(this.idFormation, this.date).pipe(
       tap(response => {
         const file = new Blob([response], {type: 'application/pdf'});
@@ -83,12 +97,12 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   }
 
   increasePositionDiapo(): void {
-      this.positionDiapo++;
+    this.positionDiapo++;
   }
 
 
   decreasePositionDiapo(): void {
-      this.positionDiapo--;
+    this.positionDiapo--;
   }
 
   goToModification(idCours: number): void {

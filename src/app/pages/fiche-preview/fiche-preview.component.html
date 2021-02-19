@@ -11,7 +11,8 @@
         </h3>
       </div>
       <div class="col col-xl-2 offset-2">
-        <button class="btn btn-primary" type="button" style="text-align: center;"
+        <button *ngIf="listCours[positionDiapo].etat.code === 'non_env'" class="btn btn-primary" type="button"
+                style="text-align: center;"
                 (click)="goToModification(listCours[positionDiapo].idCours)">MODIFIER
         </button>
       </div>
@@ -22,7 +23,8 @@
           <div class="col-md-3 col-xl-3" style="margin-top: 20px;">
             <ul class="list-group">
               <li class="list-group-item" style="cursor: pointer" *ngFor="let cours of listCours"
-                  (click)="changementPositionDiapo(listCours.indexOf(cours))"><span>{{cours.matiere.intitule}}</span>
+                  (click)="changementPositionDiapo(listCours.indexOf(cours))"><span
+                [style]="listCours.indexOf(cours) === positionDiapo ? 'color: red': ''">{{cours.matiere.intitule}}</span>
               </li>
             </ul>
           </div>
@@ -33,7 +35,6 @@
             </button>
           </div>
           <div class="col-md-3 col-xl-7" style="text-align: center;font-size: 14px">
-
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -63,7 +64,8 @@
       </div>
     </div>
     <div class="row justify-content-center align-items-center" style="margin-top: 20px">
-      <button class="btn btn-primary " id="gauche" type="button" (click)="pdfGeneration()"><span *ngIf="!loadingPDF">GENERER FICHE DE PRESENCE</span>
+      <button class="btn btn-primary " id="gauche" type="button" (click)="pdfGeneration(listCours)"><span
+        *ngIf="!loadingPDF">GENERER FICHE DE PRESENCE</span>
         <div *ngIf="loadingPDF" class="spinner-border text-dark" role="status">
         </div>
       </button>
