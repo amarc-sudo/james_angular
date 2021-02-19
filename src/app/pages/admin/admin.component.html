@@ -1,6 +1,5 @@
-
-
-<div class="h-100 d-flex-block" style="margin-top: 20px;Max-height: 100%;min-height: 100%;height: 100%;">
+<div class="h-100 d-flex-block"
+     style="margin-top: 20px;Max-height: 100%;min-height: 100%;height: 100%;">
   <div class="container h-100" style="height: 100%; min-height: 100%;">
     <div class="row h-100" style="Max-height: 100%;">
       <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 h-100 ">
@@ -10,7 +9,8 @@
           <!-- Links -->
           <ul class="navbar-nav list-group w-100">
             <li class="nav-item list-group-item dropdown w-100">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" w-100="">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false" w-100="">
                 Gestion général
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -20,7 +20,8 @@
               </div>
             </li>
             <li class="nav-item list-group-item dropdown w-100">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
                 Gestion des fiches d'absence
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -30,7 +31,7 @@
               </div>
             </li>
             <li class="nav-item list-group-item dropdown w-100">
-              <a class="nav-link" href="#"  data-toggle="dropdown" (click)="change('admin/historique')">
+              <a class="nav-link" href="#" data-toggle="dropdown" (click)="change('admin/historique')">
                 Historique
               </a>
             </li>
@@ -38,7 +39,8 @@
 
         </nav>
       </div>
-      <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 h-100" style="border-left-style: solid;"><span>Feuilles en attente d'envoie</span>
+      <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 h-100 table_admin_css">
+        <span>Feuilles en attente d'envoie</span>
         <div class="recap" *ngIf="observable$ | async as contenuTable">
           <app-table [entete]="entete" [tailleEnTete]="enteteTaille" [donneesTable]="contenuTable"></app-table>
         </div>

@@ -1,0 +1,27 @@
+.reset-titre  {
+  margin-left: 32%;
+}
+
+.container-reset {
+  margin-top: 3%;
+  border-style: none;
+}
+
+.reset-password {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  background: #212529;
+  padding: 22px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-width: 1px;
+  border-style: none;
+  height: 247px;
+}
+
+.reset-alert {
+  height: 40% ;
+  width: 100%;
+  margin-top: 10px;
+}

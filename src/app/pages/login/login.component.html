@@ -1,8 +1,8 @@
 <div class="login-clean" style="border-style: none;">
-  <div class="container" style="margin-top: 3%;border-style: none;">
+  <div class="container container-login">
     <div class="row" style="border-style: none;">
       <div class="col-2 col-sm-2 col-md-3 col-lg-3 col-xl-3"></div>
-      <div class="col-8 col-sm-8 col-md-6 col-lg-6 col-xl-6 offset-sm-0" style="margin-top: 10px;margin-bottom: 10px;border-radius: 25px;background: #212529;padding: 22px;padding-top: 30px;padding-bottom: 30px;border-width: 1px;border-style: none;height: 247px;">
+      <div class="col-8 col-sm-8 col-md-6 col-lg-6 col-xl-6 offset-sm-0 cellule-login">
         <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
           <h2 class="sr-only">Login Form</h2>
           <div class="illustration"></div>
@@ -14,7 +14,7 @@
       </div>
       <div class="col-2 col-sm-2 col-md-3 col-lg-3 col-xl-3"></div>
       <div class="col d-lg-flex justify-content-lg-center" *ngIf="error">
-        <div class="alert alert-danger d-lg-flex" role="alert" style="width: 30%;"><span ><strong>Echec</strong> mauvais mot de passe.</span></div>
+        <div class="alert alert-danger d-lg-flex container-alert" role="alert"><span ><strong>Echec</strong> mauvais mot de passe.</span></div>
       </div>
     </div>
   </div>
