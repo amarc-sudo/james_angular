@@ -42,7 +42,7 @@ export class AdminComponent implements OnInit{
       'width :10%',
       'width :30%'
     ];
-    this.observable$ = this.api.getData('/rest/api/cours/getCoursSend', { id : Number(sessionStorage.getItem('id')) });
+    this.observable$ = this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) });
   }
 
   getPrenom(): string {
