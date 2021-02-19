@@ -4,3 +4,13 @@ html {
   height: 100%;
 }
 
+.btn {
+  background: #00aba4;
+  border-color: #00aba4;
+}
+
+.btn:hover, .btn:focus {
+  background: #0192bb;
+  border-color: #0192bb;
+}
+
