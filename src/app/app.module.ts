@@ -23,7 +23,6 @@ import {TableComponent} from './annexe-component/table/table.component';
 import {FichePreviewComponent} from './pages/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
 import { ModifFicheComponent } from './pages/modif-fiche/modif-fiche.component';
-import { TableComponent } from './annexe-component/table/table.component';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
 
