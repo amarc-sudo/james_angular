@@ -23,3 +23,25 @@
   font-size:0;
 
 }
+
+.container-login {
+  margin-top: 3%;
+  border-style: none;
+}
+
+.cellule-login {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  background: #212529;
+  padding: 22px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-width: 1px;
+  border-style: none;
+  height: 247px;
+}
+
+.container-alert {
+  width: 30%;
+}

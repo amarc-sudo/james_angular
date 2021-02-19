@@ -2,4 +2,51 @@
   color: red;
 }
 
+.header {
+  text-align: center;
+  background: #0192bb;
+  padding: 20px;
+  margin-bottom: 0px;
+}
+
+.router-element {
+  margin-bottom: 28em;
+}
+
+.footer {
+  width: 100%;
+  background: #0192bb;
+  max-height: 20%;
+}
+
+.footer-container {
+  width: 100%;
+  color: rgb(255,255,255);
+}
+
+.logo-starkup{
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.cgu-block {
+  padding-top: 99px;
+}
+
+.cgu-text {
+  color: white;
+}
+
+.footer-span-starkup {
+  margin-bottom: 5px;
+  font-size: 9px;
+}
+
+.uvsq-image {
+  width: 200px;
+}
+
+.logo-james {
+  width: 88px;
+}
 
