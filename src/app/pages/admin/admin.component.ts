@@ -4,6 +4,7 @@ import {TableDataService} from '../../service/api/table.data.service';
 import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
 import {filter} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -21,10 +22,8 @@ export class AdminComponent implements OnInit{
   html: string;
   elementTable: any;
   bool: boolean;
-
+  observable$: Observable<any>;
   constructor(private router: Router, private api: TableDataService) {
-
-
   }
 
 
@@ -43,9 +42,7 @@ export class AdminComponent implements OnInit{
       'width :10%',
       'width :30%'
     ];
-    this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) }).subscribe(data => {
-      this.elementTable = data;
-    });
+    this.observable$ = this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) });
   }
 
   getPrenom(): string {
