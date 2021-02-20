@@ -28,4 +28,7 @@ export class CoursService extends ParentApiService {
     return this.httpClient.get<Cours[]>(environment.apiUrl + '/rest/api/cours/' + idFormation + '/listCoursByDate?date=' + date);
   }
 
+  update(cours: Cours): Observable<void> {
+    return this.httpClient.patch<void>(environment.apiUrl + '/rest/api/cours/update', cours);
+  }
 }

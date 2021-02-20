@@ -14,3 +14,11 @@ html {
   border-color: #0192bb;
 }
 
+.error{
+  color: red;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 12px
+}
+

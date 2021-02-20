@@ -1,36 +1,79 @@
-<div *ngIf="cours$ | async as cours">
-  <h1 class="modif-fiche"> {{cours.matiere.formation.intitule}}, le {{cours.date | date:'dd/MM/yyyy'}}</h1>
-
-  <div class="container-fluid">
-    <h2>{{cours.matiere.intitule}} de {{cours.begin.substring(0, 5)}}
-      à {{cours.end.substring(0, 5)}}</h2>
-    <h3>
-      Professeur: {{cours.professeur.personne.nom | uppercase}} {{cours.professeur.personne.prenom}}</h3>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>ETUDIANTS</th>
-          <th>STATUT</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let presence of cours.presences | orderBy: 'etudiant.personne.nom': false">
-          <td>{{presence.etudiant.personne.nom |uppercase}} {{presence.etudiant.personne.prenom}}</td>
-          <td>
-            <select  id="{{presence.idPresence}}" class='form-control'
-                     [value]="presence.etatPresence.idData" (change)="addChangementPresences(presence.idPresence)">
-              <option value='1'>Présent</option>
-              <option value='2'>En retard</option>
-              <option value='3'>Absent</option>
-            </select>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+<div class="container-fluid justify-content-center align-items-center" *ngIf="cours$ | async as cours"
+     style="width: 1100px">
+  <h1 style="text-align: center; margin-bottom: 30px"> {{cours.matiere.formation.intitule}},
+    le {{cours.date | date:'dd/MM/yyyy'}}</h1>
+  <div class="card">
+    <div class="card-body">
+      <div class="label-select justify-content-center align-items-center">
+        <label for="professeur">
+          Professeur:
+        </label>
+        <select id="professeur" class='form-control' [(ngModel)]="positionProfesseur">
+          <option *ngFor="let professeur of listProfesseurs" [value]="professeur.idProfesseur">
+            {{professeur.personne.nom}} {{professeur.personne.prenom}}
+          </option>
+        </select>
+      </div>
+      <div class="label-select justify-content-center align-items-center">
+        <label for="matiere">
+          Matiere:
+        </label>
+        <select id="matiere" class='form-control' [(ngModel)]="positionMatiere">
+          <option *ngFor="let matiere of listMatieres" [value]="matiere.idMatiere">
+            {{matiere.intitule}}
+          </option>
+        </select>
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <span class="error" *ngIf="errorTime">Veuillez séléctionner une heure de début et de fin</span>
+      </div>
+      <div class="row">
+        <div class="col justify-content-center align-items-center" style="text-align: center">
+          <span>Heure début</span>
+          <div class="row justify-content-center align-items-center">
+            <ngb-timepicker class="timepick" [(ngModel)]="heureDebut"></ngb-timepicker>
+          </div>
+        </div>
+        <div class="col" style="text-align: center">
+          <span>Heure fin</span>
+          <div class="row justify-content-center align-items-center">
+            <ngb-timepicker class="timepick" [(ngModel)]="heureFin"></ngb-timepicker>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>ETUDIANTS</th>
+            <th>STATUT</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let presence of cours.presences | orderBy: 'etudiant.personne.nom': false">
+            <td>{{presence.etudiant.personne.nom |uppercase}} {{presence.etudiant.personne.prenom}}</td>
+            <td>
+              <select id="{{presence.idPresence}}" class='form-control'
+                      [value]="presence.etatPresence.idData" (change)="addChangementPresences(presence.idPresence)">
+                <option value='1'>Présent</option>
+                <option value='2'>En retard</option>
+                <option value='3'>Absent</option>
+              </select>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <button class="btn btn-primary" (click)="enregistrer(cours)">
-      ENREGISTRER
+  </div>
+  <div class="row justify-content-center align-items-center" style="margin-top: 20px">
+    <button class="btn btn-primary" (click)="enregistrer(cours)" style="width: 123px;">
+      <div *ngIf="updating" class="spinner-border text-dark" role="status">
+      </div>
+      <span *ngIf="!updating">
+        ENREGISTRER
+      </span>
+
     </button>
   </div>
 </div>
