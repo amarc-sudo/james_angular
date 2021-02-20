@@ -27,11 +27,13 @@ export class ModifFicheComponent implements OnInit {
 
   listProfesseurs: Professeur[];
 
+
   listMatieres: Matiere[];
   positionProfesseur: number;
   positionMatiere: number;
   heureDebut: any;
   heureFin: any;
+  errorTime = false;
 
   updating = false;
 
@@ -52,7 +54,9 @@ export class ModifFicheComponent implements OnInit {
           this.positionMatiere = cours.matiere.idMatiere;
           this.heureDebut = this.conversionModel(cours.begin);
           this.heureFin = this.conversionModel(cours.end);
-          console.log(cours);
+          if (cours.etat.code === 'env') {
+            this.router.navigate(['admin']);
+          }
         }
       ));
     }
@@ -63,7 +67,6 @@ export class ModifFicheComponent implements OnInit {
   }
 
   enregistrer(cours: Cours): void {
-    this.updating = true;
     let map = new Map();
     this.setModifPresences.forEach(idPresence => {
       map.set(idPresence, this.getValueOfElementSelectID(idPresence));
@@ -84,6 +87,9 @@ export class ModifFicheComponent implements OnInit {
 
     cours.begin = this.conversionInverse(this.heureDebut);
     cours.end = this.conversionInverse(this.heureFin);
+
+    this.errorTime = false;
+    this.updating = true;
 
     this.presenceService.update(map).subscribe();
     this.coursService.update(cours).subscribe(() => {
@@ -114,6 +120,9 @@ export class ModifFicheComponent implements OnInit {
   }
 
   conversionInverse(horaireModel: any): string {
+    if (horaireModel == null) {
+      this.errorTime = true;
+    }
     return horaireModel.hour + ':' + horaireModel.minute + ':00';
   }
 }
