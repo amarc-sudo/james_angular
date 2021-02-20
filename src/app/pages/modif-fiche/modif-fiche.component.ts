@@ -33,6 +33,8 @@ export class ModifFicheComponent implements OnInit {
   heureDebut: any;
   heureFin: any;
 
+  updating = false;
+
   constructor(private route: ActivatedRoute, private coursService: CoursService, private presenceService: PresenceService,
               private matiereService: MatiereService,
               private professeurService: ProfesseurService, private router: Router) {
@@ -61,6 +63,7 @@ export class ModifFicheComponent implements OnInit {
   }
 
   enregistrer(cours: Cours): void {
+    this.updating = true;
     let map = new Map();
     this.setModifPresences.forEach(idPresence => {
       map.set(idPresence, this.getValueOfElementSelectID(idPresence));
@@ -86,6 +89,7 @@ export class ModifFicheComponent implements OnInit {
     this.coursService.update(cours).subscribe(() => {
         const date = new Date(cours.date);
         date.setTime(date.getTime() + 1000 * 60 * 60);
+        this.updating = false;
         this.router.navigate(['admin/gestion-abs/fiche-presence'], {
           queryParams: {
             id: cours.matiere.formation.idFormation,
