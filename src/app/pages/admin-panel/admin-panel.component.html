@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+          <div class="sidebar-header">
+            <h3>Administration</h3>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item container-pointer"  (click)="changeCard('Formation')"><span>Les formations</span></li>
+            <li class="list-group-item container-pointer"  (click)="changeCard('Comptes')"><span>Les comptes</span></li>
+            <li class="list-group-item container-pointer"  (click)="changeCard('Etablisement')"><span>les établisement</span></li>
+            <li class="list-group-item container-pointer"  (click)="changeCard('Statistics')"><span>Statistique</span></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="col-8 offset-1">
+      <app-admin-card [header]=headerCard></app-admin-card>
+    </div>
+  </div>
+</div>

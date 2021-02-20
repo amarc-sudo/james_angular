@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {TableDataService} from '../../service/api/table.data.service';
 import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
+import {filter} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -20,8 +22,12 @@ export class AdminComponent implements OnInit{
   html: string;
   elementTable: any;
   bool: boolean;
-
+  observable$: Observable<any>;
   constructor(private router: Router, private api: TableDataService) {
+  }
+
+
+  ngOnInit(): void {
     this.prenom = sessionStorage.getItem('prenom');
     this.nom = sessionStorage.getItem('nom');
     this.entete = [
@@ -36,14 +42,7 @@ export class AdminComponent implements OnInit{
       'width :10%',
       'width :30%'
     ];
-    this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) }).subscribe(data => {
-        this.elementTable = data;
-    });
-
-  }
-
-
-  ngOnInit(): void {
+    this.observable$ = this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) });
   }
 
   getPrenom(): string {
@@ -52,6 +51,15 @@ export class AdminComponent implements OnInit{
 
   change(s: string): void {
     this.router.navigate([s]);
+    this.router.events
+      .pipe(
+        filter(value => value instanceof NavigationEnd),
+      )
+      .subscribe(event => {
+        if (event.toString() === 'http://mypreviousUrl.com') {
+          window.location.reload();
+        }
+      });
   }
 
 }

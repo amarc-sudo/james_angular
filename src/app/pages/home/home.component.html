@@ -1,28 +1,37 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12 col-xl-12 text-center">
+  <div class="card container-card">
+    <div class="card-body">
       <div class="row">
-        <div class="col">
-          <h2 style="width: 100%;margin-top: 20px;">James : Projet Tutoré 2020 : Groupe 1</h2>
-        </div>
-        <div class="col-4 text-center d-xl-flex justify-content-xl-center align-items-xl-center" style="margin-top: 20px;margin-bottom: 20px;">
-          <button class="btn btn-primary" type="button" (click)="change('login')" *ngIf="!logged()" >Se connecter</button>
-          <button class="btn btn-primary" type="button" (click)="change('admin')" *ngIf="logged()" >Admin</button>
+        <div class="col-md-12 col-xl-12 text-center">
+          <div class="row">
+            <div class="col">
+              <h2 class="container-colonne">James : Projet Tutoré 2020 : Groupe 1</h2>
+            </div>
+            <div class="col-4 text-center d-xl-flex justify-content-xl-center align-items-xl-center container-bouton">
+              <button class="btn btn-primary" type="button" (click)="change('login')" *ngIf="!logged()" >Se connecter</button>
+              <button class="btn btn-primary" type="button" (click)="change('admin')" *ngIf="logged()" >Admin</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4 offset-xl-1" style="margin-top: 20px;">
-      <ul class="list-group">
-        <li class="list-group-item"><span>Le groupe</span></li>
-        <li class="list-group-item"><span>Le rapport</span></li>
-        <li class="list-group-item"><span>Le code</span></li>
-        <li class="list-group-item"><span>L'application</span></li>
-      </ul>
-    </div>
-    <div class="col-6 offset-xl-0" style="border-left-style: solid;">
-      <p>Ce site a été crée dans le cadre du projet tutoré du groupe des apprentis en DUT Info de l'IUT de Vélizy</p>
+      <div class="row">
+        <div class="col-4 offset-xl-1" style="margin-top: 20px;">
+          <ul class="list-group">
+            <a href=""><li class="list-group-item"><span>Le groupe</span></li></a>
+            <a href=""><li class="list-group-item"><span>Le rapport</span></li></a>
+            <a href=""><li class="list-group-item"><span>Le code</span></li></a>
+            <a href="https://play.google.com/store/apps/details?id=com.iut.james_mobile"><li class="list-group-item"><span>L'application</span></li></a>
+            <a href="admin-panel"><li class="list-group-item " ><span>Administration</span></li></a>
+          </ul>
+        </div>
+        <div class="col-6 offset-xl-0" style="border-left-style: solid;">
+          <div class="card container-card">
+            <div class="card-body">
+              <p class="card-text">Ce site a été crée dans le cadre du projet tutoré du groupe des apprentis en DUT Info de l'IUT de Vélizy</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
