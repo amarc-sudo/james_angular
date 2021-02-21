@@ -13,7 +13,7 @@ body {
 .btn:hover, .btn:focus {
   background: #69043c;
   border-color: #69043c;
-  color: white !important;
+  color: white;
 }
 
 .error{
@@ -43,4 +43,8 @@ body {
   -o-transition: background .5s ease-out 0s;
   transition: background .5s ease-out 0s;
   background: #0192bb;
+}
+
+.btn-hover-color-white:hover{
+  color: white !important;
 }

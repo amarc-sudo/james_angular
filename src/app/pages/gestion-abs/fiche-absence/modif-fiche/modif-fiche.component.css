@@ -19,4 +19,11 @@ span {
   text-align: center;
 }
 
+.btn-enregistrer{
+  width: auto;
+  padding: 5px;
+}
 
+.btn-enregistrer:hover{
+  color: white !important;
+}
