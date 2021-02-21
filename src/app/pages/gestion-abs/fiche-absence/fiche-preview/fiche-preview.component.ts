@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {Cours} from '../../api/objects/Cours';
-import {CoursService} from '../../service/api/cours.service';
+import {Cours} from '../../../../api/objects/Cours';
+import {CoursService} from '../../../../service/api/cours.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Presence} from '../../api/objects/Presence';
+import {Presence} from '../../../../api/objects/Presence';
 import {tap} from 'rxjs/operators';
-import {Formation} from '../../api/objects/Formation';
+import {Formation} from '../../../../api/objects/Formation';
 import {faAngleRight, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
-import {TableData} from '../../api/objects/TableData';
-import {TableDataService} from '../../service/api/table.data.service';
+import {TableData} from '../../../../api/objects/TableData';
+import {TableDataService} from '../../../../service/api/table.data.service';
 
 @Component({
   selector: 'app-fiche-preview',
@@ -38,18 +38,18 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   spinner = faSpinner;
 
 
-
   envoye: TableData;
 
   nombreCours: number;
 
+  // tslint:disable-next-line:max-line-length
   constructor(private coursService: CoursService, private tableDataService: TableDataService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.idFormation = params['id'];
-      this.date = params['date'];
+      this.idFormation = params.id;
+      this.date = params.date;
     });
     if (this.idFormation !== undefined && this.date !== undefined) {
       this.listCours$ = this.coursService.listByFormationAndDate(this.idFormation, this.date);
@@ -81,10 +81,11 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   pdfGeneration(listCours: Cours[]): void {
     this.loadingPDF = true;
     listCours.forEach(cours => {
-      cours.etat = this.envoye;
-      this.subscriptions.push(this.coursService.update(cours).subscribe());
-    }
-  )
+        cours.etat = this.envoye;
+        // @ts-ignore
+        this.subscriptions.push(this.coursService.update(cours).subscribe());
+      }
+    )
     ;
     this.subscriptions.push(this.coursService.readFichePresence(this.idFormation, this.date).pipe(
       tap(response => {
@@ -106,7 +107,7 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   }
 
   goToModification(idCours: number): void {
-    this.router.navigate(['/admin/gestion-abs/fiche-presence/modification'], {queryParams: {idCours: idCours.toString()}});
+    this.router.navigate(['/accueil/gestion-abs/fiche-presence/modification'], {queryParams: {idCours: idCours.toString()}});
   }
 
   changementPositionDiapo(indice: number): void {

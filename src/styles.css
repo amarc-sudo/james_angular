@@ -1,17 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
-html {
+html,
+body {
   height: 100%;
 }
-
 .btn {
-  background: #00aba4;
-  border-color: #00aba4;
+  background: #0192bb;
+  border-color: #0192bb;
+  color: white;
 }
 
 .btn:hover, .btn:focus {
-  background: #0192bb;
-  border-color: #0192bb;
+  background: #69043c;
+  border-color: #69043c;
+  color: white !important;
 }
 
 .error{
@@ -22,3 +24,23 @@ html {
   font-size: 12px
 }
 
+/* Item des différentes liste */
+.menu_item{
+  cursor: pointer;
+}
+
+.no_decoration{
+  text-decoration: none;
+  color: black;
+}
+.no_decoration:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.menu_item:hover{
+  -webkit-transition: background .5s ease-out 0s;
+  -o-transition: background .5s ease-out 0s;
+  transition: background .5s ease-out 0s;
+  background: #0192bb;
+}

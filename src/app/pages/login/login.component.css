@@ -1,4 +1,5 @@
 
+
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }
@@ -33,7 +34,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 25px;
-  background: #212529;
+  background: black;
   padding: 22px;
   padding-top: 30px;
   padding-bottom: 30px;

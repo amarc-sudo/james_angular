@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
   loading: boolean;
 
   ngOnInit(): void {
+    if(this.logged()){
+      this.router.navigate(['accueil']);
+    }
   }
 
   onSubmit(form: NgForm): void{
@@ -36,7 +39,7 @@ export class LoginComponent implements OnInit {
         else if (data[0] === 'professeur') {
           this.Auth.loggedIn(true, email, data[2].idProfesseur, data[1], data[2].personne, 'prof');
         }
-        this.router.navigate(['admin']);
+        this.router.navigate(['accueil']);
       } else {
         this.error = true;
         sessionStorage.removeItem('loggedIn');
@@ -63,6 +66,10 @@ export class LoginComponent implements OnInit {
       }
 
     });
+  }
+
+  logged(): any{
+    return sessionStorage.getItem('loggedIn');
   }
 
 }

@@ -14,15 +14,15 @@ import {AuthService} from './service/api/auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ResetComponent} from './pages/reset/reset.component';
 import {ModalDemandeComponent} from './annexe-component/modal/demandeReset/modal-demande.component';
-import {HistoryComponent} from './pages/history/history.component';
+import {HistoryComponent} from './pages/gestion-abs/history/history.component';
 import {AppGestionAdmComponent} from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
-import {AppGestionAbsComponent} from './pages/gestion-abs/app-gestion-abs/app-gestion-abs.component';
+import {AppGestionAbsComponent} from './pages/gestion-abs/panel-fiche/app-gestion-abs.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {Safe} from './service/SafeHTML/safe';
 import {TableComponent} from './annexe-component/table/table.component';
-import {FichePreviewComponent} from './pages/fiche-preview/fiche-preview.component';
+import {FichePreviewComponent} from './pages/gestion-abs/fiche-absence/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
-import { ModifFicheComponent } from './pages/modif-fiche/modif-fiche.component';
+import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
 
@@ -60,22 +60,22 @@ import { AdminCardComponent } from './annexe-component/admin-card/admin-card.com
         component: LoginComponent
       },
       {
-        path: 'admin',
+        path: 'accueil',
         component: AdminComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'admin/historique',
+        path: 'accueil/historique',
         component: HistoryComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'admin/gestion-adm',
+        path: 'accueil/gestion-adm',
         component: AppGestionAdmComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'admin/gestion-abs',
+        path: 'accueil/gestion-abs',
         component: AppGestionAbsComponent,
         canActivate: [AuthGuard]
       },
@@ -85,12 +85,17 @@ import { AdminCardComponent } from './annexe-component/admin-card/admin-card.com
         canActivate: [AuthGuard]
       },
       {
-        path: 'admin/gestion-abs/fiche-presence',
+        path: 'accueil/gestion-abs/fiche-presence',
         component: FichePreviewComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'admin/gestion-abs/fiche-presence/modification',
+        path: 'accueil/historique/fiche-presence',
+        component: FichePreviewComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'accueil/gestion-abs/fiche-presence/modification',
         component: ModifFicheComponent,
         canActivate: [AuthGuard]
       },

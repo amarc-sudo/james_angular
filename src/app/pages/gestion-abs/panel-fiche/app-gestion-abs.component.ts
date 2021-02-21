@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {TableDataService} from '../../service/api/table.data.service';
+import {TableDataService} from '../../../service/api/table.data.service';
 import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css']
+  selector: 'app-app-gestion-abs',
+  templateUrl: './app-gestion-abs.component.html',
+  styleUrls: ['./app-gestion-abs.component.css']
 })
-export class HistoryComponent implements OnInit {
+
+export class AppGestionAbsComponent implements OnInit {
 
   entete: string[];
   enteteTaille: string[];
@@ -33,7 +34,7 @@ export class HistoryComponent implements OnInit {
       'width :10%',
       'width :30%'
     ];
-    this.observable$ = this.api.getData('/rest/api/cours/getCoursSend', { id : Number(sessionStorage.getItem('id')) });
+    this.observable$ = this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) });
   }
 
   onSubmit(form: NgForm): void {

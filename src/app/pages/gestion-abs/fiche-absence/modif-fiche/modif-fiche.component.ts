@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Cours} from '../../api/objects/Cours';
-import {CoursService} from '../../service/api/cours.service';
-import {PresenceService} from '../../service/api/presence.service';
+import {Cours} from '../../../../api/objects/Cours';
+import {CoursService} from '../../../../service/api/cours.service';
+import {PresenceService} from '../../../../service/api/presence.service';
 import {Observable} from 'rxjs';
 import * as moment from 'moment-timezone';
-import {Professeur} from '../../api/objects/Professeur';
-import {ProfesseurService} from '../../service/api/professeur.service';
+import {Professeur} from '../../../../api/objects/Professeur';
+import {ProfesseurService} from '../../../../service/api/professeur.service';
 import {materialize, tap} from 'rxjs/operators';
-import {Matiere} from '../../api/objects/Matiere';
-import {MatiereService} from '../../service/api/matiere.service';
+import {Matiere} from '../../../../api/objects/Matiere';
+import {MatiereService} from '../../../../service/api/matiere.service';
 
 @Component({
   selector: 'app-modif-fiche',
@@ -44,7 +44,7 @@ export class ModifFicheComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.idCours = params['idCours'];
+      this.idCours = params.idCours;
     });
     if (this.idCours != null) {
       this.cours$ = this.coursService.read(this.idCours).pipe(tap(cours => {
@@ -55,7 +55,7 @@ export class ModifFicheComponent implements OnInit {
           this.heureDebut = this.conversionModel(cours.begin);
           this.heureFin = this.conversionModel(cours.end);
           if (cours.etat.code === 'env') {
-            this.router.navigate(['admin']);
+            this.router.navigate(['accueil']);
           }
         }
       ));
@@ -96,7 +96,7 @@ export class ModifFicheComponent implements OnInit {
         const date = new Date(cours.date);
         date.setTime(date.getTime() + 1000 * 60 * 60);
         this.updating = false;
-        this.router.navigate(['admin/gestion-abs/fiche-presence'], {
+        this.router.navigate(['accueil/gestion-abs/fiche-presence'], {
           queryParams: {
             id: cours.matiere.formation.idFormation,
             date: date.toISOString().substring(0, 10)

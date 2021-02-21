@@ -17,6 +17,9 @@ export class TableComponent implements OnInit, OnChanges {
   @Input()
   donneesTable: any[];
 
+  @Input()
+  pathFromHistory = false;
+
 
   constructor(private router: Router) {
   }
@@ -25,8 +28,11 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   goToFiche(date: string, formation: string): void {
-
-    this.router.navigate(['/admin/gestion-abs/fiche-presence'], {queryParams: {id: formation, date: date}});
+    if (this.pathFromHistory) {
+      this.router.navigate(['/accueil/historique/fiche-presence'], {queryParams: {id: formation, date: date}});
+    } else {
+      this.router.navigate(['/accueil/gestion-abs/fiche-presence'], {queryParams: {id: formation, date: date}});
+    }
   }
 
   ngOnChanges(): void {

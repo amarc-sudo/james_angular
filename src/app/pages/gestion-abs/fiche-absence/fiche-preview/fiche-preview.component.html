@@ -11,7 +11,7 @@
         </h3>
       </div>
       <div class="col col-xl-2 offset-2">
-        <button *ngIf="listCours[positionDiapo].etat.code === 'non_env'" class="btn btn-primary" type="button"
+        <button *ngIf="listCours[positionDiapo].etat.code === 'non_env'" class="btn" type="button"
                 style="text-align: center;"
                 (click)="goToModification(listCours[positionDiapo].idCours)">MODIFIER
         </button>
@@ -29,7 +29,7 @@
             </ul>
           </div>
           <div class="col-md-3 col-xl-1">
-            <button class="btn btn-primary align-self-center" type="button" (click)="decreasePositionDiapo()"
+            <button class="btn align-self-center" type="button" (click)="decreasePositionDiapo()"
                     [disabled]="positionDiapo==0">
               <fa-icon [icon]="faFlecheGauche"></fa-icon>
             </button>
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="col-md-3 col-xl-1">
-            <button class="btn btn-primary align-self-center" type="button" (click)="increasePositionDiapo()"
+            <button class="btn align-self-center" type="button" (click)="increasePositionDiapo()"
                     [disabled]="positionDiapo==listCours.length-1">
               <fa-icon [icon]="faFlecheDroite"></fa-icon>
             </button>
@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="row justify-content-center align-items-center" style="margin-top: 20px">
-      <button class="btn btn-primary " id="gauche" type="button" (click)="pdfGeneration(listCours)"><span
+      <button class="btn" id="gauche" type="button" (click)="pdfGeneration(listCours)"><span
         *ngIf="!loadingPDF">GENERER FICHE DE PRESENCE</span>
         <div *ngIf="loadingPDF" class="spinner-border text-dark" role="status">
         </div>
