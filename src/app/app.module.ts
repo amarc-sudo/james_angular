@@ -82,7 +82,6 @@ import { AdminCardComponent } from './annexe-component/admin-card/admin-card.com
       {
         path: 'admin-panel',
         component: AdminPanelComponent,
-        canActivate: [AuthGuard]
       },
       {
         path: 'accueil/gestion-abs/fiche-presence',

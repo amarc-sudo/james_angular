@@ -85,3 +85,13 @@
     </div>
   </div>
 </div>
+<div class="fixed-bottom bannerCookie container-fluid" *ngIf="!isAcceptedCookie()" >
+  <div class="row ">
+    <div class="col-6 col-sm-8 col-lg-9 col-xl-10">
+      <span class="textCookie">En appuyant sur le bouton "j'accepte" ou en continuant à naviguer sur le site, vous nous autorisez à déposer des cookies à des fins non commerciales.</span>
+    </div>
+    <div class="col-1 align-self-center justify-content-center text-center">
+      <button class="btn btn-cookie btn-hover-color-white " (click)="acceptedCookie()"><span>j'accepte</span></button>
+    </div>
+  </div>
+</div>

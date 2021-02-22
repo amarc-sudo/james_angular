@@ -12,7 +12,9 @@ export class AppComponent {
   title = 'James';
   path: string[];
 
+
   constructor(private router: Router) {
+
   }
   faBars = faBars;
 
@@ -53,5 +55,13 @@ export class AppComponent {
     else{
       return navtext.slice(0, navtext.indexOf('?'));
     }
+  }
+
+  isAcceptedCookie(): string {
+    return localStorage.getItem('cookieStatus');
+  }
+
+  acceptedCookie(): void {
+    localStorage.setItem('cookieStatus', 'true');
   }
 }
