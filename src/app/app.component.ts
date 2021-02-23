@@ -57,11 +57,5 @@ export class AppComponent {
     }
   }
 
-  isAcceptedCookie(): string {
-    return localStorage.getItem('cookieStatus');
-  }
 
-  acceptedCookie(): void {
-    localStorage.setItem('cookieStatus', 'true');
-  }
 }

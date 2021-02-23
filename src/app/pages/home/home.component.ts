@@ -22,4 +22,8 @@ export class HomeComponent implements OnInit {
   logged(): any{
     return sessionStorage.getItem('loggedIn');
   }
+
+  goToSite(s: string): void {
+    document.location.href = s;
+  }
 }
