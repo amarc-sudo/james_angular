@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ParentApiService} from './parent.api.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Professeur} from '../../api/objects/Professeur';
+import {Professeur} from './objects/Professeur';
 
 @Injectable({
   providedIn: 'root'

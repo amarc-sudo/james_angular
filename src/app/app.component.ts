@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import Popper from 'popper.js';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
@@ -14,11 +14,13 @@ export class AppComponent {
 
   constructor(private router: Router) {
   }
+
   faBars = faBars;
 
-  logged(): any{
+  logged(): any {
     return sessionStorage.getItem('loggedIn');
   }
+
   getCurrentRoute(): any {
     this.path = this.router.url.split('/');
     this.path.shift();
@@ -29,28 +31,22 @@ export class AppComponent {
     const pathTab = this.path.splice(0, index + 1);
     // tslint:disable-next-line:only-arrow-functions
     let finalPath = '';
+    // tslint:disable-next-line:only-arrow-functions typedef
     pathTab.forEach(function(value) {
       finalPath += '/' + value;
     });
     return finalPath;
   }
 
-  changeRoute(route: string): void{
+  changeRoute(route: string): void {
     this.router.navigate([route]);
   }
 
-  disconnect(): void {
-    sessionStorage.removeItem('loggedIn');
-    sessionStorage.removeItem('email');
-    sessionStorage.removeItem('id');
-    this.changeRoute('');
-  }
-
-  formatingNavtext(navtext: string): string{
-    if(navtext.indexOf('?') == -1){
+  formatingNavtext(navtext: string): string {
+    // tslint:disable-next-line:triple-equals
+    if (navtext.indexOf('?') == -1) {
       return navtext;
-    }
-    else{
+    } else {
       return navtext.slice(0, navtext.indexOf('?'));
     }
   }

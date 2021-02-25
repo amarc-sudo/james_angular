@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Cours} from '../../../../api/objects/Cours';
+import {Cours} from '../../../../service/api/objects/Cours';
 import {CoursService} from '../../../../service/api/cours.service';
 import {PresenceService} from '../../../../service/api/presence.service';
 import {Observable} from 'rxjs';
 import * as moment from 'moment-timezone';
-import {Professeur} from '../../../../api/objects/Professeur';
+import {Professeur} from '../../../../service/api/objects/Professeur';
 import {ProfesseurService} from '../../../../service/api/professeur.service';
 import {materialize, tap} from 'rxjs/operators';
-import {Matiere} from '../../../../api/objects/Matiere';
+import {Matiere} from '../../../../service/api/objects/Matiere';
 import {MatiereService} from '../../../../service/api/matiere.service';
 
 @Component({

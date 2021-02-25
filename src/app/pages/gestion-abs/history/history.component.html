@@ -31,7 +31,8 @@
         </div>
         <div class="col-12 col-md-8 ">
           <div class="recap" *ngIf="observable$ | async as contenuTable">
-            <app-table [entete]="entete" [tailleEnTete]="enteteTaille" [donneesTable]="contenuTable" [pathFromHistory]=true></app-table>
+            <app-table [entete]="entete" [tailleEnTete]="enteteTaille" [donneesTable]="contenuTable"
+                       [pathFromHistory]=true></app-table>
           </div>
         </div>
       </div>

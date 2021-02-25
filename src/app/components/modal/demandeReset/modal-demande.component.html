@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Forgot Password</h4>
+  <button type="button" class="close" aria-label="Close" (click)="this.getModalService().dismissAll()">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #f="ngForm" (ngSubmit)="sendReset(f)" novalidate>
+    <h2 class="sr-only">Forgot PassWord</h2>
+    <div class="illustration"></div>
+    <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" ngModel required>
+    </div>
+    <div class="form-group d-lg-flex justify-content-lg-center align-items-lg-center">
+      <button class="btn btn-block text-center d-lg-flex justify-content-lg-center align-items-lg-center"
+              [class.spinner]="loading" [disabled]="loading" type="submit" style="width: 50%;"><span>Send</span>
+      </button>
+    </div>
+  </form>
+  <div class="col d-lg-flex justify-content-lg-center" *ngIf="error">
+    <div class="alert alert-danger d-lg-flex" role="alert"><span><strong>Echec</strong> Adresse email inconnu</span>
+    </div>
+  </div>
+</div>
+

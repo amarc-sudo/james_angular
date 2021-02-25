@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {Cours} from '../../../../api/objects/Cours';
+import {Cours} from '../../../../service/api/objects/Cours';
 import {CoursService} from '../../../../service/api/cours.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Presence} from '../../../../api/objects/Presence';
+import {Presence} from '../../../../service/api/objects/Presence';
 import {tap} from 'rxjs/operators';
-import {Formation} from '../../../../api/objects/Formation';
+import {Formation} from '../../../../service/api/objects/Formation';
 import {faAngleRight, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
-import {TableData} from '../../../../api/objects/TableData';
+import {TableData} from '../../../../service/api/objects/TableData';
 import {TableDataService} from '../../../../service/api/table.data.service';
 
 @Component({

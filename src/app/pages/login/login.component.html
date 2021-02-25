@@ -6,20 +6,28 @@
         <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
           <h2 class="sr-only">Login Form</h2>
           <div class="illustration"></div>
-          <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"  ngModel required></div>
-          <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" ngModel required></div>
-          <div class="form-group d-lg-flex justify-content-lg-center align-items-lg-center"><button class="btn btn-block text-center d-lg-flex justify-content-lg-center align-items-lg-center" type="submit" style="width: 50%;" >Log In</button></div>
-          <a class="d-lg-flex justify-content-lg-center align-items-lg-center forgot no_decoration" (click)="open(mymodal)" style="color: white; cursor: pointer;" >Forgot your password?</a>
+          <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" ngModel
+                                         required></div>
+          <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"
+                                         ngModel required></div>
+          <div class="form-group d-lg-flex justify-content-lg-center align-items-lg-center">
+            <button class="btn btn-block text-center d-lg-flex justify-content-lg-center align-items-lg-center"
+                    type="submit" style="width: 50%;">Log In
+            </button>
+          </div>
+          <a class="d-lg-flex justify-content-lg-center align-items-lg-center forgot no_decoration"
+             (click)="open(mymodal)" style="color: white; cursor: pointer;">Forgot your password?</a>
         </form>
       </div>
       <div class="col-2 col-sm-2 col-md-3 col-lg-3 col-xl-3"></div>
       <div class="col d-lg-flex justify-content-lg-center" *ngIf="error">
-        <div class="alert alert-danger d-lg-flex container-alert" role="alert"><span ><strong>Echec</strong> mauvais mot de passe.</span></div>
+        <div class="alert alert-danger d-lg-flex container-alert" role="alert"><span><strong>Echec</strong> mauvais mot de passe.</span>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <ng-template #mymodal let-modal>
-<app-modal-demande></app-modal-demande>
+  <app-modal-demande></app-modal-demande>
 </ng-template>

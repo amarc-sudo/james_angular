@@ -13,16 +13,16 @@ import {Observable} from 'rxjs';
   styleUrls: ['./admin.component.css']
 })
 
-export class AdminComponent implements OnInit{
+export class AdminComponent implements OnInit {
 
   prenom: string;
   nom: string;
   entete: string[];
   enteteTaille: string[];
   html: string;
-  elementTable: any;
   bool: boolean;
   observable$: Observable<any>;
+
   constructor(private router: Router, private api: TableDataService) {
   }
 
@@ -42,24 +42,11 @@ export class AdminComponent implements OnInit{
       'width :10%',
       'width :30%'
     ];
-    this.observable$ = this.api.getData('/rest/api/cours/getCoursNoSend', { id : Number(sessionStorage.getItem('id')) });
+    this.observable$ = this.api.getData('/rest/api/cours/getCoursNoSend', {id: Number(sessionStorage.getItem('id'))});
   }
 
   getPrenom(): string {
     return this.prenom + ' ' + this.nom;
-  }
-
-  change(s: string): void {
-    this.router.navigate([s]);
-    this.router.events
-      .pipe(
-        filter(value => value instanceof NavigationEnd),
-      )
-      .subscribe(event => {
-        if (event.toString() === 'http://mypreviousUrl.com') {
-          window.location.reload();
-        }
-      });
   }
 
 }
