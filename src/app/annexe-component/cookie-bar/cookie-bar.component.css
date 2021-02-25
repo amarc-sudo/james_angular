@@ -1,0 +1,18 @@
+.bannerCookie{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.textCookie{
+  color: white;
+}
+.btn-cookie{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: red;
+}
+.btn-cookie:hover{
+  background: #69043c;
+}

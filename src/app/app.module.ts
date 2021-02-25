@@ -25,6 +25,7 @@ import {OrderModule} from 'ngx-order-pipe';
 import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
+import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AdminCardComponent } from './annexe-component/admin-card/admin-card.com
     ModifFicheComponent,
     AdminPanelComponent,
     AdminCardComponent,
+    CookieBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,6 @@ import { AdminCardComponent } from './annexe-component/admin-card/admin-card.com
       {
         path: 'admin-panel',
         component: AdminPanelComponent,
-        canActivate: [AuthGuard]
       },
       {
         path: 'accueil/gestion-abs/fiche-presence',

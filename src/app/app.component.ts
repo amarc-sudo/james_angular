@@ -12,7 +12,9 @@ export class AppComponent {
   title = 'James';
   path: string[];
 
+
   constructor(private router: Router) {
+
   }
   faBars = faBars;
 
@@ -54,4 +56,6 @@ export class AppComponent {
       return navtext.slice(0, navtext.indexOf('?'));
     }
   }
+
+
 }
