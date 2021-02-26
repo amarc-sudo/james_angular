@@ -8,24 +8,24 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {AdminComponent} from './pages/admin/admin.component';
 import {FormsModule} from '@angular/forms';
-import {AuthGuard} from './service/guard/auth-session/auth.guard';
-import {AuthService} from './service/api/auth.service';
+import {AuthGuard} from './shared/service/guard/auth-session/auth.guard';
+import {AuthService} from './shared/service/api/auth.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ResetComponent} from './pages/reset/reset.component';
-import {ModalDemandeComponent} from './components/modal/demandeReset/modal-demande.component';
+import {ModalDemandeComponent} from './shared/components/modal/demandeReset/modal-demande.component';
 import {HistoryComponent} from './pages/gestion-abs/history/history.component';
 import {AppGestionAdmComponent} from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
 import {AppGestionAbsComponent} from './pages/gestion-abs/panel-fiche/app-gestion-abs.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {TableComponent} from './components/table/table.component';
+import {TableComponent} from './shared/components/table/table.component';
 import {FichePreviewComponent} from './pages/gestion-abs/fiche-absence/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
 import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
-import { AdminCardComponent } from './components/admin-card/admin-card.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { AdminCardComponent } from './shared/components/admin-card/admin-card.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [

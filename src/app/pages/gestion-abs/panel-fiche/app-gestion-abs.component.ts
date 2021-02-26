@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {TableDataService} from '../../../service/api/table.data.service';
+import {TableDataService} from '../../../shared/service/api/table.data.service';
 import {Observable} from 'rxjs';
 
 @Component({

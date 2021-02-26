@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {TableDataService} from '../../service/api/table.data.service';
+import {TableDataService} from '../../shared/service/api/table.data.service';
 import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
 import {filter} from 'rxjs/operators';

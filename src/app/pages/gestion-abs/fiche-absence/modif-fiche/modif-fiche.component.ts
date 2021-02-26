@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Cours} from '../../../../service/api/objects/Cours';
-import {CoursService} from '../../../../service/api/cours.service';
-import {PresenceService} from '../../../../service/api/presence.service';
+import {Cours} from '../../../../shared/service/api/objects/Cours';
+import {CoursService} from '../../../../shared/service/api/cours.service';
+import {PresenceService} from '../../../../shared/service/api/presence.service';
 import {Observable} from 'rxjs';
 import * as moment from 'moment-timezone';
-import {Professeur} from '../../../../service/api/objects/Professeur';
-import {ProfesseurService} from '../../../../service/api/professeur.service';
+import {Professeur} from '../../../../shared/service/api/objects/Professeur';
+import {ProfesseurService} from '../../../../shared/service/api/professeur.service';
 import {materialize, tap} from 'rxjs/operators';
-import {Matiere} from '../../../../service/api/objects/Matiere';
-import {MatiereService} from '../../../../service/api/matiere.service';
+import {Matiere} from '../../../../shared/service/api/objects/Matiere';
+import {MatiereService} from '../../../../shared/service/api/matiere.service';
 
 @Component({
   selector: 'app-modif-fiche',
