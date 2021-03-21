@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Formation} from '../../../api/objects/Formation';
 import {Etudiant} from '../../../api/objects/Etudiant';
 import {Personne} from '../../../api/objects/Personne';
-import {$e} from 'codelyzer/angular/styles/chars';
 import {Subscription} from 'rxjs';
 import {PersonneService} from '../../../service/api/personne.service';
 import {EtudiantService} from '../../../service/api/etudiant.service';
 import {switchMapTo, tap} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-ajout-classe',
@@ -16,7 +16,7 @@ import {switchMapTo, tap} from 'rxjs/operators';
 export class AjoutClasseComponent implements OnInit {
 
 
-  constructor(private personneService: PersonneService, private etudiantService: EtudiantService) {
+  constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private router: Router) {
   }
 
   subscriptions: Subscription[] = [];
@@ -24,6 +24,10 @@ export class AjoutClasseComponent implements OnInit {
   listFormations: Formation[] = [];
 
   listEtudiants: Etudiant[] = [];
+
+  erreur = false;
+
+  uploading = false;
 
   ngOnInit(): void {
     // On récupère les formations
@@ -36,20 +40,17 @@ export class AjoutClasseComponent implements OnInit {
   handleFileSelect($event: any): void {
     const files = $event.target.files; // FileList object
     const file = files[0];
-    if (true) {
-      const reader = new FileReader();
-      reader.readAsText(file);
-      reader.onload = () => {
-        const csvData = reader.result;
-        const csvRecordsArray = (csvData as string).split(/\r\n|\n/);
-        this.listEtudiants = this.getEtudiantArrayFromCSVFile(csvRecordsArray);
-
-      };
-      // tslint:disable-next-line:only-arrow-functions
-      reader.onerror = function() {
-        console.log('erreur');
-      };
-    }
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = () => {
+      const csvData = reader.result;
+      const csvRecordsArray = (csvData as string).split(/\r\n|\n/);
+      const listTemporaireEtudiant = this.getEtudiantArrayFromCSVFile(csvRecordsArray);
+      if (listTemporaireEtudiant != null) {
+        this.erreur = false;
+        this.listEtudiants = listTemporaireEtudiant;
+      }
+    };
   }
 
   getEtudiantArrayFromCSVFile(csvRecordsArray: any): Etudiant[] {
@@ -59,6 +60,10 @@ export class AjoutClasseComponent implements OnInit {
       const ligneCSV = (csvRecordsArray[i] as string).split(',');
       const etudiant = new Etudiant();
       const personne = new Personne();
+      if (ligneCSV.length !== 4) {
+        this.erreur = true;
+        return null;
+      }
       personne.nom = ligneCSV[0].trim();
       personne.prenom = ligneCSV[1].trim();
       etudiant.adresseMail = ligneCSV[2].trim();
@@ -84,14 +89,20 @@ export class AjoutClasseComponent implements OnInit {
 
   ajouterEtudiants(): void {
     const formation = new Formation();
+    this.uploading = true;
     formation.idFormation = parseInt((document.getElementById('formation') as HTMLSelectElement).value, 10);
-    this.listEtudiants.forEach(etudiant => {
-      etudiant.formation = formation;
-      this.subscriptions.push(this.personneService.create(etudiant.personne).pipe(tap(personne =>
-          etudiant.personne = personne),
-        switchMapTo(this.etudiantService.create(etudiant))
-      ).subscribe());
-    });
+    for (let i = 0; i < this.listEtudiants.length; i++) {
+      this.listEtudiants[i].formation = formation;
+      this.subscriptions.push(this.personneService.create(this.listEtudiants[i].personne).pipe(tap(personne =>
+          this.listEtudiants[i].personne = personne),
+        switchMapTo(this.etudiantService.create(this.listEtudiants[i])),
+      ).subscribe(result => {
+        if (i === this.listEtudiants.length - 1) {
+          this.uploading = false;
+          this.router.navigate(['accueil/gestion-formation']);
+        }
+      }));
+    }
   }
 
   changeAdresseMailValue($event: any, index: number): void {

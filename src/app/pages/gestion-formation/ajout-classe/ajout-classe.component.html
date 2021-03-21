@@ -9,10 +9,12 @@
       </option>
     </select>
   </div>
-
+  <span class="info">Le fichier doit être au format CSV. IL n'a pas d'en-tête et contient 4 colonnes: "Nom,Prénom,Adresse mail,Groupe". Mettre un groupe est optionnel.</span>
+  <br>
+  <span class="info" *ngIf="erreur" style="color: red">Erreur lors du chargement du fichier</span>
   <div class="custom-file" style="margin-bottom: 20px">
     <input accept=".csv" (change)="handleFileSelect($event)" type="file" class="custom-file-input" id="customFile">
-    <label class="custom-file-label" for="customFile">Importez un CSV</label>
+    <label class="custom-file-label" for="customFile">Choisissez un fichier</label>
   </div>
 
   <div class="table-responsive">
@@ -42,7 +44,13 @@
       </tbody>
     </table>
     <div *ngIf="listEtudiants.length>0" class="row justify-content-center align-items-center" style="width: 90%">
-      <button class="btn" (click)="ajouterEtudiants()">Valider l'ajout</button>
+      <button class="btn" (click)="ajouterEtudiants()">
+        <div *ngIf="uploading" class="spinner-border text-dark" role="status">
+        </div>
+        <span *ngIf="!uploading">
+          VALIDER AJOUT
+        </span>
+      </button>
     </div>
   </div>
 </div>
