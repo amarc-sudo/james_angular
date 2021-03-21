@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prod": "./node_modules/.bin/ng build --prod",
-    "prod-windows":"ng build --prod"
+    "prod-windows": "ng build --prod"
   },
   "private": true,
   "dependencies": {

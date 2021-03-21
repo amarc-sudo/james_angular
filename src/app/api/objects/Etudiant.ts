@@ -7,4 +7,5 @@ export class Etudiant{
   formation: Formation;
   groupe: number;
   hasSigned: boolean;
+  adresseMail: string;
 }
