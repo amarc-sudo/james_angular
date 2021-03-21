@@ -26,6 +26,7 @@ import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fic
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
 import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.com
     AdminPanelComponent,
     AdminCardComponent,
     CookieBarComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,6 +105,10 @@ import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.com
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: '**',
+        component: NotfoundComponent
       }
     ]),
     OrderModule

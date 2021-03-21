@@ -1,0 +1,24 @@
+#messageErreur404{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 200%;
+}
+#oups404{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 700%;
+}
+#codeErreur404{
+  font-weight: bold;
+}
+#messageLiens404{
+  font-size:150%;
+  font-weight: bold;
+}
+
+#chuckErreur404{
+  opacity: 1;
+}
+#contenu{
+  padding-top: 6%;
+}
