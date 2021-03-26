@@ -10,7 +10,7 @@
             </a>
           </li>
           <li class="nav-item list-group-item menu_item dropdown w-100">
-            <a class="nav-link no_decoration">
+            <a class="nav-link no_decoration" (click)="changeView(2)">
               Ajouter un élève
             </a>
           </li>
@@ -27,7 +27,9 @@
       <div *ngIf="switchView==1">
         <app-ajout-classe (resetView)="changeView($event)"></app-ajout-classe>
       </div>
-
+      <div *ngIf="switchView==2">
+        <app-ajout-eleve></app-ajout-eleve>
+      </div>
     </div>
 
   </div>

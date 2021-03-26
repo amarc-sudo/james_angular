@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="input-group" style="margin: 40px 0">
+    <span class="input-group-addon">
+      Formation
+    </span>
+    <select class="form-control" id="formation">
+      <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
+        {{formation.intitule}}
+      </option>
+    </select>
+  </div>
+  <br>
+  <div class="input-group" style="margin: 15px 0">
+    <span *ngIf="errorNom" style="color: red;">Veuillez remplir ce champ</span>
+    <span class="input-group-addon">
+        Nom
+    </span>
+    <input class='form-control' id="nom" type="text">
+  </div>
+  <div class="input-group" style="margin: 15px 0">
+    <span *ngIf="errorPrenom" style="color: red;">Veuillez remplir ce champ</span>
+    <span class="input-group-addon">
+      Prénom
+    </span>
+    <input class='form-control' id="prenom" type="text">
+  </div>
+  <div class="input-group" style="margin: 15px 0">
+    <span *ngIf="errorAdresseMail" style="color: red;">Veuillez remplir ce champ</span>
+    <span class="input-group-addon">
+      Adresse mail
+  </span>
+    <input class='form-control' id="adresse-mail" type="text"></div>
+  <div class="input-group" style="margin: 15px 0">
+  <span class="input-group-addon">
+      Groupe
+    </span>
+    <select class="form-control" id="groupe">
+      <option value=""></option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+  <div class="row justify-content-center align-items-center" style="width: 90%">
+    <button class="btn">
+      <div *ngIf="updating" class="spinner-border text-dark" role="status">
+      </div>
+      <span *ngIf="!updating" (click)="addEtudiant()">
+          VALIDER AJOUT
+        </span>
+    </button>
+  </div>
+</div>
+
+

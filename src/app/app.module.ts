@@ -28,6 +28,7 @@ import { AdminCardComponent } from './annexe-component/admin-card/admin-card.com
 import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
 import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
 import { AccueilGestionFormationComponent } from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
+import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AccueilGestionFormationComponent } from './pages/gestion-formation/accu
     CookieBarComponent,
     AjoutClasseComponent,
     AccueilGestionFormationComponent,
+    AjoutEleveComponent,
   ],
   imports: [
     BrowserModule,
