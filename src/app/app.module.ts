@@ -110,11 +110,6 @@ import { AccueilGestionFormationComponent } from './pages/gestion-formation/accu
         canActivate: [AuthGuard]
       },
       {
-        path: 'accueil/gestion-formation/ajout-classe',
-        component: AjoutClasseComponent,
-        canActivate: [AuthGuard]
-      },
-      {
         path: '',
         component: HomeComponent
       }

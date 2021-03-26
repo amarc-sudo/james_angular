@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Formation} from '../../../api/objects/Formation';
 import {Etudiant} from '../../../api/objects/Etudiant';
 import {Personne} from '../../../api/objects/Personne';
@@ -8,13 +8,13 @@ import {EtudiantService} from '../../../service/api/etudiant.service';
 import {switchMapTo, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 
+
 @Component({
   selector: 'app-ajout-classe',
   templateUrl: './ajout-classe.component.html',
   styleUrls: ['./ajout-classe.component.css']
 })
 export class AjoutClasseComponent implements OnInit {
-
 
   constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private router: Router) {
   }
@@ -28,6 +28,8 @@ export class AjoutClasseComponent implements OnInit {
   erreur = false;
 
   uploading = false;
+
+  @Output() resetView = new EventEmitter<number>();
 
   ngOnInit(): void {
     // On récupère les formations
@@ -99,7 +101,7 @@ export class AjoutClasseComponent implements OnInit {
       ).subscribe(result => {
         if (i === this.listEtudiants.length - 1) {
           this.uploading = false;
-          this.router.navigate(['accueil/gestion-formation']);
+          this.resetView.emit(0);
         }
       }));
     }

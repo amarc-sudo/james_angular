@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {filter} from 'rxjs/operators';
 import {NavigationEnd, Router} from '@angular/router';
 
@@ -9,7 +9,10 @@ import {NavigationEnd, Router} from '@angular/router';
 })
 export class AccueilGestionFormationComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  switchView = 0;
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
   }
@@ -27,4 +30,7 @@ export class AccueilGestionFormationComponent implements OnInit {
       });
   }
 
+  changeView(switchView: number): void {
+    this.switchView = switchView;
+  }
 }

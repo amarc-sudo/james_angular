@@ -1,21 +1,34 @@
-<nav class="navbar">
-  <!-- Links -->
-  <ul class="navbar-nav list-group w-100">
-    <li class="nav-item  list-group-item menu_item dropdown w-100">
-      <a class="nav-link no_decoration" (click)="change('accueil/gestion-formation/ajout-classe')">
-        Ajouter toute une classe
-      </a>
-    </li>
-    <li class="nav-item list-group-item menu_item dropdown w-100">
-      <a class="nav-link no_decoration">
-        Ajouter un élève
-      </a>
-    </li>
-    <li class="nav-item list-group-item menu_item dropdown w-100">
-      <a class="nav-link no_decoration">
-        Gérer les professeurs
-      </a>
-    </li>
-  </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <nav class="navbar">
+        <!-- Links -->
+        <ul class="navbar-nav list-group w-100">
+          <li class="nav-item  list-group-item menu_item dropdown w-100">
+            <a class="nav-link no_decoration" (click)="changeView(1)">
+              Ajouter toute une classe
+            </a>
+          </li>
+          <li class="nav-item list-group-item menu_item dropdown w-100">
+            <a class="nav-link no_decoration">
+              Ajouter un élève
+            </a>
+          </li>
+          <li class="nav-item list-group-item menu_item dropdown w-100">
+            <a class="nav-link no_decoration">
+              Gérer les professeurs
+            </a>
+          </li>
+        </ul>
 
-</nav>
+      </nav>
+    </div>
+    <div class="col-8">
+      <div *ngIf="switchView==1">
+        <app-ajout-classe (resetView)="changeView($event)"></app-ajout-classe>
+      </div>
+
+    </div>
+
+  </div>
+</div>
