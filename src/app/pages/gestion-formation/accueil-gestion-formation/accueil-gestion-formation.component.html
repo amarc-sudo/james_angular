@@ -28,7 +28,7 @@
         <app-ajout-classe (resetView)="changeView($event)"></app-ajout-classe>
       </div>
       <div *ngIf="switchView==2">
-        <app-ajout-eleve></app-ajout-eleve>
+        <app-ajout-eleve (resetView)="changeView($event)"></app-ajout-eleve>
       </div>
     </div>
 

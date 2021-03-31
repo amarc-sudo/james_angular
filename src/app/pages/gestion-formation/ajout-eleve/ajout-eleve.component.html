@@ -10,27 +10,27 @@
     </select>
   </div>
   <br>
-  <div class="input-group" style="margin: 15px 0">
-    <span *ngIf="errorNom" style="color: red;">Veuillez remplir ce champ</span>
+  <span class="info" *ngIf="errorNom" style="color: red;">Veuillez remplir ce champ</span>
+  <div class="input-group" style="margin-bottom: 30px">
     <span class="input-group-addon">
         Nom
     </span>
     <input class='form-control' id="nom" type="text">
   </div>
-  <div class="input-group" style="margin: 15px 0">
-    <span *ngIf="errorPrenom" style="color: red;">Veuillez remplir ce champ</span>
+  <span class="info" *ngIf="errorPrenom" style="color: red;">Veuillez remplir ce champ</span>
+  <div class="input-group" style="margin-bottom: 30px">
     <span class="input-group-addon">
       Prénom
     </span>
     <input class='form-control' id="prenom" type="text">
   </div>
-  <div class="input-group" style="margin: 15px 0">
-    <span *ngIf="errorAdresseMail" style="color: red;">Veuillez remplir ce champ</span>
+  <span class="info" *ngIf="errorAdresseMail" style="color: red;">Veuillez remplir ce champ</span>
+  <div class="input-group" style="margin-bottom: 30px">
     <span class="input-group-addon">
       Adresse mail
-  </span>
+    </span>
     <input class='form-control' id="adresse-mail" type="text"></div>
-  <div class="input-group" style="margin: 15px 0">
+  <div class="input-group" style="margin-bottom: 30px">
   <span class="input-group-addon">
       Groupe
     </span>

@@ -29,6 +29,8 @@ export class AjoutClasseComponent implements OnInit {
 
   uploading = false;
 
+  erreurValidation = false;
+
   @Output() resetView = new EventEmitter<number>();
 
   ngOnInit(): void {
@@ -57,12 +59,11 @@ export class AjoutClasseComponent implements OnInit {
 
   getEtudiantArrayFromCSVFile(csvRecordsArray: any): Etudiant[] {
     const etudiantList: Etudiant[] = [];
-
     for (let i = 0; i < csvRecordsArray.length; i++) {
       const ligneCSV = (csvRecordsArray[i] as string).split(',');
       const etudiant = new Etudiant();
       const personne = new Personne();
-      if (ligneCSV.length !== 4) {
+      if (ligneCSV.length !== 4 || ligneCSV[0].trim() === '' || ligneCSV[1].trim() === '' || ligneCSV[2].trim() === '' || !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(ligneCSV[2].trim())) {
         this.erreur = true;
         return null;
       }
@@ -91,17 +92,28 @@ export class AjoutClasseComponent implements OnInit {
 
   ajouterEtudiants(): void {
     const formation = new Formation();
-    this.uploading = true;
+
     formation.idFormation = parseInt((document.getElementById('formation') as HTMLSelectElement).value, 10);
+    // vérification avant de valider
+    for (let i = 0; i < this.listEtudiants.length; i++) {
+      if (this.listEtudiants[i].personne.nom === '' || this.listEtudiants[i].personne.prenom === '' || this.listEtudiants[i].adresseMail === '' ||
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.listEtudiants[i].adresseMail)) {
+        this.erreurValidation = true;
+        return;
+      }
+    }
+    this.erreurValidation = false;
+    this.uploading = true;
+
     for (let i = 0; i < this.listEtudiants.length; i++) {
       this.listEtudiants[i].formation = formation;
       this.subscriptions.push(this.personneService.create(this.listEtudiants[i].personne).pipe(tap(personne =>
           this.listEtudiants[i].personne = personne),
         switchMapTo(this.etudiantService.create(this.listEtudiants[i])),
-      ).subscribe(result => {
+      ).subscribe(() => {
         if (i === this.listEtudiants.length - 1) {
           this.uploading = false;
-          this.resetView.emit(0);
+
         }
       }));
     }

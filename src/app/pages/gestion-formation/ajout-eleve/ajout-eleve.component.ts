@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Formation} from "../../../api/objects/Formation";
-import {Etudiant} from "../../../api/objects/Etudiant";
-import {Personne} from "../../../api/objects/Personne";
-import {switchMapTo, tap} from "rxjs/operators";
-import {Subscription} from "rxjs";
-import {PersonneService} from "../../../service/api/personne.service";
-import {EtudiantService} from "../../../service/api/etudiant.service";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Formation} from '../../../api/objects/Formation';
+import {Etudiant} from '../../../api/objects/Etudiant';
+import {Personne} from '../../../api/objects/Personne';
+import {switchMapTo, tap} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {PersonneService} from '../../../service/api/personne.service';
+import {EtudiantService} from '../../../service/api/etudiant.service';
 
 @Component({
   selector: 'app-ajout-eleve',
@@ -26,6 +26,8 @@ export class AjoutEleveComponent implements OnInit {
 
   errorAdresseMail = false;
 
+  @Output() resetView = new EventEmitter<number>();
+
   constructor(private personneService: PersonneService, private etudiantService: EtudiantService) {
   }
 
@@ -35,7 +37,6 @@ export class AjoutEleveComponent implements OnInit {
     for (let i = 0; i < storedArray.length; i++) {
       this.listFormations.push(storedArray[i] as Formation);
     }
-    console.log(this.listFormations);
   }
 
   addEtudiant(): void {
@@ -44,25 +45,30 @@ export class AjoutEleveComponent implements OnInit {
     const personne: Personne = new Personne();
     formation.idFormation = parseInt((document.getElementById('formation') as HTMLSelectElement).value, 10);
     etudiant.formation = formation;
+    this.errorAdresseMail = false;
+    this.errorNom = false;
+    this.errorPrenom = false;
     if ((document.getElementById('nom') as HTMLInputElement).value === '') {
       this.errorNom = true;
-      return;
     }
     personne.nom = (document.getElementById('nom') as HTMLInputElement).value;
     if ((document.getElementById('prenom') as HTMLInputElement).value === '') {
       this.errorPrenom = true;
-      return;
     }
     personne.prenom = (document.getElementById('prenom') as HTMLInputElement).value;
-    if ((document.getElementById('adresse-mail') as HTMLInputElement).value === '') {
+    const mail = (document.getElementById('adresse-mail') as HTMLInputElement).value;
+    if (mail === '' || !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
       this.errorAdresseMail = true;
-      return;
     }
     etudiant.adresseMail = (document.getElementById('adresse-mail') as HTMLInputElement).value;
     etudiant.personne = personne;
+    if (this.errorAdresseMail || this.errorPrenom || this.errorNom) {
+      return;
+    }
+
     this.subscriptions.push(this.personneService.create(etudiant.personne).pipe(tap(personneRetour =>
         etudiant.personne = personneRetour),
       switchMapTo(this.etudiantService.create(etudiant)),
-    ).subscribe());
+    ).subscribe(() => this.resetView.emit(0)));
   }
 }
