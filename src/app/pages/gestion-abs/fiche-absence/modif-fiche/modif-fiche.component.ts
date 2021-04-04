@@ -10,6 +10,8 @@ import {ProfesseurService} from '../../../../service/api/professeur.service';
 import {materialize, tap} from 'rxjs/operators';
 import {Matiere} from '../../../../api/objects/Matiere';
 import {MatiereService} from '../../../../service/api/matiere.service';
+import {Presence} from '../../../../api/objects/Presence';
+import {TableData} from '../../../../api/objects/TableData';
 
 @Component({
   selector: 'app-modif-fiche',
@@ -18,17 +20,16 @@ import {MatiereService} from '../../../../service/api/matiere.service';
 })
 export class ModifFicheComponent implements OnInit {
 
-
   idCours: number;
 
   cours$: Observable<Cours>;
 
-  setModifPresences = new Set<string>();
-
   listProfesseurs: Professeur[];
 
-
   listMatieres: Matiere[];
+
+  listPresences: Presence[];
+
   positionProfesseur: number;
   positionMatiere: number;
   heureDebut: any;
@@ -52,6 +53,7 @@ export class ModifFicheComponent implements OnInit {
           this.matiereService.listByFormation(cours.matiere.formation.idFormation).subscribe(result => this.listMatieres = result);
           this.positionProfesseur = cours.professeur.idProfesseur;
           this.positionMatiere = cours.matiere.idMatiere;
+          this.listPresences = cours.presences;
           this.heureDebut = this.conversionModel(cours.begin);
           this.heureFin = this.conversionModel(cours.end);
           if (cours.etat.code === 'env') {
@@ -62,15 +64,7 @@ export class ModifFicheComponent implements OnInit {
     }
   }
 
-  addChangementPresences(idPresence: string): void {
-    this.setModifPresences.add(idPresence);
-  }
-
   enregistrer(cours: Cours): void {
-    let map = new Map();
-    this.setModifPresences.forEach(idPresence => {
-      map.set(idPresence, this.getValueOfElementSelectID(idPresence));
-    });
 
     this.listMatieres.forEach(matiere => {
         if (matiere.idMatiere == this.getValueOfElementSelectID('matiere')) {
@@ -90,11 +84,13 @@ export class ModifFicheComponent implements OnInit {
 
     this.errorTime = false;
     this.updating = true;
-
-    this.presenceService.update(map).subscribe();
+    const coursId = new Cours();
+    coursId.idCours = cours.idCours;
+    this.listPresences.forEach(presence => presence.cours = coursId);
+    this.presenceService.update(this.listPresences).subscribe();
     this.coursService.update(cours).subscribe(() => {
         const date = new Date(cours.date);
-        date.setTime(date.getTime() + 1000 * 60 * 60);
+        date.setTime(date.getTime() + 3000 * 60 * 60);
         this.updating = false;
         this.router.navigate(['accueil/gestion-abs/fiche-presence'], {
           queryParams: {
@@ -124,5 +120,20 @@ export class ModifFicheComponent implements OnInit {
       this.errorTime = true;
     }
     return horaireModel.hour + ':' + horaireModel.minute + ':00';
+  }
+
+  updateListPresences(idPresence: number): void {
+    const tableData = new TableData();
+    tableData.code = (document.getElementById(String(idPresence)) as HTMLSelectElement).value;
+    this.listPresences[this.getPresenceIndexByID(idPresence)].etatPresence = tableData;
+  }
+
+  getPresenceIndexByID(idPresence: number): number {
+    for (let i = 0; i < idPresence; i++) {
+      if (this.listPresences[i].idPresence === idPresence) {
+        return i;
+      }
+    }
+    return 0;
   }
 }

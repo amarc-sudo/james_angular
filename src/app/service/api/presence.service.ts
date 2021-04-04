@@ -4,6 +4,7 @@ import {ParentApiService} from './parent.api.service';
 import {Observable} from 'rxjs';
 import {Cours} from '../../api/objects/Cours';
 import {environment} from '../../../environments/environment';
+import {Presence} from '../../api/objects/Presence';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,8 @@ export class PresenceService extends ParentApiService {
     super();
   }
 
-  update(map: Map<any, any>): Observable<void> {
-    const convMap = {};
-    map.forEach((val: string, key: string) => {
-      convMap[key] = val;
-    });
-    return this.httpClient.patch<void>(environment.apiUrl + '/rest/api/presence/update', convMap
+  update(listPresences: Presence[]): Observable<Presence[]> {
+    return this.httpClient.patch<Presence[]>(environment.apiUrl + '/rest/api/presence/updateList', listPresences
     );
   }
 
