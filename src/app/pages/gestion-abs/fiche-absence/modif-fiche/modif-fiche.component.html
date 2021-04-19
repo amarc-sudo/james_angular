@@ -49,14 +49,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let presence of cours.presences | orderBy: 'etudiant.personne.nom': false">
+          <tr *ngFor="let presence of cours.presences| orderBy: 'etudiant.personne.nom': false;">
             <td>{{presence.etudiant.personne.nom |uppercase}} {{presence.etudiant.personne.prenom}}</td>
             <td>
               <select id="{{presence.idPresence}}" class='form-control'
-                      [value]="presence.etatPresence.idData" (change)="addChangementPresences(presence.idPresence)">
-                <option value='1'>Présent</option>
-                <option value='2'>En retard</option>
-                <option value='3'>Absent</option>
+                      [value]="presence.etatPresence.code" (change)="updateListPresences(presence.idPresence)">
+                <option value='pre'>Présent</option>
+                <option value='ret'>En retard</option>
+                <option value='abs'>Absent</option>
               </select>
             </td>
           </tr>
