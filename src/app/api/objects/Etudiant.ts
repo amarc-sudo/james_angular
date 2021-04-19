@@ -9,4 +9,5 @@ export class Etudiant {
   nombreAbsences: number;
   nombreRetards: number;
   hasSigned: boolean;
+  adresseMail: string;
 }
