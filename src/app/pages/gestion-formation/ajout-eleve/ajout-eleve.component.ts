@@ -65,7 +65,9 @@ export class AjoutEleveComponent implements OnInit {
     if (this.errorAdresseMail || this.errorPrenom || this.errorNom) {
       return;
     }
-
+    if ((document.getElementById('groupe') as HTMLSelectElement).value != '') {
+      etudiant.groupe = parseInt((document.getElementById('groupe') as HTMLSelectElement).value, 10);
+    }
     this.subscriptions.push(this.personneService.create(etudiant.personne).pipe(tap(personneRetour =>
         etudiant.personne = personneRetour),
       switchMapTo(this.etudiantService.create(etudiant)),
