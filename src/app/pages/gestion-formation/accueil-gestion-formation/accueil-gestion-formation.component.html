@@ -15,6 +15,11 @@
             </a>
           </li>
           <li class="nav-item list-group-item menu_item dropdown w-100">
+            <a class="nav-link no_decoration" (click)="changeView(3)">
+              Voir les formations
+            </a>
+          </li>
+          <li class="nav-item list-group-item menu_item dropdown w-100">
             <a class="nav-link no_decoration" (click)="changeView(4)">
               Gérer les professeurs
             </a>
@@ -34,6 +39,9 @@
       </div>
       <div *ngIf="switchView==2">
         <app-ajout-eleve (resetView)="changeView($event)"></app-ajout-eleve>
+      </div>
+      <div *ngIf="switchView==3">
+        <app-visualisation-formation (resetView)="changeView($event)"></app-visualisation-formation>
       </div>
 
       <div *ngIf="switchView==4">
