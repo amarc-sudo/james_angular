@@ -1,4 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Formation} from '../../../api/objects/Formation';
+import {Etudiant} from '../../../api/objects/Etudiant';
+import {EtudiantService} from '../../../service/api/etudiant.service';
+import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-visualisation-formation',
@@ -7,10 +12,34 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class VisualisationFormationComponent implements OnInit {
 
-  @Output() resetView = new EventEmitter<number>();
-  constructor() { }
 
-  ngOnInit(): void {
+  @Output() resetView = new EventEmitter<number>();
+
+  listFormations: Formation[] = [];
+
+  etudiantListComplete: Etudiant[] = [];
+
+  etudiantListFiltered: Etudiant[] = [];
+
+  constructor(private etudiantService: EtudiantService) {
+
   }
 
+  ngOnInit(): void {
+    const storedArray = JSON.parse(sessionStorage.getItem('formations'));
+    for (let i = 0; i < storedArray.length; i++) {
+      this.listFormations.push(storedArray[i] as Formation);
+    }
+    this.etudiantService.listByFormation(this.listFormations).pipe(tap(result => {
+        this.etudiantListComplete = result;
+        this.etudiantListFiltered = this.etudiantListComplete
+          .filter(etudiant => etudiant.formation.idFormation === this.listFormations[0].idFormation);
+      }
+    )).subscribe();
+  }
+
+  onChange(value: any): void {
+    this.etudiantListFiltered = this.etudiantListComplete
+      .filter(etudiant => etudiant.formation.idFormation == value);
+  }
 }
