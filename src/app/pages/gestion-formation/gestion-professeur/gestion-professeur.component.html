@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="input-group" style="margin: 40px 0">
+    <span class="input-group-addon">
+      Formation
+    </span>
+    <select class="form-control" id="formation">
+      <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
+        {{formation.intitule}}
+      </option>
+    </select>
+  </div>
+  <div class="row">
+    <div droppable class="col" (onDrop)="professeurInRemove($event)">
+      <ul>
+        <li  draggable [dragData]="professeurOutFormation" *ngFor="let professeurOutFormation of listProfesseurOutFormation">
+          {{professeurOutFormation.personne.nom}} {{professeurOutFormation.personne.prenom}}
+        </li>
+      </ul>
+    </div>
+    <div droppable class="col" (onDrop)="professeurInAdd($event)">
+      <ul>
+        <li draggable [dragData]="professeurInFormation" *ngFor="let professeurInFormation of listProfesseurInFormation">
+          {{professeurInFormation.personne.nom}} {{professeurInFormation.personne.prenom}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center" style="width: 90%">
+    <button class="btn">
+      <div *ngIf="updating" class="spinner-border text-dark" role="status">
+      </div>
+      <span *ngIf="!updating" (click)="updateProfesseur()">
+          VALIDER MODIFICATIONS
+        </span>
+    </button>
+  </div>
+</div>
+
+
+

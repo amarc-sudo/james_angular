@@ -13,7 +13,15 @@ export class ProfesseurService extends ParentApiService {
     super();
   }
 
+  list(): Observable<Professeur[]> {
+    return this.httpClient.get<Professeur[]>(this.api + '/rest/api/professeur/list');
+  }
+
   listByFormation(idFormation: number): Observable<Professeur[]> {
-    return this.httpClient.get<Professeur[]>(this.api + '/rest/api/professeur/list?idFormation=' + idFormation);
+    return this.httpClient.get<Professeur[]>(this.api + '/rest/api/professeur/listByFormation?idFormation=' + idFormation);
+  }
+
+  updateList(listProfesseur: Professeur[]): Observable<Professeur[]> {
+    return this.httpClient.patch<Professeur[]>(this.api + '/rest/api/professeur/updateList', listProfesseur);
   }
 }
