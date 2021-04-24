@@ -11,10 +11,13 @@ export class AccueilGestionFormationComponent implements OnInit {
 
   switchView = 0;
 
+  poste: string;
+
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+    this.poste = sessionStorage.getItem('poste');
   }
 
   change(s: string): void {

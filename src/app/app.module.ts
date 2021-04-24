@@ -22,13 +22,14 @@ import {Safe} from './service/SafeHTML/safe';
 import {TableComponent} from './annexe-component/table/table.component';
 import {FichePreviewComponent} from './pages/gestion-abs/fiche-absence/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
-import {ModifFicheComponent} from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
-import {AdminPanelComponent} from './pages/admin-panel/admin-panel.component';
-import {AdminCardComponent} from './annexe-component/admin-card/admin-card.component';
-import {CookieBarComponent} from './annexe-component/cookie-bar/cookie-bar.component';
-import {AjoutClasseComponent} from './pages/gestion-formation/ajout-classe/ajout-classe.component';
-import {AccueilGestionFormationComponent} from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
-import {AjoutEleveComponent} from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
+import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
+import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
+import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
+import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
+import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
+import { AccueilGestionFormationComponent } from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
+import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
+import { AjoutFormationComponent } from './pages/gestion-formation/ajout-formation/ajout-formation.component';
 import {GestionProfesseurComponent} from './pages/gestion-formation/gestion-professeur/gestion-professeur.component';
 import {NgDragDropModule} from 'ng-drag-drop';
 
@@ -54,6 +55,7 @@ import {NgDragDropModule} from 'ng-drag-drop';
     AccueilGestionFormationComponent,
     AjoutEleveComponent,
     GestionProfesseurComponent,
+    AjoutFormationComponent,
   ],
   imports: [
     BrowserModule,
