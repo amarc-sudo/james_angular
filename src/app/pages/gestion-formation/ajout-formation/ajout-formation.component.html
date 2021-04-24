@@ -1,1 +1,28 @@
-
+<div *ngIf="listProfesseur!= undefined && listProfesseur.length > 0" class="container-fluid">
+  <div class="input-group" style="margin: 40px 0">
+  <span class="input-group-addon">
+      Professeur Responsable
+    </span>
+    <select class="form-control" id="professeur">
+      <option *ngFor="let professeur of listProfesseur" [value]="professeur.idProfesseur">
+        {{professeur.personne.nom}} {{professeur.personne.prenom}}
+      </option>
+    </select>
+  </div>
+  <span class="info" *ngIf="errorNom" style="color: red;">Veuillez remplir ce champ</span>
+  <div class="input-group" style="margin-bottom: 30px">
+    <span class="input-group-addon">
+        Nom Formation
+    </span>
+    <input class='form-control' id="nom" type="text">
+  </div>
+  <div class="row justify-content-center align-items-center" style="width: 90%">
+    <button class="btn">
+      <div *ngIf="updating" class="spinner-border text-dark" role="status">
+      </div>
+      <span *ngIf="!updating" (click)="addFormation()">
+          VALIDER AJOUT
+        </span>
+    </button>
+  </div>
+</div>
