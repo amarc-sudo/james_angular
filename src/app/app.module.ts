@@ -29,6 +29,7 @@ import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.com
 import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
 import { AccueilGestionFormationComponent } from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
 import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
+import { AjoutFormationComponent } from './pages/gestion-formation/ajout-formation/ajout-formation.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout
     AjoutClasseComponent,
     AccueilGestionFormationComponent,
     AjoutEleveComponent,
+    AjoutFormationComponent,
   ],
   imports: [
     BrowserModule,

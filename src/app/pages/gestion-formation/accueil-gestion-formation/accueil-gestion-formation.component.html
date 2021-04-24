@@ -15,8 +15,8 @@
             </a>
           </li>
           <li class="nav-item list-group-item menu_item dropdown w-100">
-            <a class="nav-link no_decoration">
-              Gérer les professeurs
+            <a class="nav-link no_decoration" *ngIf="poste == 'sec'" (click)="changeView(5)">
+              Ajouter une formation
             </a>
           </li>
         </ul>
@@ -29,6 +29,10 @@
       </div>
       <div *ngIf="switchView==2">
         <app-ajout-eleve (resetView)="changeView($event)"></app-ajout-eleve>
+      </div>
+
+      <div *ngIf="switchView==5">
+        <app-ajout-formation (resetView)="changeView($event)"></app-ajout-formation>
       </div>
     </div>
 
