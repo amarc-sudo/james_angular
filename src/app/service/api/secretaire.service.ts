@@ -20,4 +20,8 @@ export class SecretaireService extends ParentApiService {
     return this.httpClient.get<Secretaire>(this.api + '/rest/api/secretaire/read?idSecretaire=' + idSecretaire);
   }
 
+  update(secretaire: Secretaire): Observable<Secretaire> {
+    return this.httpClient.patch<Secretaire>(this.api + '/rest/api/secretaire/update', secretaire);
+  }
+
 }
