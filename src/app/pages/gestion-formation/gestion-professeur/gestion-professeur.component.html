@@ -3,34 +3,40 @@
     <span class="input-group-addon">
       Formation
     </span>
-    <select class="form-control" id="formation">
+    <select class="form-control" id="formation" (change)="changeFormation($event)">
       <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
         {{formation.intitule}}
       </option>
     </select>
   </div>
   <div class="row">
-    <div droppable class="col" (onDrop)="professeurInRemove($event)">
+    <div droppable class="col zone" [dropScope]="'out'" (onDrop)="professeurInRemove($event)">
+      <div class="head">
+        Professeurs disponibles
+      </div>
       <ul>
-        <li  draggable [dragData]="professeurOutFormation" *ngFor="let professeurOutFormation of listProfesseurOutFormation">
+        <li  draggable [dragScope]="'in'" [dragData]="professeurOutFormation" *ngFor="let professeurOutFormation of listProfesseurOutFormation">
           {{professeurOutFormation.personne.nom}} {{professeurOutFormation.personne.prenom}}
         </li>
       </ul>
     </div>
-    <div droppable class="col" (onDrop)="professeurInAdd($event)">
+    <div droppable class="col zone" [dropScope]="'in'"  (onDrop)="professeurInAdd($event)">
+      <div class="head">
+        Professeurs en {{nomFormationSelected}}
+      </div>
       <ul>
-        <li draggable [dragData]="professeurInFormation" *ngFor="let professeurInFormation of listProfesseurInFormation">
+        <li draggable  [dragScope]="'out'"  [dragData]="professeurInFormation" *ngFor="let professeurInFormation of listProfesseurInFormation">
           {{professeurInFormation.personne.nom}} {{professeurInFormation.personne.prenom}}
         </li>
       </ul>
     </div>
   </div>
-  <div class="row justify-content-center align-items-center" style="width: 90%">
+  <div class="row justify-content-center align-items-center" style="width: 90%; margin-top: 25px">
     <button class="btn">
       <div *ngIf="updating" class="spinner-border text-dark" role="status">
       </div>
       <span *ngIf="!updating" (click)="updateProfesseur()">
-          VALIDER MODIFICATIONS
+          VALIDER MODIFICATIONS POUR LA FORMATION
         </span>
     </button>
   </div>

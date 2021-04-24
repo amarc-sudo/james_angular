@@ -25,6 +25,7 @@ export class GestionProfesseurComponent implements OnInit {
 
   idFormationSelected: number;
 
+  nomFormationSelected: string;
   @Output() resetView = new EventEmitter<number>();
 
   updating = false;
@@ -41,9 +42,11 @@ export class GestionProfesseurComponent implements OnInit {
       this.professeurService.list().pipe(tap(result => {
         this.listProfesseur = result;
         this.listProfesseurAltered = result;
-        this.listProfesseurInFormation = this.listProfesseur.filter(professeur => professeur.formations.map(formation => formation.idFormation).includes(this.listFormations[0].idFormation));
-        this.listProfesseurOutFormation = this.listProfesseur.filter(professeur => !professeur.formations.map(formation => formation.idFormation).includes(this.listFormations[0].idFormation));
         this.idFormationSelected = this.listFormations[0].idFormation;
+        this.nomFormationSelected = this.listFormations[0].intitule;
+        this.listProfesseurInFormation = this.listProfesseur.filter(professeur => professeur.formations.map(formation => formation.idFormation).includes(this.idFormationSelected));
+        this.listProfesseurOutFormation = this.listProfesseur.filter(professeur => !professeur.formations.map(formation => formation.idFormation).includes(this.idFormationSelected));
+
       })).subscribe();
     }
 
@@ -55,7 +58,6 @@ export class GestionProfesseurComponent implements OnInit {
     for (let i = 0; i < this.listProfesseurAltered.length; i++) {
       if (this.listProfesseurAltered[i].idProfesseur == ($event.dragData as Professeur).idProfesseur) {
         this.listProfesseurAltered[i].formations.push({idFormation: this.idFormationSelected} as Formation);
-        console.log(this.listProfesseurAltered);
       }
     }
   }
@@ -66,7 +68,6 @@ export class GestionProfesseurComponent implements OnInit {
     for (let i = 0; i < this.listProfesseurAltered.length; i++) {
       if (this.listProfesseurAltered[i].idProfesseur == ($event.dragData as Professeur).idProfesseur) {
         this.listProfesseurAltered[i].formations = this.listProfesseurAltered[i].formations.filter(formation => formation.idFormation != this.idFormationSelected);
-        console.log(this.listProfesseurAltered);
       }
     }
   }
@@ -74,5 +75,13 @@ export class GestionProfesseurComponent implements OnInit {
   updateProfesseur(): void {
     this.updating = false;
     this.professeurService.updateList(this.listProfesseurAltered).pipe(tap(() => this.resetView.emit(0))).subscribe();
+  }
+
+  changeFormation($event: Event): void {
+    this.idFormationSelected = parseInt(($event.target as HTMLSelectElement).value, 10);
+    this.listProfesseurAltered = this.listProfesseur;
+    this.listProfesseurInFormation = this.listProfesseur.filter(professeur => professeur.formations.map(formation => formation.idFormation).includes(this.idFormationSelected));
+    this.listProfesseurOutFormation = this.listProfesseur.filter(professeur => !professeur.formations.map(formation => formation.idFormation).includes(this.idFormationSelected));
+    this.nomFormationSelected = (this.listFormations.filter(formation => formation.idFormation == this.idFormationSelected))[0].intitule;
   }
 }
