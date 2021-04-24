@@ -37,7 +37,6 @@ export class HistoryComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    console.log('coucou');
   }
 
 }

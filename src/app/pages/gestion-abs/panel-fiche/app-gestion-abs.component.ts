@@ -38,7 +38,6 @@ export class AppGestionAbsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    console.log('coucou');
   }
 
 }

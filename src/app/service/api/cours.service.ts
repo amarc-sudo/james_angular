@@ -19,9 +19,7 @@ export class CoursService extends ParentApiService {
   }
 
   readFichePresence(idFormation: number, date: string): Observable<any> {
-    return this.httpClient.post<any>(environment.apiUrl + '/rest/api/cours/getFichePresence', {
-      idFormation, date
-    }, {responseType: 'blob' as 'json'});
+    return this.httpClient.get<any>(environment.apiUrl + '/rest/api/cours/getFichePresence?idFormation=' + idFormation + '&dateCours=' + date, {responseType: 'blob' as 'json'});
   }
 
   listByFormationAndDate(idFormation: number, date: string): Observable<Cours[]> {
