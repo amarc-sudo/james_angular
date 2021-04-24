@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="listProfesseur.length > 0 && listFormations.length > 0">
   <div class="input-group" style="margin: 40px 0">
     <span class="input-group-addon">
       Formation
@@ -30,15 +30,6 @@
         </li>
       </ul>
     </div>
-  </div>
-  <div class="row justify-content-center align-items-center" style="width: 90%; margin-top: 25px">
-    <button class="btn">
-      <div *ngIf="updating" class="spinner-border text-dark" role="status">
-      </div>
-      <span *ngIf="!updating" (click)="updateProfesseur()">
-          VALIDER MODIFICATIONS POUR LA FORMATION
-        </span>
-    </button>
   </div>
 </div>
 

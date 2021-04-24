@@ -21,6 +21,10 @@ export class ProfesseurService extends ParentApiService {
     return this.httpClient.get<Professeur[]>(this.api + '/rest/api/professeur/listByFormation?idFormation=' + idFormation);
   }
 
+  update(professeur: Professeur): Observable<Professeur> {
+    return this.httpClient.post<Professeur>(this.api + '/rest/api/professeur/update', professeur);
+  }
+
   updateList(listProfesseur: Professeur[]): Observable<Professeur[]> {
     return this.httpClient.patch<Professeur[]>(this.api + '/rest/api/professeur/updateList', listProfesseur);
   }
