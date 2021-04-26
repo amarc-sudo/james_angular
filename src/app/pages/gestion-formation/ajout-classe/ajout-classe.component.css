@@ -1,0 +1,14 @@
+.table_hover:hover{
+  background-color: #18c8f0;
+  transition: 1s all;
+}
+
+.table_hover{
+  transition: 1s all;
+  background-color: white;
+}
+
+.info{
+  font-style: italic;
+  font-weight: 600;
+}

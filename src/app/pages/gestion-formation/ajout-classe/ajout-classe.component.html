@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="input-group" style="margin: 40px 0">
+    <span class="input-group-addon">
+      Formation
+    </span>
+    <select class="form-control" id="formation">
+      <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
+        {{formation.intitule}}
+      </option>
+    </select>
+  </div>
+  <span class="info">Le fichier doit être au format CSV. IL n'a pas d'en-tête et contient 4 colonnes: "Nom,Prénom,Adresse mail,Groupe". Mettre un groupe est optionnel.</span>
+  <br>
+  <span class="info" *ngIf="erreur" style="color: red">Erreur lors du chargement du fichier</span>
+  <div class="custom-file" style="margin-bottom: 20px">
+    <input accept=".csv" (change)="handleFileSelect($event)" type="file" class="custom-file-input" id="customFile">
+    <label class="custom-file-label" for="customFile">Choisissez un fichier</label>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table" data-toggle="table">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Adresse mail</th>
+        <th>Groupe</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let etudiant of listEtudiants; let index = index">
+        <td><input class='form-control' type="text" [value]="etudiant.personne.nom"
+                   (change)="changeNomValue($event,index)"></td>
+        <td><input class='form-control' type="text" [value]="etudiant.personne.prenom"
+                   (change)="changePrenomValue($event,index)"></td>
+        <td><input class='form-control' type="text" [value]="etudiant.adresseMail"
+                   (change)="changeAdresseMailValue($event,index)"></td>
+        <td><select class='form-control' [value]="etudiant.groupe" (change)="changeGroupe($event,index)">
+          <option value=""></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select></td>
+      </tr>
+      </tbody>
+    </table>
+    <span class="info row justify-content-center align-items-center"  *ngIf="erreurValidation" style="color: red; width: 90%">Un champ obligatoire n'est pas correctement rempli</span>
+    <div *ngIf="listEtudiants.length>0" class="row justify-content-center align-items-center" style="width: 90%">
+      <button class="btn" (click)="ajouterEtudiants()">
+        <div *ngIf="uploading" class="spinner-border text-dark" role="status">
+        </div>
+        <span *ngIf="!uploading">
+          VALIDER AJOUT
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

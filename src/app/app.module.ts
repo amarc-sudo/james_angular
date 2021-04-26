@@ -27,6 +27,9 @@ import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
 import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
+import { AccueilGestionFormationComponent } from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
+import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
     AdminCardComponent,
     CookieBarComponent,
     NotfoundComponent,
+    AjoutClasseComponent,
+    AccueilGestionFormationComponent,
+    AjoutEleveComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +106,11 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
       {
         path: 'accueil/gestion-abs/fiche-presence/modification',
         component: ModifFicheComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'accueil/gestion-formation',
+        component: AccueilGestionFormationComponent,
         canActivate: [AuthGuard]
       },
       {
