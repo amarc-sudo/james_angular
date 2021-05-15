@@ -13,6 +13,10 @@ export class ProfesseurService extends ParentApiService {
     super();
   }
 
+  read(idProfesseur : number): Observable<Professeur>{
+    return this.httpClient.get<Professeur>(this.api + '/rest/api/professeur/read?id=' + idProfesseur);
+  }
+
   listByFormation(idFormation: number): Observable<Professeur[]> {
     return this.httpClient.get<Professeur[]>(this.api + '/rest/api/professeur/list?idFormation=' + idFormation);
   }

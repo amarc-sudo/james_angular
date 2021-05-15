@@ -29,6 +29,7 @@ import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.com
 import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
 import { AccueilGestionFormationComponent } from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
 import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
+import { EmargementCoursComponent } from './pages/emargement-cours/emargement-cours.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout
     AjoutClasseComponent,
     AccueilGestionFormationComponent,
     AjoutEleveComponent,
+    EmargementCoursComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +111,11 @@ import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout
       {
         path: 'accueil/gestion-formation',
         component: AccueilGestionFormationComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'accueil/emargement-cours',
+        component: EmargementCoursComponent,
         canActivate: [AuthGuard]
       },
       {
