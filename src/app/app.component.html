@@ -3,7 +3,7 @@
     <div class=" col-6 col-sm-6 justify-content-center align-content-center d-none d-sm-block ">
       <a class="title_header" (click)="changeRoute('')">James - Gestion de feuille d'émargement</a>
     </div>
-    <div class="col-1 col-sm-1 offset-sm-4 justify-content-center align-content-center text-center offset-*" *ngIf="logged()">
+    <div class="col-1 col-sm-1 offset-sm-4 justify-content-center align-content-center text-center offset-*" *ngIf="logged">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn_menu" id="dropdownBasic1" ngbDropdownToggle>Menu</button>
         <div ngbDropdownMenu class="dropdown-menu-group">
@@ -20,7 +20,7 @@
     </div>
     <div class="col-1 col-sm-1 offset-sm-3 mx-auto">
       <button class=" disconnect btn justify-content-center align-content-center" (click)="changeRoute('login')"
-              *ngIf="!logged()">Connexion
+              *ngIf="!logged">Connexion
       </button>
     </div>
   </div>
@@ -39,7 +39,7 @@
   <div class="row router-element">
     <div class="container">
       <div class="row">
-        <div class="media-body" *ngIf="logged()">
+        <div class="media-body" *ngIf="logged">
           <div class="card card_navigation">
             <div class="card-body card_navigation">
               <div class="row">

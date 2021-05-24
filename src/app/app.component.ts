@@ -18,7 +18,7 @@ export class AppComponent {
   }
   faBars = faBars;
 
-  logged(): any{
+  get logged(): any{
     return sessionStorage.getItem('loggedIn');
   }
   getCurrentRoute(): any {
