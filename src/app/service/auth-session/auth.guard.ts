@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   CanActivate,
   CanActivateChild,
@@ -11,32 +11,39 @@ import {
   UrlTree,
   Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {AuthService} from '../api/auth.service';
+import {TokenConnexionService} from '../api/token-connexion.service';
+import {tap} from 'rxjs/operators';
+import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService, private router: Router, private tokenConnexionService: TokenConnexionService) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if ( sessionStorage.getItem('loggedIn')){
-        return true;
-      }
-      else{
-        sessionStorage.setItem('failLogged', 'true');
-        return false;
-      }
+    if (sessionStorage.getItem('email') == null || sessionStorage.getItem('token') == null) {
+      sessionStorage.setItem('failLogged', 'true');
+      sessionStorage.setItem('loggedIn', 'false');
+      return false;
+    }
+    return this.tokenConnexionService.checkConnexion(sessionStorage.getItem('email'), sessionStorage.getItem('token')).toPromise().then(value => {
+      sessionStorage.setItem('loggedIn', String(value));
+      return value;
+    });
   }
+
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return true;
   }
+
   canDeactivate(
     component: unknown,
     currentRoute: ActivatedRouteSnapshot,
@@ -44,6 +51,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return true;
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
