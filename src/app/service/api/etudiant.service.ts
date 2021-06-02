@@ -5,6 +5,7 @@ import {Cours} from '../../api/objects/Cours';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {Etudiant} from '../../api/objects/Etudiant';
+import {Formation} from '../../api/objects/Formation';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,9 @@ export class EtudiantService extends ParentApiService {
 
   create(etudiant: Etudiant): Observable<Etudiant> {
     return this.httpClient.post<Etudiant>(environment.apiUrl + '/rest/api/etudiant/create', etudiant);
+  }
+
+  listByFormation(formation: Formation[]): Observable<Etudiant[]> {
+    return this.httpClient.post<Etudiant[]>(environment.apiUrl + '/rest/api/etudiant/listByFormation', formation);
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {filter} from 'rxjs/operators';
 import {NavigationEnd, Router} from '@angular/router';
+import {Formation} from '../../../api/objects/Formation';
 
 @Component({
   selector: 'app-accueil-gestion-formation',

@@ -60,7 +60,7 @@ export class AjoutClasseComponent implements OnInit {
   getEtudiantArrayFromCSVFile(csvRecordsArray: any): Etudiant[] {
     const etudiantList: Etudiant[] = [];
     for (let i = 0; i < csvRecordsArray.length; i++) {
-      const ligneCSV = (csvRecordsArray[i] as string).split(',');
+      const ligneCSV = (csvRecordsArray[i] as string).split(';');
       const etudiant = new Etudiant();
       const personne = new Personne();
       if (ligneCSV.length !== 4 || ligneCSV[0].trim() === '' || ligneCSV[1].trim() === '' || ligneCSV[2].trim() === '' || !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(ligneCSV[2].trim())) {
