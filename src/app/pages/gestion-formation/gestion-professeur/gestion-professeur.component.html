@@ -1,0 +1,37 @@
+<div class="container-fluid" *ngIf="listProfesseur.length > 0 && listFormations.length > 0">
+  <div class="input-group" style="margin: 40px 0">
+    <span class="input-group-addon">
+      Formation
+    </span>
+    <select class="form-control" id="formation" (change)="changeFormation($event)">
+      <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
+        {{formation.intitule}}
+      </option>
+    </select>
+  </div>
+  <div class="row">
+    <div droppable class="col zone" [dropScope]="'out'" (onDrop)="professeurInRemove($event)">
+      <div class="head">
+        Professeurs disponibles
+      </div>
+      <ul>
+        <li  draggable [dragScope]="'in'" [dragData]="professeurOutFormation" *ngFor="let professeurOutFormation of listProfesseurOutFormation">
+          {{professeurOutFormation.personne.nom}} {{professeurOutFormation.personne.prenom}}
+        </li>
+      </ul>
+    </div>
+    <div droppable class="col zone" [dropScope]="'in'"  (onDrop)="professeurInAdd($event)">
+      <div class="head">
+        Professeurs en {{nomFormationSelected}}
+      </div>
+      <ul>
+        <li draggable  [dragScope]="'out'"  [dragData]="professeurInFormation" *ngFor="let professeurInFormation of listProfesseurInFormation">
+          {{professeurInFormation.personne.nom}} {{professeurInFormation.personne.prenom}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
