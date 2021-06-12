@@ -4,6 +4,7 @@ import {Etudiant} from '../../../api/objects/Etudiant';
 import {EtudiantService} from '../../../service/api/etudiant.service';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-visualisation-formation',
@@ -21,7 +22,7 @@ export class VisualisationFormationComponent implements OnInit {
 
   etudiantListFiltered: Etudiant[] = [];
 
-  constructor(private etudiantService: EtudiantService) {
+  constructor(private etudiantService: EtudiantService, private router: Router) {
 
   }
 
@@ -41,5 +42,9 @@ export class VisualisationFormationComponent implements OnInit {
   onChange(value: any): void {
     this.etudiantListFiltered = this.etudiantListComplete
       .filter(etudiant => etudiant.formation.idFormation == value);
+  }
+
+  goToEtudiant(etudiant: Etudiant): void {
+    this.router.navigate(['/accueil/gestion-eleve/consultation'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
   }
 }
