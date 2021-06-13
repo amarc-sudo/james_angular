@@ -128,12 +128,12 @@ import { ModificationEleveComponentComponent } from './pages/gestion-eleves/modi
         canActivate: [AuthGuard]
       },
       {
-        path: 'accueil/gestion-eleve/consultation',
+        path: 'accueil/gestion-formation/consultation-eleve',
         component: ConsultationEleveComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'accueil/gestion-eleve/modification',
+        path: 'accueil/gestion-formation/modification-eleve',
         component: ModificationEleveComponentComponent,
         canActivate: [AuthGuard]
       },

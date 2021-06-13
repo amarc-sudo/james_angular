@@ -32,6 +32,6 @@ export class ConsultationEleveComponent implements OnInit {
   }
 
   goToModification(etudiant: Etudiant): void {
-    this.router.navigate(['accueil/gestion-eleve/modification'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
+    this.router.navigate(['accueil/gestion-formation/modification-eleve'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
   }
 }

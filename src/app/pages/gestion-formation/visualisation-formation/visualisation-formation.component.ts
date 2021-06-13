@@ -45,6 +45,6 @@ export class VisualisationFormationComponent implements OnInit {
   }
 
   goToEtudiant(etudiant: Etudiant): void {
-    this.router.navigate(['/accueil/gestion-eleve/consultation'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
+    this.router.navigate(['accueil/gestion-formation/consultation-eleve'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
   }
 }

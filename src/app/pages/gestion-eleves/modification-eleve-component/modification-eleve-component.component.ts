@@ -98,7 +98,7 @@ export class ModificationEleveComponentComponent implements OnInit {
       switchMapTo(this.etudiantService.update(etudiant)),
     ).subscribe(() => {
       this.updating = false;
-      this.router.navigate(['accueil/gestion-eleve/consultation'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
+      this.router.navigate(['accueil/gestion-formation/consultation-eleve'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
     }));
   }
 
