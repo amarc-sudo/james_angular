@@ -18,4 +18,8 @@ export class PersonneService extends ParentApiService{
   create(personne: Personne): Observable<Personne> {
     return this.httpClient.post<Personne>(environment.apiUrl + '/rest/api/personne/create', personne);
   }
+
+  update(personne: Personne): Observable<Personne> {
+    return this.httpClient.post<Personne>(environment.apiUrl + '/rest/api/personne/update', personne);
+  }
 }

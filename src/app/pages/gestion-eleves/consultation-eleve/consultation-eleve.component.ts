@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
 import {Etudiant} from '../../../api/objects/Etudiant';
@@ -18,7 +18,8 @@ export class ConsultationEleveComponent implements OnInit {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private etudiantService: EtudiantService) { }
+  constructor(private activatedRoute: ActivatedRoute, private etudiantService: EtudiantService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -30,4 +31,7 @@ export class ConsultationEleveComponent implements OnInit {
     }
   }
 
+  goToModification(etudiant: Etudiant): void {
+    this.router.navigate(['accueil/gestion-eleve/modification'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
+  }
 }
