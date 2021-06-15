@@ -1,0 +1,20 @@
+<div class="recap" *ngIf="etudiant$ | async as etudiant">
+  <div class="container">
+    <div class="row justify-content-center align-items-center" style="text-align: left">
+      <div class="col col-xl-7 test">
+        <h3> {{etudiant.personne.nom}} {{etudiant.personne.prenom}} </h3><br/>
+        <span><b> Adresse Mail: </b> {{etudiant.adresseMail}} </span>  <br/> <br/>
+        <span><b> Formation: </b> {{etudiant.formation.intitule}} </span>  <br/> <br/>
+        <span><b> Groupe: </b> {{etudiant.groupe}} </span>  <br/> <br/>
+        <span><b> Nombre Absences: </b> {{etudiant.nombreAbsences}} </span> <br/> <br/>
+        <span><b> Nombre Retards: </b> {{etudiant.nombreRetards}} </span> <br/> <br/>
+      </div>
+      <div class="col col-xl-2 offset-2">
+        <button class="btn btn-hover-color-white" type="button"
+                style="text-align: center;"
+                (click)="goToModification(etudiant)">MODIFIER
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

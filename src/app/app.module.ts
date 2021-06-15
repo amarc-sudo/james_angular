@@ -33,6 +33,8 @@ import { VisualisationFormationComponent } from './pages/gestion-formation/visua
 import { AjoutFormationComponent } from './pages/gestion-formation/ajout-formation/ajout-formation.component';
 import {GestionProfesseurComponent} from './pages/gestion-formation/gestion-professeur/gestion-professeur.component';
 import {NgDragDropModule} from 'ng-drag-drop';
+import { ConsultationEleveComponent } from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
+import { ModificationEleveComponentComponent } from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import {NgDragDropModule} from 'ng-drag-drop';
     VisualisationFormationComponent,
     GestionProfesseurComponent,
     AjoutFormationComponent,
+    ConsultationEleveComponent,
+    ModificationEleveComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,14 +118,25 @@ import {NgDragDropModule} from 'ng-drag-drop';
         canActivate: [AuthGuard]
       },
       {
+        path: 'accueil/gestion-abs/fiche-presence/modification',
+        component: ModifFicheComponent,
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'accueil/gestion-formation',
         component: AccueilGestionFormationComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: '',
-        component: HomeComponent
-      }
+        path: 'accueil/gestion-formation/consultation-eleve',
+        component: ConsultationEleveComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'accueil/gestion-formation/modification-eleve',
+        component: ModificationEleveComponentComponent,
+        canActivate: [AuthGuard]
+      },
     ]),
     OrderModule,
     NgDragDropModule.forRoot()

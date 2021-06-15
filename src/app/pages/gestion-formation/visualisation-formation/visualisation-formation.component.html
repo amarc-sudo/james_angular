@@ -22,7 +22,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let etudiant of etudiantListFiltered">
+      <tr class="clickable" *ngFor="let etudiant of etudiantListFiltered" (click)="goToEtudiant(etudiant)">
         <td>{{etudiant.personne.nom}}</td>
         <td>{{etudiant.personne.prenom}}</td>
         <td>{{etudiant.adresseMail}}</td>
