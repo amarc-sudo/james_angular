@@ -1,3 +1,4 @@
+<div *ngIf="listProfesseur != null">
 <div class="container-fluid" *ngIf="listProfesseur.length > 0 && listFormations.length > 0">
   <div class="input-group" style="margin: 40px 0">
     <span class="input-group-addon">
@@ -9,29 +10,33 @@
       </option>
     </select>
   </div>
+
   <div class="row">
     <div droppable class="col zone" [dropScope]="'out'" (onDrop)="professeurInRemove($event)">
-      <div class="head">
+      <div class="head text-center font-weight-bold">
         Professeurs disponibles
       </div>
       <ul>
-        <li  draggable [dragScope]="'in'" [dragData]="professeurOutFormation" *ngFor="let professeurOutFormation of listProfesseurOutFormation">
+        <li  draggable [dragScope]="'in'" [dragData]="professeurOutFormation" *ngFor="let professeurOutFormation of listProfesseurOutFormation | filter:term">
           {{professeurOutFormation.personne.nom}} {{professeurOutFormation.personne.prenom}}
         </li>
       </ul>
+
     </div>
+
     <div droppable class="col zone" [dropScope]="'in'"  (onDrop)="professeurInAdd($event)">
-      <div class="head">
+      <div class="head text-center font-weight-bold">
         Professeurs en {{nomFormationSelected}}
       </div>
       <ul>
-        <li draggable  [dragScope]="'out'"  [dragData]="professeurInFormation" *ngFor="let professeurInFormation of listProfesseurInFormation">
+        <li draggable [dragScope]="'out'"  [dragData]="professeurInFormation" *ngFor="let professeurInFormation of listProfesseurInFormation  | filter:term">
           {{professeurInFormation.personne.nom}} {{professeurInFormation.personne.prenom}}
         </li>
       </ul>
     </div>
   </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+  </div>
 </div>
-
-
-
+</div>

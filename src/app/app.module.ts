@@ -15,7 +15,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ResetComponent} from './pages/reset/reset.component';
 import {ModalDemandeComponent} from './annexe-component/modal/demandeReset/modal-demande.component';
 import {HistoryComponent} from './pages/gestion-abs/history/history.component';
-import {AppGestionAdmComponent} from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
 import {AppGestionAbsComponent} from './pages/gestion-abs/panel-fiche/app-gestion-abs.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {Safe} from './service/SafeHTML/safe';
@@ -23,7 +22,7 @@ import {TableComponent} from './annexe-component/table/table.component';
 import {FichePreviewComponent} from './pages/gestion-abs/fiche-absence/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
 import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
-import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
+import { AdminPanelComponent } from './pages/gestion-administrateur/admin-panel/admin-panel.component';
 import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
 import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
 import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
@@ -40,6 +39,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { GestionSecretaireComponent } from './pages/gestion-administrateur/gestion-secretaire/gestion-secretaire.component';
+import { AjoutSecretaireComponent } from './pages/gestion-administrateur/ajout-secretaire/ajout-secretaire.component';
+import { AjoutProfesseurComponent } from './pages/gestion-formation/ajout-professeur/ajout-professeur.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +54,6 @@ import {MatInputModule} from '@angular/material/input';
     ResetComponent,
     ModalDemandeComponent,
     HistoryComponent,
-    AppGestionAdmComponent,
     AppGestionAbsComponent,
     Safe,
     TableComponent,
@@ -66,6 +70,9 @@ import {MatInputModule} from '@angular/material/input';
     AjoutFormationComponent,
     ConsultationEleveComponent,
     ModificationEleveComponentComponent,
+    GestionSecretaireComponent,
+    AjoutSecretaireComponent,
+    AjoutProfesseurComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,11 +101,6 @@ import {MatInputModule} from '@angular/material/input';
       {
         path: 'accueil/historique',
         component: HistoryComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'accueil/gestion-adm',
-        component: AppGestionAdmComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -151,7 +153,10 @@ import {MatInputModule} from '@angular/material/input';
     BrowserAnimationsModule,
     MatTabsModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    DragDropModule,
+    Ng2SearchPipeModule
 
   ],
   providers: [AuthService, AuthGuard],
