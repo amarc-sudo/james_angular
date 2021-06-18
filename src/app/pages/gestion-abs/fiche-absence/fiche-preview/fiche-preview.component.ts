@@ -62,7 +62,6 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
           this.nombreCours = list.length;
         }
       })).subscribe());
-
       this.subscriptions.push(this.tableDataService.readByCode('env').subscribe(result => this.envoye = result));
     }
   }
@@ -73,6 +72,7 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
   nombreAbsents(presences: Presence[]): number {
     return (presences.filter(presence => presence.etatPresence.code === 'abs')).length;
+
   }
 
   nombreRetards(presences: Presence[]): number {

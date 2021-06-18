@@ -35,7 +35,11 @@ import {GestionProfesseurComponent} from './pages/gestion-formation/gestion-prof
 import {NgDragDropModule} from 'ng-drag-drop';
 import { ConsultationEleveComponent } from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
 import { ModificationEleveComponentComponent } from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +74,10 @@ import { ModificationEleveComponentComponent } from './pages/gestion-eleves/modi
     NgbModule,
     FontAwesomeModule,
     RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent
+      },
       {
         path: 'reset',
         component: ResetComponent
@@ -139,7 +147,11 @@ import { ModificationEleveComponentComponent } from './pages/gestion-eleves/modi
       },
     ]),
     OrderModule,
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatOptionModule,
+    MatSelectModule
 
   ],
   providers: [AuthService, AuthGuard],

@@ -12,6 +12,7 @@ import {Matiere} from '../../../../api/objects/Matiere';
 import {MatiereService} from '../../../../service/api/matiere.service';
 import {Presence} from '../../../../api/objects/Presence';
 import {TableData} from '../../../../api/objects/TableData';
+import {Personne} from '../../../../api/objects/Personne';
 
 @Component({
   selector: 'app-modif-fiche',
@@ -78,10 +79,12 @@ export class ModifFicheComponent implements OnInit {
         }
       }
     );
-
+    const personne = new Personne();
+    personne.idPersonne = parseInt(sessionStorage.getItem('idPersonne'), 10);
     cours.begin = this.conversionInverse(this.heureDebut);
     cours.end = this.conversionInverse(this.heureFin);
-
+    cours.lastModifDate = new Date();
+    cours.lastModifId = personne;
     this.errorTime = false;
     this.updating = true;
     const coursId = new Cours();
