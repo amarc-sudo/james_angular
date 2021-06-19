@@ -19,7 +19,7 @@ export class AjoutFormationComponent implements OnInit {
 
   secretaire: Secretaire;
 
-  listProfesseur: Professeur[];
+  listProfesseur: Professeur[] = [];
 
   updating = false;
 
