@@ -43,6 +43,9 @@ import {MatInputModule} from '@angular/material/input';
 import {ToastrModule} from 'ngx-toastr';
 import {MyToast} from './annexe-component/toast/my-toast.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { AccueilMatiereComponent } from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
+import { VisualisationMatiereComponent } from './pages/gestion-formation/gestion-matiere/visualisation-matiere/visualisation-matiere.component';
+import { CreationMatiereComponent } from './pages/gestion-formation/gestion-matiere/creation-matiere/creation-matiere.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     AjoutFormationComponent,
     ConsultationEleveComponent,
     ModificationEleveComponentComponent,
+    AccueilMatiereComponent,
+    VisualisationMatiereComponent,
+    CreationMatiereComponent,
   ],
   imports: [
     BrowserModule,
