@@ -22,24 +22,27 @@ import {Safe} from './service/SafeHTML/safe';
 import {TableComponent} from './annexe-component/table/table.component';
 import {FichePreviewComponent} from './pages/gestion-abs/fiche-absence/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
-import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
-import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
-import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
-import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
-import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
-import { AccueilGestionFormationComponent } from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
-import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
-import { VisualisationFormationComponent } from './pages/gestion-formation/visualisation-formation/visualisation-formation.component';
-import { AjoutFormationComponent } from './pages/gestion-formation/ajout-formation/ajout-formation.component';
+import {ModifFicheComponent} from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
+import {AdminPanelComponent} from './pages/admin-panel/admin-panel.component';
+import {AdminCardComponent} from './annexe-component/admin-card/admin-card.component';
+import {CookieBarComponent} from './annexe-component/cookie-bar/cookie-bar.component';
+import {AjoutClasseComponent} from './pages/gestion-formation/ajout-classe/ajout-classe.component';
+import {AccueilGestionFormationComponent} from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
+import {AjoutEleveComponent} from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
+import {VisualisationFormationComponent} from './pages/gestion-formation/visualisation-formation/visualisation-formation.component';
+import {AjoutFormationComponent} from './pages/gestion-formation/ajout-formation/ajout-formation.component';
 import {GestionProfesseurComponent} from './pages/gestion-formation/gestion-professeur/gestion-professeur.component';
 import {NgDragDropModule} from 'ng-drag-drop';
-import { ConsultationEleveComponent } from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
-import { ModificationEleveComponentComponent } from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ConsultationEleveComponent} from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
+import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+import {ToastrModule} from 'ngx-toastr';
+import {MyToast} from './annexe-component/toast/my-toast.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,7 +154,9 @@ import {MatInputModule} from '@angular/material/input';
     BrowserAnimationsModule,
     MatTabsModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 5000, toastComponent: MyToast}),
 
   ],
   providers: [AuthService, AuthGuard],

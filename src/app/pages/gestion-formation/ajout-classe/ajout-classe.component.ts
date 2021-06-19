@@ -7,6 +7,7 @@ import {PersonneService} from '../../../service/api/personne.service';
 import {EtudiantService} from '../../../service/api/etudiant.service';
 import {switchMapTo, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AjoutClasseComponent implements OnInit {
 
-  constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private router: Router) {
+  constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private router: Router, private toastService: ToastrService) {
   }
 
   subscriptions: Subscription[] = [];
@@ -113,6 +114,8 @@ export class AjoutClasseComponent implements OnInit {
       ).subscribe(() => {
         if (i === this.listEtudiants.length - 1) {
           this.uploading = false;
+          this.toastService.success('Les ' + this.listEtudiants.length + ' étudiants ont été ajoutés');
+          this.listEtudiants = [];
 
         }
       }));
