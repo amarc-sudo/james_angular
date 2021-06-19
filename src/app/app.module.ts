@@ -42,6 +42,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {ToastrModule} from 'ngx-toastr';
 import {MyToast} from './annexe-component/toast/my-toast.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -159,7 +160,7 @@ import {MyToast} from './annexe-component/toast/my-toast.component';
     ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 5000, toastComponent: MyToast}),
 
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {
