@@ -11,6 +11,10 @@
     </select>
   </div>
 
+  <div class="form-group" style="margin-bottom: 20px;">
+    <input type="text" class="form-control" placeholder="Filtrer les professeurs" [(ngModel)]="term">
+  </div>
+
   <div class="row">
     <div droppable class="col zone" [dropScope]="'out'" (onDrop)="professeurInRemove($event)">
       <div class="head text-center font-weight-bold">
@@ -34,9 +38,6 @@
         </li>
       </ul>
     </div>
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
   </div>
 </div>
 </div>

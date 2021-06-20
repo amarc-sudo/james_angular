@@ -9,6 +9,7 @@ import {switchMapTo, tap} from 'rxjs/operators';
 import {Secretaire} from '../../../api/objects/Secretaire';
 import {Contact} from '../../../api/objects/Contact';
 import {SecretaireService} from '../../../service/api/secretaire.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ajout-secretaire',
@@ -32,7 +33,10 @@ export class AjoutSecretaireComponent implements OnInit {
 
   @Output() resetView = new EventEmitter<number>();
 
-  constructor(private personneService: PersonneService, private secretaireService: SecretaireService) {
+  constructor(private personneService: PersonneService,
+              private secretaireService: SecretaireService,
+              private snackBar: MatSnackBar
+  ) {
   }
 
   ngOnInit(): void {
@@ -71,6 +75,13 @@ export class AjoutSecretaireComponent implements OnInit {
     this.subscriptions.push(this.personneService.create(secretaire.personne).pipe(tap(personneRetour =>
         secretaire.personne = personneRetour),
       switchMapTo(this.secretaireService.create(secretaire)),
-    ).subscribe(() => this.resetView.emit(0)));
+    ).subscribe(() => {
+      this.snackBar.open('Le ou la secrétaire ' + personne.nom.toUpperCase() + ' ' + personne.prenom + ' a bien été ajouté(e)', 'OK', {
+        duration: 3000
+      });
+      (document.getElementById('adresse-mail') as HTMLInputElement).value = '';
+      (document.getElementById('prenom') as HTMLInputElement).value = '';
+      (document.getElementById('nom') as HTMLInputElement).value = '';
+    }));
   }
 }

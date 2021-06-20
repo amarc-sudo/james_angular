@@ -9,6 +9,7 @@ import {Personne} from '../../../api/objects/Personne';
 import {switchMapTo, tap} from 'rxjs/operators';
 import {Professeur} from '../../../api/objects/Professeur';
 import {ProfesseurService} from '../../../service/api/professeur.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ajout-professeur',
@@ -32,7 +33,8 @@ export class AjoutProfesseurComponent implements OnInit {
 
   @Output() resetView = new EventEmitter<number>();
 
-  constructor(private personneService: PersonneService, private professeurService: ProfesseurService) {
+  constructor(private personneService: PersonneService, private professeurService: ProfesseurService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -71,6 +73,11 @@ export class AjoutProfesseurComponent implements OnInit {
     this.subscriptions.push(this.personneService.create(professeur.personne).pipe(tap(personneRetour =>
         professeur.personne = personneRetour),
       switchMapTo(this.professeurService.create(professeur)),
-    ).subscribe(() => this.resetView.emit(0)));
+    ).subscribe(() => {
+      this.resetView.emit(0);
+      this.snackBar.open('L\'enseignant(e) ' + personne.nom.toUpperCase() + ' ' + personne.prenom + ' a bien été ajouté(e)', 'OK', {
+        duration: 3000
+      });
+    }));
   }
 }

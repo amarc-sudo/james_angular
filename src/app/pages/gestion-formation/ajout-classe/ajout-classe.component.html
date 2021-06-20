@@ -44,8 +44,8 @@
       </tbody>
     </table>
     <span class="info row justify-content-center align-items-center"  *ngIf="erreurValidation" style="color: red; width: 90%">Un champ obligatoire n'est pas correctement rempli</span>
-    <div *ngIf="listEtudiants.length>0" class="row justify-content-center align-items-center" style="width: 90%">
-      <button class="btn" (click)="ajouterEtudiants()">
+    <div class="row justify-content-center align-items-center" style="width: 90%">
+      <button *ngIf="listEtudiants.length > 0" class="btn" [disabled]="uploading" (click)="ajouterEtudiants()">
         <div *ngIf="uploading" class="spinner-border text-dark" role="status">
         </div>
         <span *ngIf="!uploading">

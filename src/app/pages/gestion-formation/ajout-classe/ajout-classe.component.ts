@@ -18,7 +18,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class AjoutClasseComponent implements OnInit {
 
-  constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private router: Router, private toastService: ToastrService,
+  constructor(private personneService: PersonneService,
+              private etudiantService: EtudiantService,
+              private router: Router,
               private snackBar: MatSnackBar) {
   }
 
