@@ -14,9 +14,6 @@ import {
 import {Observable} from 'rxjs';
 import {AuthService} from '../api/auth.service';
 import {TokenConnexionService} from '../api/token-connexion.service';
-import {tap} from 'rxjs/operators';
-import {stringify} from 'querystring';
-
 @Injectable({
   providedIn: 'root'
 })

@@ -8,6 +8,7 @@ import {FormationService} from '../../../service/api/formation.service';
 import {Etudiant} from '../../../api/objects/Etudiant';
 import {Formation} from '../../../api/objects/Formation';
 import {Personne} from '../../../api/objects/Personne';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ajout-formation',
@@ -19,7 +20,7 @@ export class AjoutFormationComponent implements OnInit {
 
   secretaire: Secretaire;
 
-  listProfesseur: Professeur[];
+  listProfesseur: Professeur[] = [];
 
   updating = false;
 
@@ -27,7 +28,10 @@ export class AjoutFormationComponent implements OnInit {
 
   @Output() resetView = new EventEmitter<number>();
 
-  constructor(private secretaireService: SecretaireService, private professeurService: ProfesseurService, private formationService: FormationService) {
+  constructor(private secretaireService: SecretaireService,
+              private professeurService: ProfesseurService,
+              private formationService: FormationService,
+              private snackBar: MatSnackBar) {
 
   }
 
@@ -57,8 +61,13 @@ export class AjoutFormationComponent implements OnInit {
 
       }),
       switchMapTo(this.secretaireService.update(this.secretaire).pipe(
-        tap(secretaire => this.secretaire = secretaire)))).subscribe(() =>
-      this.resetView.emit(0)
+        tap(secretaire => this.secretaire = secretaire)))).subscribe(() => {
+        this.snackBar.open('La formation ' + intitule + ' ' + ' a bien été ajoutée', 'OK', {
+          duration: 3000
+        });
+        this.resetView.emit(0);
+        (document.getElementById('nom') as HTMLInputElement).value = '';
+      }
     );
   }
 

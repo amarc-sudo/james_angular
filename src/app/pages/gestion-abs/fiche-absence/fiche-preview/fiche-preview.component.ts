@@ -11,6 +11,7 @@ import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
 import {TableData} from '../../../../api/objects/TableData';
 import {TableDataService} from '../../../../service/api/table.data.service';
 import {HistoriqueFicheService} from '../../../../service/api/historique-fiche.service';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-fiche-preview',
@@ -90,18 +91,14 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
       );
       this.subscriptions.push(this.coursService.readFichePresence(this.idFormation, this.date).pipe(
         tap(response => {
-          const file = new Blob([response], {type: 'application/pdf'});
-          const fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
+          FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
           this.loadingPDF = false;
         })
       ).subscribe());
     } else {
       this.subscriptions.push(this.historiqueFicheService.readFichePresence(this.idFormation, this.date).pipe(
         tap(response => {
-          const file = new Blob([response], {type: 'application/pdf'});
-          const fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
+          FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
           this.loadingPDF = false;
         })
       ).subscribe());

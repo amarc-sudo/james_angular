@@ -20,7 +20,7 @@ export class GestionProfesseurComponent implements OnInit {
 
   listProfesseurOutFormation: Professeur[];
 
-  listProfesseur: Professeur[];
+  listProfesseur: Professeur[] = [];
 
   term: string;
 
