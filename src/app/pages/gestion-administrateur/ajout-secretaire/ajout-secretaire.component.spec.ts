@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppGestionAdmComponent } from './app-gestion-adm.component';
+import { AjoutSecretaireComponent } from './ajout-secretaire.component';
 
-describe('AppGestionAdmComponent', () => {
-  let component: AppGestionAdmComponent;
-  let fixture: ComponentFixture<AppGestionAdmComponent>;
+describe('AjoutSecretaireComponent', () => {
+  let component: AjoutSecretaireComponent;
+  let fixture: ComponentFixture<AjoutSecretaireComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppGestionAdmComponent ]
+      declarations: [ AjoutSecretaireComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppGestionAdmComponent);
+    fixture = TestBed.createComponent(AjoutSecretaireComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

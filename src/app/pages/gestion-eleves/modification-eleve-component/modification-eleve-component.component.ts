@@ -7,6 +7,7 @@ import {Etudiant} from '../../../api/objects/Etudiant';
 import {Personne} from '../../../api/objects/Personne';
 import {switchMapTo, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modification-eleve-component',
@@ -33,7 +34,11 @@ export class ModificationEleveComponentComponent implements OnInit {
 
   @Output() resetView = new EventEmitter<number>();
 
-  constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private personneService: PersonneService,
+              private etudiantService: EtudiantService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -51,7 +56,7 @@ export class ModificationEleveComponentComponent implements OnInit {
         this.etudiantToUpdate = etudiant;
         (document.getElementById('adresse-mail') as HTMLInputElement).value = etudiant.adresseMail;
         (document.getElementById('nom') as HTMLInputElement).value = etudiant.personne.nom;
-        (document.getElementById('prenom') as HTMLInputElement).value = etudiant.personne.nom;
+        (document.getElementById('prenom') as HTMLInputElement).value = etudiant.personne.prenom;
         (document.getElementById('formation') as HTMLInputElement).value = etudiant.formation.idFormation.toString(10);
         (document.getElementById('groupe') as HTMLInputElement).value = etudiant.groupe.toString(10);
       })).subscribe();
@@ -98,12 +103,20 @@ export class ModificationEleveComponentComponent implements OnInit {
       switchMapTo(this.etudiantService.update(etudiant)),
     ).subscribe(() => {
       this.updating = false;
+      this.snackBar.open('L\'étudiant(e) ' + this.etudiantToUpdate.personne.nom.toUpperCase() + ' ' + this.etudiantToUpdate.personne.prenom + ' a bien été modifié(e)', 'OK', {
+        duration: 3000
+      });
       this.router.navigate(['accueil/gestion-formation/consultation-eleve'], {queryParams: {idEtudiant: etudiant.idEtudiant}});
     }));
   }
 
   delete(): void {
+    this.updating = true;
     this.etudiantService.delete(this.etudiantToUpdate.idEtudiant).pipe(tap(() => {
+      this.snackBar.open('L\'étudiant(e) ' + this.etudiantToUpdate.personne.nom.toUpperCase() + ' ' + this.etudiantToUpdate.personne.prenom + ' a bien été supprimé(e)', 'OK', {
+        duration: 3000
+      });
+      this.updating = false;
       this.router.navigate(['accueil/gestion-formation']);
     })).subscribe();
   }

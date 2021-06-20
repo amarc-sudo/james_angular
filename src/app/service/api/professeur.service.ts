@@ -3,6 +3,8 @@ import {ParentApiService} from './parent.api.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Professeur} from '../../api/objects/Professeur';
+import {Secretaire} from '../../api/objects/Secretaire';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +29,9 @@ export class ProfesseurService extends ParentApiService {
 
   updateList(listProfesseur: Professeur[]): Observable<Professeur[]> {
     return this.httpClient.patch<Professeur[]>(this.api + '/rest/api/professeur/updateList', listProfesseur);
+  }
+
+  create(professeur: Professeur): Observable<Professeur> {
+    return this.httpClient.post<Professeur>(environment.apiUrl + '/rest/api/professeur/create', professeur);
   }
 }

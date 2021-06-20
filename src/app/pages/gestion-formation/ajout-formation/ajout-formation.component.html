@@ -17,10 +17,10 @@
     <input class='form-control' id="nom" type="text">
   </div>
   <div class="row justify-content-center align-items-center" style="width: 90%">
-    <button class="btn">
+    <button class="btn" [disabled]="updating" (click)="addFormation()">
       <div *ngIf="updating" class="spinner-border text-dark" role="status">
       </div>
-      <span *ngIf="!updating" (click)="addFormation()">
+      <span *ngIf="!updating">
           VALIDER AJOUT
         </span>
     </button>

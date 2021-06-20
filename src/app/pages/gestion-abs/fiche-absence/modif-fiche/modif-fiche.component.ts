@@ -13,6 +13,7 @@ import {MatiereService} from '../../../../service/api/matiere.service';
 import {Presence} from '../../../../api/objects/Presence';
 import {TableData} from '../../../../api/objects/TableData';
 import {Personne} from '../../../../api/objects/Personne';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modif-fiche',
@@ -41,6 +42,7 @@ export class ModifFicheComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private coursService: CoursService, private presenceService: PresenceService,
               private matiereService: MatiereService,
+              private snackBar: MatSnackBar,
               private professeurService: ProfesseurService, private router: Router) {
   }
 
@@ -95,6 +97,9 @@ export class ModifFicheComponent implements OnInit {
         const date = new Date(cours.date);
         date.setTime(date.getTime() + 3000 * 60 * 60);
         this.updating = false;
+        this.snackBar.open('Le cours du ' + cours.date + ' de la formation ' + cours.matiere.formation.intitule + ' a bien été modifié', 'OK', {
+          duration: 3000
+        });
         this.router.navigate(['accueil/gestion-abs/fiche-presence'], {
           queryParams: {
             id: cours.matiere.formation.idFormation,

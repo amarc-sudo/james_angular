@@ -5,7 +5,8 @@ import {Professeur} from '../../../api/objects/Professeur';
 import {ProfesseurService} from '../../../service/api/professeur.service';
 import {tap} from 'rxjs/operators';
 import {DropEvent} from 'ng-drag-drop';
-
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @Component({
   selector: 'app-gestion-professeur',
   templateUrl: './gestion-professeur.component.html',
@@ -21,6 +22,7 @@ export class GestionProfesseurComponent implements OnInit {
 
   listProfesseur: Professeur[] = [];
 
+  term: string;
 
   idFormationSelected: number;
 
@@ -50,7 +52,7 @@ export class GestionProfesseurComponent implements OnInit {
 
   }
 
-  professeurInAdd($event: DropEvent): void {
+  professeurInAdd($event): void {
     const professeurToUpdate = $event.dragData as Professeur;
     this.listProfesseurInFormation.push(professeurToUpdate);
     this.listProfesseurOutFormation = this.listProfesseurOutFormation.filter(professeur => professeur !== professeurToUpdate);
@@ -61,8 +63,7 @@ export class GestionProfesseurComponent implements OnInit {
       }
     }
   }
-
-  professeurInRemove($event: DropEvent): void {
+  professeurInRemove($event): void {
     const professeurToUpdate = $event.dragData as Professeur;
     this.listProfesseurOutFormation.push(professeurToUpdate);
     this.listProfesseurInFormation = this.listProfesseurInFormation.filter(professeur => professeur !== professeurToUpdate);
@@ -81,4 +82,5 @@ export class GestionProfesseurComponent implements OnInit {
     this.listProfesseurOutFormation = this.listProfesseur.filter(professeur => !professeur.formations.map(formation => formation.idFormation).includes(this.idFormationSelected));
     this.nomFormationSelected = (this.listFormations.filter(formation => formation.idFormation == this.idFormationSelected))[0].intitule;
   }
+
 }

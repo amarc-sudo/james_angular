@@ -15,7 +15,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ResetComponent} from './pages/reset/reset.component';
 import {ModalDemandeComponent} from './annexe-component/modal/demandeReset/modal-demande.component';
 import {HistoryComponent} from './pages/gestion-abs/history/history.component';
-import {AppGestionAdmComponent} from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
 import {AppGestionAbsComponent} from './pages/gestion-abs/panel-fiche/app-gestion-abs.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {Safe} from './service/SafeHTML/safe';
@@ -23,7 +22,6 @@ import {TableComponent} from './annexe-component/table/table.component';
 import {FichePreviewComponent} from './pages/gestion-abs/fiche-absence/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
 import {ModifFicheComponent} from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
-import {AdminPanelComponent} from './pages/admin-panel/admin-panel.component';
 import {AdminCardComponent} from './annexe-component/admin-card/admin-card.component';
 import {CookieBarComponent} from './annexe-component/cookie-bar/cookie-bar.component';
 import {AjoutClasseComponent} from './pages/gestion-formation/ajout-classe/ajout-classe.component';
@@ -39,13 +37,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {ToastrModule} from 'ngx-toastr';
-import {MyToast} from './annexe-component/toast/my-toast.component';
+import {MatCardModule} from '@angular/material/card';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {GestionSecretaireComponent} from './pages/gestion-administrateur/gestion-secretaire/gestion-secretaire.component';
+import {AjoutSecretaireComponent} from './pages/gestion-administrateur/ajout-secretaire/ajout-secretaire.component';
+import {AjoutProfesseurComponent} from './pages/gestion-formation/ajout-professeur/ajout-professeur.component';
+import {VisualisationMatiereComponent} from './pages/gestion-formation/gestion-matiere/visualisation-matiere/visualisation-matiere.component';
+import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matiere/creation-matiere/creation-matiere.component';
+import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
+import {AdminPanelComponent} from './pages/gestion-administrateur/admin-panel/admin-panel.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { AccueilMatiereComponent } from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
-import { VisualisationMatiereComponent } from './pages/gestion-formation/gestion-matiere/visualisation-matiere/visualisation-matiere.component';
-import { CreationMatiereComponent } from './pages/gestion-formation/gestion-matiere/creation-matiere/creation-matiere.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,6 @@ import { CreationMatiereComponent } from './pages/gestion-formation/gestion-mati
     ResetComponent,
     ModalDemandeComponent,
     HistoryComponent,
-    AppGestionAdmComponent,
     AppGestionAbsComponent,
     Safe,
     TableComponent,
@@ -73,6 +74,9 @@ import { CreationMatiereComponent } from './pages/gestion-formation/gestion-mati
     AjoutFormationComponent,
     ConsultationEleveComponent,
     ModificationEleveComponentComponent,
+    GestionSecretaireComponent,
+    AjoutSecretaireComponent,
+    AjoutProfesseurComponent,
     AccueilMatiereComponent,
     VisualisationMatiereComponent,
     CreationMatiereComponent,
@@ -104,11 +108,6 @@ import { CreationMatiereComponent } from './pages/gestion-formation/gestion-mati
       {
         path: 'accueil/historique',
         component: HistoryComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'accueil/gestion-adm',
-        component: AppGestionAdmComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -162,8 +161,10 @@ import { CreationMatiereComponent } from './pages/gestion-formation/gestion-mati
     MatTabsModule,
     MatOptionModule,
     MatSelectModule,
-
-    ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 5000, toastComponent: MyToast}),
+    MatSelectModule,
+    MatCardModule,
+    DragDropModule,
+    Ng2SearchPipeModule
 
   ],
   providers: [AuthService, AuthGuard, MatSnackBar],

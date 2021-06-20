@@ -1,10 +1,11 @@
 
     <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="Formation"><app-visualisation-formation (resetView)="reloadComponent()"></app-visualisation-formation></mat-tab>
-      <mat-tab label="Ajout Formation"><app-ajout-formation (resetView)="reloadComponent()"></app-ajout-formation></mat-tab>
-      <mat-tab label="Ajout Classe"><app-ajout-classe (resetView)="reloadComponent()"></app-ajout-classe></mat-tab>
-      <mat-tab label="Ajout élève"><app-ajout-eleve (resetView)="reloadComponent()"></app-ajout-eleve></mat-tab>
-      <mat-tab label="Gestion Professeur"><app-gestion-professeur></app-gestion-professeur></mat-tab>
-      <mat-tab label="Gestion Matière"><app-accueil-matiere></app-accueil-matiere></mat-tab>
+      <mat-tab label="Formation"><mat-card><app-visualisation-formation (resetView)="reloadComponent()"></app-visualisation-formation></mat-card></mat-tab>
+      <mat-tab label="Création Classe"><mat-card><app-ajout-classe (resetView)="reloadComponent()"></app-ajout-classe></mat-card></mat-tab>
+      <mat-tab label="Création Elève"><mat-card><app-ajout-eleve (resetView)="reloadComponent()"></app-ajout-eleve></mat-card></mat-tab>
+      <mat-tab label="Création Formation" ><mat-card><app-ajout-formation (resetView)="reloadComponent()"></app-ajout-formation></mat-card></mat-tab>
+      <mat-tab label="Gestion Professeur"><mat-card><app-gestion-professeur (resetView)="reloadComponent()"></app-gestion-professeur></mat-card></mat-tab>
+      <mat-tab label="Création Professeur"><mat-card><app-ajout-professeur (resetView)="reloadComponent()"></app-ajout-professeur></mat-card></mat-tab>
+      <mat-tab label="Gestion Matière"><mat-card><app-accueil-matiere></app-accueil-matiere></mat-card></mat-tab>
     </mat-tab-group>
 
