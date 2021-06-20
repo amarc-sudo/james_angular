@@ -108,13 +108,13 @@ export class EmargementCoursComponent implements OnInit {
     cours.etat = data;
     this.coursService.create(cours).pipe(tap(c => {
       this.listPresencesToSave.forEach(presence => presence.cours = c);
-      this.presenceService.createList(this.listPresencesToSave).subscribe(c1 => {});
-    })).subscribe(
-      this.updating = false;
-      this.snackBar.open('Le cours du ' + c1.date + ' de la formation ' + c1.matiere.formation.intitule + ' a bien été ajouté', 'OK', {
-        duration: 3000
+      this.presenceService.createList(this.listPresencesToSave).subscribe(c1 => {
+        this.updating = false;
+        this.snackBar.open('Le cours du ' + c.date + ' de la formation ' + c.matiere.formation.intitule + ' a bien été ajouté', 'OK', {
+          duration: 3000
+        });
       });
-    });
+    })).subscribe();
   }
 
   getValueOfElementSelectID(id: string): any {
