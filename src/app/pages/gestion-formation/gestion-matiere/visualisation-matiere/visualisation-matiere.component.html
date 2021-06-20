@@ -1,0 +1,23 @@
+<div class="container-fluid" *ngIf="matiereListComplete.length > 0">
+  <div class="input-group" style="margin: 40px 0">
+    <span class="input-group-addon">
+      Formation
+    </span>
+    <select class="form-control" id="formation" (change)="onChange($event.target.value)">
+      <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
+        {{formation.intitule}}
+      </option>
+    </select>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+      <tr class="clickable" *ngFor="let matiere of matiereListFiltered">
+        <td width="90%">{{matiere.intitule}}</td>
+        <td width="10%"><img (click)="deleteMatiere(matiere)" class="trash" src="assets/icons/trash-solid.svg"
+                             width="20px"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

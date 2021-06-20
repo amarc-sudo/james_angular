@@ -7,6 +7,8 @@ import {PersonneService} from '../../../service/api/personne.service';
 import {EtudiantService} from '../../../service/api/etudiant.service';
 import {switchMapTo, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -16,8 +18,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AjoutClasseComponent implements OnInit {
 
-  constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private router: Router) {
+  constructor(private personneService: PersonneService,
+              private etudiantService: EtudiantService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
+
 
   subscriptions: Subscription[] = [];
 
@@ -60,7 +66,7 @@ export class AjoutClasseComponent implements OnInit {
   getEtudiantArrayFromCSVFile(csvRecordsArray: any): Etudiant[] {
     const etudiantList: Etudiant[] = [];
     for (let i = 0; i < csvRecordsArray.length; i++) {
-      const ligneCSV = (csvRecordsArray[i] as string).split(',');
+      const ligneCSV = (csvRecordsArray[i] as string).split(';');
       const etudiant = new Etudiant();
       const personne = new Personne();
       if (ligneCSV.length !== 4 || ligneCSV[0].trim() === '' || ligneCSV[1].trim() === '' || ligneCSV[2].trim() === '' || !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(ligneCSV[2].trim())) {
@@ -113,6 +119,11 @@ export class AjoutClasseComponent implements OnInit {
       ).subscribe(() => {
         if (i === this.listEtudiants.length - 1) {
           this.uploading = false;
+          this.resetView.emit(0);
+          this.snackBar.open('Les ' + this.listEtudiants.length + ' étudiants ont été ajoutés', 'OK', {
+            duration: 3000
+          });
+          this.listEtudiants = [];
 
         }
       }));

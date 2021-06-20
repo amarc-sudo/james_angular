@@ -15,21 +15,39 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ResetComponent} from './pages/reset/reset.component';
 import {ModalDemandeComponent} from './annexe-component/modal/demandeReset/modal-demande.component';
 import {HistoryComponent} from './pages/gestion-abs/history/history.component';
-import {AppGestionAdmComponent} from './pages/gestion-adm/app-gestion-adm/app-gestion-adm.component';
 import {AppGestionAbsComponent} from './pages/gestion-abs/panel-fiche/app-gestion-abs.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {Safe} from './service/SafeHTML/safe';
 import {TableComponent} from './annexe-component/table/table.component';
 import {FichePreviewComponent} from './pages/gestion-abs/fiche-absence/fiche-preview/fiche-preview.component';
 import {OrderModule} from 'ngx-order-pipe';
-import { ModifFicheComponent } from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
-import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
-import { AdminCardComponent } from './annexe-component/admin-card/admin-card.component';
-import { CookieBarComponent } from './annexe-component/cookie-bar/cookie-bar.component';
-import { AjoutClasseComponent } from './pages/gestion-formation/ajout-classe/ajout-classe.component';
-import { AccueilGestionFormationComponent } from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
-import { AjoutEleveComponent } from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
-import { EmargementCoursComponent } from './pages/emargement-cours/emargement-cours.component';
+import {ModifFicheComponent} from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
+import {AdminCardComponent} from './annexe-component/admin-card/admin-card.component';
+import {CookieBarComponent} from './annexe-component/cookie-bar/cookie-bar.component';
+import {AjoutClasseComponent} from './pages/gestion-formation/ajout-classe/ajout-classe.component';
+import {AccueilGestionFormationComponent} from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
+import {AjoutEleveComponent} from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
+import {VisualisationFormationComponent} from './pages/gestion-formation/visualisation-formation/visualisation-formation.component';
+import {AjoutFormationComponent} from './pages/gestion-formation/ajout-formation/ajout-formation.component';
+import {GestionProfesseurComponent} from './pages/gestion-formation/gestion-professeur/gestion-professeur.component';
+import {NgDragDropModule} from 'ng-drag-drop';
+import {ConsultationEleveComponent} from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
+import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {GestionSecretaireComponent} from './pages/gestion-administrateur/gestion-secretaire/gestion-secretaire.component';
+import {AjoutSecretaireComponent} from './pages/gestion-administrateur/ajout-secretaire/ajout-secretaire.component';
+import {AjoutProfesseurComponent} from './pages/gestion-formation/ajout-professeur/ajout-professeur.component';
+import {VisualisationMatiereComponent} from './pages/gestion-formation/gestion-matiere/visualisation-matiere/visualisation-matiere.component';
+import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matiere/creation-matiere/creation-matiere.component';
+import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
+import {AdminPanelComponent} from './pages/gestion-administrateur/admin-panel/admin-panel.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -40,7 +58,6 @@ import { EmargementCoursComponent } from './pages/emargement-cours/emargement-co
     ResetComponent,
     ModalDemandeComponent,
     HistoryComponent,
-    AppGestionAdmComponent,
     AppGestionAbsComponent,
     Safe,
     TableComponent,
@@ -52,7 +69,17 @@ import { EmargementCoursComponent } from './pages/emargement-cours/emargement-co
     AjoutClasseComponent,
     AccueilGestionFormationComponent,
     AjoutEleveComponent,
-    EmargementCoursComponent,
+    VisualisationFormationComponent,
+    GestionProfesseurComponent,
+    AjoutFormationComponent,
+    ConsultationEleveComponent,
+    ModificationEleveComponentComponent,
+    GestionSecretaireComponent,
+    AjoutSecretaireComponent,
+    AjoutProfesseurComponent,
+    AccueilMatiereComponent,
+    VisualisationMatiereComponent,
+    CreationMatiereComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +88,10 @@ import { EmargementCoursComponent } from './pages/emargement-cours/emargement-co
     NgbModule,
     FontAwesomeModule,
     RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent
+      },
       {
         path: 'reset',
         component: ResetComponent
@@ -77,11 +108,6 @@ import { EmargementCoursComponent } from './pages/emargement-cours/emargement-co
       {
         path: 'accueil/historique',
         component: HistoryComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'accueil/gestion-adm',
-        component: AppGestionAdmComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -109,23 +135,39 @@ import { EmargementCoursComponent } from './pages/emargement-cours/emargement-co
         canActivate: [AuthGuard]
       },
       {
+        path: 'accueil/gestion-abs/fiche-presence/modification',
+        component: ModifFicheComponent,
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'accueil/gestion-formation',
         component: AccueilGestionFormationComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'accueil/emargement-cours',
-        component: EmargementCoursComponent,
+        path: 'accueil/gestion-formation/consultation-eleve',
+        component: ConsultationEleveComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: '',
-        component: HomeComponent
-      }
+        path: 'accueil/gestion-formation/modification-eleve',
+        component: ModificationEleveComponentComponent,
+        canActivate: [AuthGuard]
+      },
     ]),
-    OrderModule
+    OrderModule,
+    NgDragDropModule.forRoot(),
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSelectModule,
+    MatCardModule,
+    DragDropModule,
+    Ng2SearchPipeModule
+
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {

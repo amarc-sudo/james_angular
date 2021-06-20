@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log('HomeComponent');
   }
 
 
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
 
 
   logged(): any{
-    return sessionStorage.getItem('loggedIn');
+    return sessionStorage.getItem('loggedIn') === 'true';
   }
 
   isLogged(): boolean{
@@ -31,6 +32,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToSite(s: string): void {
-    document.location.href = s;
+    //document.location.href = s;
   }
 }

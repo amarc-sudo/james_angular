@@ -1,36 +1,11 @@
-<div class="container">
-  <div class="row">
-    <div class="col-2">
-      <nav class="navbar">
-        <!-- Links -->
-        <ul class="navbar-nav list-group w-100">
-          <li class="nav-item  list-group-item menu_item dropdown w-100">
-            <a class="nav-link no_decoration" (click)="changeView(1)">
-              Ajouter toute une classe
-            </a>
-          </li>
-          <li class="nav-item list-group-item menu_item dropdown w-100">
-            <a class="nav-link no_decoration" (click)="changeView(2)">
-              Ajouter un élève
-            </a>
-          </li>
-          <li class="nav-item list-group-item menu_item dropdown w-100">
-            <a class="nav-link no_decoration">
-              Gérer les professeurs
-            </a>
-          </li>
-        </ul>
 
-      </nav>
-    </div>
-    <div class="col-8">
-      <div *ngIf="switchView==1">
-        <app-ajout-classe (resetView)="changeView($event)"></app-ajout-classe>
-      </div>
-      <div *ngIf="switchView==2">
-        <app-ajout-eleve (resetView)="changeView($event)"></app-ajout-eleve>
-      </div>
-    </div>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Formation"><mat-card><app-visualisation-formation (resetView)="reloadComponent()"></app-visualisation-formation></mat-card></mat-tab>
+      <mat-tab label="Création Classe"><mat-card><app-ajout-classe (resetView)="reloadComponent()"></app-ajout-classe></mat-card></mat-tab>
+      <mat-tab label="Création Elève"><mat-card><app-ajout-eleve (resetView)="reloadComponent()"></app-ajout-eleve></mat-card></mat-tab>
+      <mat-tab label="Création Formation" ><mat-card><app-ajout-formation (resetView)="reloadComponent()"></app-ajout-formation></mat-card></mat-tab>
+      <mat-tab label="Gestion Professeur"><mat-card><app-gestion-professeur (resetView)="reloadComponent()"></app-gestion-professeur></mat-card></mat-tab>
+      <mat-tab label="Création Professeur"><mat-card><app-ajout-professeur (resetView)="reloadComponent()"></app-ajout-professeur></mat-card></mat-tab>
+      <mat-tab label="Gestion Matière"><mat-card><app-accueil-matiere></app-accueil-matiere></mat-card></mat-tab>
+    </mat-tab-group>
 
-  </div>
-</div>

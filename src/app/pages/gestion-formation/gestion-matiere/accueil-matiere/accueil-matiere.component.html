@@ -1,0 +1,5 @@
+<mat-tab-group mat-align-tabs="center" style="margin-top: 25px;">
+  <mat-tab label="Liste Matières"><app-visualisation-matiere ></app-visualisation-matiere></mat-tab>
+  <mat-tab label="Créer Matière" ><app-creation-matiere (resetView)="reloadComponent()"></app-creation-matiere></mat-tab>
+</mat-tab-group>
+

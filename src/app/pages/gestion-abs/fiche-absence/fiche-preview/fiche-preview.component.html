@@ -3,6 +3,7 @@
     <div class="row justify-content-center align-items-center" style="text-align: left">
       <div class="col col-xl-7">
         <h1> {{formation.intitule}}, le {{date | date:'dd/MM/yyyy'}}</h1>
+        <h4> derniere modification : {{  listCours[positionDiapo].lastModifDate | date:'dd/MM/yyyy'}}</h4>
         <h3>{{listCours[positionDiapo].matiere.intitule}} <br/>
           Professeur: {{listCours[positionDiapo].professeur.personne.nom | uppercase}} {{listCours[positionDiapo].professeur.personne.prenom}}
           <br/>

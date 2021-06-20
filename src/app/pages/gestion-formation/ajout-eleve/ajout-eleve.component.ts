@@ -6,6 +6,8 @@ import {switchMapTo, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {PersonneService} from '../../../service/api/personne.service';
 import {EtudiantService} from '../../../service/api/etudiant.service';
+import {ToastrService} from 'ngx-toastr';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ajout-eleve',
@@ -28,7 +30,7 @@ export class AjoutEleveComponent implements OnInit {
 
   @Output() resetView = new EventEmitter<number>();
 
-  constructor(private personneService: PersonneService, private etudiantService: EtudiantService) {
+  constructor(private personneService: PersonneService, private etudiantService: EtudiantService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -71,6 +73,15 @@ export class AjoutEleveComponent implements OnInit {
     this.subscriptions.push(this.personneService.create(etudiant.personne).pipe(tap(personneRetour =>
         etudiant.personne = personneRetour),
       switchMapTo(this.etudiantService.create(etudiant)),
-    ).subscribe(() => this.resetView.emit(0)));
+    ).subscribe(() => {
+      this.snackBar.open('L\'étudiant(e) ' + personne.nom.toUpperCase() + ' ' + personne.prenom + ' a bien été ajouté(e)', 'OK', {
+        duration: 3000
+      });
+      this.resetView.emit(0);
+      (document.getElementById('groupe' ) as HTMLSelectElement).value = '';
+      (document.getElementById('adresse-mail') as HTMLInputElement).value = '';
+      (document.getElementById('prenom') as HTMLInputElement).value = '';
+      (document.getElementById('nom') as HTMLInputElement).value = '';
+    }));
   }
 }

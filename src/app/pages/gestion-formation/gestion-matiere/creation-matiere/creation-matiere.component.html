@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="input-group" style="margin: 40px 0">
+    <span class="input-group-addon">
+      Formation
+    </span>
+    <select class="form-control" id="formation">
+      <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
+        {{formation.intitule}}
+      </option>
+    </select>
+  </div>
+  <span class="info" *ngIf="errorIntitule" style="color: red;">Veuillez remplir ce champ</span>
+  <div class="input-group" style="margin-bottom: 30px">
+    <span class="input-group-addon">
+        Intitule
+    </span>
+    <input class='form-control' id="intitule" type="text">
+  </div>
+  <div class="row justify-content-center align-items-center" style="width: 90%">
+    <button class="btn" [disabled]="updating" (click)="addMatiere()">
+      <div *ngIf="updating" class="spinner-border text-dark" role="status">
+      </div>
+      <span *ngIf="!updating">
+          VALIDER AJOUT
+        </span>
+    </button>
+  </div>
+</div>
