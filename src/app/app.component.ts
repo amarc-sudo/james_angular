@@ -19,7 +19,7 @@ export class AppComponent {
   faBars = faBars;
 
   get logged(): any {
-    return sessionStorage.getItem('loggedIn');
+    return sessionStorage.getItem('loggedIn') === 'true';
   }
 
   getCurrentRoute(): any {
@@ -46,6 +46,7 @@ export class AppComponent {
     sessionStorage.removeItem('loggedIn');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
+    sessionStorage.removeItem('token');
     this.changeRoute('');
   }
 

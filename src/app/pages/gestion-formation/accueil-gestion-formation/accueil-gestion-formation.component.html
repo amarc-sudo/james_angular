@@ -1,9 +1,10 @@
 
     <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Formation"><app-visualisation-formation (resetView)="reloadComponent()"></app-visualisation-formation></mat-tab>
+      <mat-tab label="Ajout Formation"><app-ajout-formation (resetView)="reloadComponent()"></app-ajout-formation></mat-tab>
       <mat-tab label="Ajout Classe"><app-ajout-classe (resetView)="reloadComponent()"></app-ajout-classe></mat-tab>
       <mat-tab label="Ajout élève"><app-ajout-eleve (resetView)="reloadComponent()"></app-ajout-eleve></mat-tab>
-      <mat-tab label="Formation"><app-visualisation-formation (resetView)="reloadComponent()"></app-visualisation-formation></mat-tab>
-      <mat-tab label="ajout Formation"><app-ajout-formation></app-ajout-formation></mat-tab>
       <mat-tab label="Gestion Professeur"><app-gestion-professeur></app-gestion-professeur></mat-tab>
+      <mat-tab label="Gestion Matière"><app-accueil-matiere></app-accueil-matiere></mat-tab>
     </mat-tab-group>
 
