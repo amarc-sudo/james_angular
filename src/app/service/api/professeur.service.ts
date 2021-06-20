@@ -13,7 +13,7 @@ export class ProfesseurService extends ParentApiService {
     super();
   }
 
-  read(idProfesseur : number): Observable<Professeur>{
+  read(idProfesseur: number): Observable<Professeur>{
     return this.httpClient.get<Professeur>(this.api + '/rest/api/professeur/read?id=' + idProfesseur);
   }
 

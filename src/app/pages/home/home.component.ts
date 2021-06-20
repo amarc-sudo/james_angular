@@ -23,6 +23,13 @@ export class HomeComponent implements OnInit {
     return sessionStorage.getItem('loggedIn');
   }
 
+  isLogged(): boolean{
+    if (sessionStorage.getItem('tokenLogin') !== null){
+      return true;
+    }
+    return false;
+  }
+
   goToSite(s: string): void {
     document.location.href = s;
   }

@@ -6,12 +6,18 @@ import {PresenceService} from '../../service/api/presence.service';
 import {Observable} from 'rxjs';
 import {Professeur} from '../../api/objects/Professeur';
 import {ProfesseurService} from '../../service/api/professeur.service';
+import {EtudiantService} from '../../service/api/etudiant.service';
 import {materialize, tap} from 'rxjs/operators';
 import {Matiere} from '../../api/objects/Matiere';
 import {MatiereService} from '../../service/api/matiere.service';
 import {Presence} from '../../api/objects/Presence';
 import {TableData} from '../../api/objects/TableData';
 import {Formation} from '../../api/objects/Formation';
+import {Form} from '@angular/forms';
+import {getTime} from 'ngx-bootstrap/chronos/utils/date-getters';
+import {formatDate} from "@angular/common";
+import {Etudiant} from '../../api/objects/Etudiant';
+import {reflectTypeEntityToDeclaration} from '@angular/compiler-cli/src/ngtsc/reflection';
 
 @Component({
   selector: 'app-emargement-cours',
@@ -25,8 +31,6 @@ export class EmargementCoursComponent implements OnInit {
 
   cours$: Observable<Cours>;
 
-  //listProfesseurs: Professeur[];
-
   idProf = parseInt(sessionStorage.getItem('id'), 10);
   // le deuxième nombre indique la base avec laquelle on travaille, ici la base décimale (10)
 
@@ -35,12 +39,13 @@ export class EmargementCoursComponent implements OnInit {
   listMatieres: Matiere[];
 
   listPresences: Presence[];
+  listEtudiants: Etudiant[];
+  etudiantsFormation: Etudiant[] = [];
 
   professeur: Professeur;
 
-  positionProfesseur: number;
-  positionMatiere: number;
-  positionFormation: number;
+  formationSelectionnee: number;
+
   heureDebut: any;
   heureFin: any;
   errorTime = false;
@@ -49,13 +54,27 @@ export class EmargementCoursComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private coursService: CoursService, private presenceService: PresenceService,
               private matiereService: MatiereService,
-              private professeurService: ProfesseurService, private router: Router) {
+              private professeurService: ProfesseurService, private etudiantService: EtudiantService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.professeurService.read(this.idProf).subscribe(result => this.professeur = result);
-    this.listFormations = this.professeur.formations;
-    //this.idCours = 40;
+    this.professeurService.read(9).subscribe(result => { // changer pour mettre idProf que pour les profs et pas la secrétaire;
+      this.professeur = result;
+      this.listFormations = this.professeur.formations;
+      this.etudiantService.listByFormations(this.listFormations).subscribe(etudiants => {
+        this.listEtudiants = etudiants;
+
+      });
+    });
+    const hourBeginning = new Date().getHours();
+    const minuteZero = '00';
+    const heureCompleteDebutTexte = hourBeginning + ':' + minuteZero;
+    const heureCompleteFinTexte = (hourBeginning + 1) + ':' + minuteZero;
+    this.heureDebut = this.conversionModel(heureCompleteDebutTexte);
+    this.heureFin = this.conversionModel(heureCompleteFinTexte);
+
+
+    // this.idCours = 40;
     /*if (this.idCours != null) {
       this.cours$ = this.coursService.read(this.idCours).pipe(tap(cours => {
          // this.professeurService.listByFormation(cours.matiere.formation.idFormation).subscribe(result => this.listProfesseurs = result);
@@ -81,12 +100,6 @@ export class EmargementCoursComponent implements OnInit {
         }
       }
     );
-   /* this.listProfesseurs.forEach(professeur => {
-        if (professeur.idProfesseur == this.getValueOfElementSelectID('professeur')) {
-          cours.professeur = professeur;
-        }
-      }
-    );*/
 
     cours.begin = this.conversionInverse(this.heureDebut);
     cours.end = this.conversionInverse(this.heureFin);
@@ -96,7 +109,8 @@ export class EmargementCoursComponent implements OnInit {
     const coursId = new Cours();
     coursId.idCours = cours.idCours;
     this.listPresences.forEach(presence => presence.cours = coursId);
-    this.presenceService.update(this.listPresences).subscribe();
+    // this.presenceService.update(this.listPresences).subscribe();
+    this.presenceService.createList(this.listPresences).subscribe();
     this.coursService.update(cours).subscribe(() => {
         const date = new Date(cours.date);
         date.setTime(date.getTime() + 3000 * 60 * 60);
@@ -137,9 +151,52 @@ export class EmargementCoursComponent implements OnInit {
     this.listPresences[this.getPresenceIndexByID(idPresence)].etatPresence = tableData;
   }
 
+  updateListPresences2(etudiant: Etudiant): void {
+    const tableData = new TableData();
+    tableData.code = (document.getElementById(String(etudiant.personne.idPersonne)) as HTMLSelectElement).value;
+    console.log(tableData.code + '/');
+    this.listPresences.push(etudiant.personne.idPersonne);
+    console.log(this.listPresences[this.getPresenceIndexByID2(etudiant.personne.idPersonne)].etatPresence);
+    // this.listPresences[this.getPresenceIndexByID(idPresence)].etatPresence = tableData;
+  }
+
+  updateListEtudiants(idFormationSelectionnee: number): void {
+    this.etudiantsFormation = [];
+    this.etudiantService.listByFormations(this.listFormations).subscribe(etudiants => {
+      this.listEtudiants = etudiants;
+      this.listEtudiants.forEach(etudiant => {
+        if (etudiant.formation.idFormation == idFormationSelectionnee && this.etudiantsFormation.includes(etudiant) == false) {
+          this.etudiantsFormation.push(etudiant);
+        }
+      });
+    });
+  }
+
+  updateListMatieres(): void {
+    this.listFormations.forEach(formation => {
+        if (formation.idFormation == this.getValueOfElementSelectID('formation')) {
+          const idFormation = formation.idFormation;
+          this.matiereService.listByFormation(idFormation).subscribe(result => {
+            this.listMatieres = result;
+          });
+        }
+      }
+    );
+    this.updateListEtudiants(this.getValueOfElementSelectID('formation'));
+  }
+
   getPresenceIndexByID(idPresence: number): number {
     for (let i = 0; i < idPresence; i++) {
       if (this.listPresences[i].idPresence === idPresence) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
+  getPresenceIndexByID2(idPersonne: number): number {
+    for (let i = 0; i < idPersonne; i++) {
+      if (this.listPresences[i].etudiant.personne.idPersonne === idPersonne) {
         return i;
       }
     }

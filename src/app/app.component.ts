@@ -21,6 +21,12 @@ export class AppComponent {
   logged(): any{
     return sessionStorage.getItem('loggedIn');
   }
+  isLogged(): boolean{
+    if (sessionStorage.getItem('tokenLogin') !== null){
+      return true;
+    }
+    return false;
+  }
   getCurrentRoute(): any {
     this.path = this.router.url.split('/');
     this.path.shift();
@@ -42,6 +48,7 @@ export class AppComponent {
   }
 
   disconnect(): void {
+    sessionStorage.removeItem('tokenLogin');
     sessionStorage.removeItem('loggedIn');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');

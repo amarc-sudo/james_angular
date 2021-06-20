@@ -1,13 +1,11 @@
-<div class="container justify-content-center align-items-center" *ngIf="cours$ | async as cours">
-  <h1 style="text-align: center; margin-bottom: 30px"> {{cours.matiere.formation.intitule}},
-    le {{cours.date | date:'dd/MM/yyyy'}}</h1>
+<div class="container justify-content-center align-items-center">
   <div class="card">
     <div class="card-body">
       <div class="label-select justify-content-center align-items-center">
         <label for="formation">
-          Matiere:
+          Formation:
         </label>
-        <select id="formation" class='form-control' [(ngModel)]="positionFormation">
+        <select id="formation" class='form-control' (change)="updateListMatieres()" [(ngModel)]='formationSelectionnee'>
           <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
             {{formation.intitule}}
           </option>
@@ -17,7 +15,7 @@
         <label for="matiere">
           Matiere:
         </label>
-        <select id="matiere" class='form-control' [(ngModel)]="positionMatiere">
+        <select id="matiere" class='form-control'>
           <option *ngFor="let matiere of listMatieres" [value]="matiere.idMatiere">
             {{matiere.intitule}}
           </option>
@@ -30,7 +28,7 @@
         <div class="col justify-content-center align-items-center" style="text-align: center">
           <span>Heure début</span>
           <div class="row justify-content-center align-items-center">
-            <ngb-timepicker class="timepick" [(ngModel)]="heureDebut"></ngb-timepicker>
+            <ngb-timepicker class="timepick" [(ngModel)]="heureDebut">{{ heureDebut}}</ngb-timepicker>
           </div>
         </div>
         <div class="col" style="text-align: center">
@@ -40,6 +38,7 @@
           </div>
         </div>
       </div>
+
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -49,11 +48,10 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let presence of cours.presences| orderBy: 'etudiant.personne.nom': false;">
-            <td>{{presence.etudiant.personne.nom |uppercase}} {{presence.etudiant.personne.prenom}}</td>
+          <tr *ngFor="let etudiant of etudiantsFormation| orderBy: 'etudiant.personne.nom': false;">
+            <td>{{etudiant.personne.nom |uppercase}} {{etudiant.personne.prenom}}</td>
             <td>
-              <select id="{{presence.idPresence}}" class='form-control'
-                      [value]="presence.etatPresence.code" (change)="updateListPresences(presence.idPresence)">
+              <select class='form-control' id="{{etudiant.personne.idPersonne}}" (change)="updateListPresences2(etudiant)"> <!--etudiant.personne.idPersonne -->
                 <option value='pre'>Présent</option>
                 <option value='ret'>En retard</option>
                 <option value='abs'>Absent</option>
@@ -66,13 +64,13 @@
     </div>
   </div>
   <div class="row justify-content-center align-items-center" style="margin-top: 20px">
-    <button class="btn btn-enregistrer" (click)="enregistrer(cours)">
+   <!-- <button class="btn btn-enregistrer" (click)="enregistrer(cours)">
       <div *ngIf="updating" class="spinner-border text-dark" role="status">
       </div>
       <span *ngIf="!updating">
         ENREGISTRER
       </span>
 
-    </button>
+    </button>-->
   </div>
 </div>
