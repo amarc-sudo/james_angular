@@ -42,7 +42,6 @@ export class VisualisationMatiereComponent implements OnInit {
         duration: 3000
       });
       this.matiereListComplete = this.matiereListComplete.filter(mat => mat.idMatiere != matiere.idMatiere);
-      console.log(this.matiereListComplete);
       this.onChange(matiere.formation.idFormation);
     })).subscribe();
   }
