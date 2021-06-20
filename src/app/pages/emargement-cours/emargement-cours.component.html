@@ -1,4 +1,4 @@
-<div class="container justify-content-center align-items-center">
+<div *ngIf="formationSelectionnee!=null" class="container justify-content-center align-items-center">
   <div class="card">
     <div class="card-body">
       <div class="label-select justify-content-center align-items-center">
@@ -16,7 +16,7 @@
           Matiere:
         </label>
         <select id="matiere" class='form-control'>
-          <option *ngFor="let matiere of listMatieres" [value]="matiere.idMatiere">
+          <option *ngFor="let matiere of listeMatieresFiltrees" [value]="matiere.idMatiere">
             {{matiere.intitule}}
           </option>
         </select>
@@ -51,7 +51,7 @@
           <tr *ngFor="let etudiant of etudiantsFormation| orderBy: 'etudiant.personne.nom': false;">
             <td>{{etudiant.personne.nom |uppercase}} {{etudiant.personne.prenom}}</td>
             <td>
-              <select class='form-control' id="{{etudiant.personne.idPersonne}}" (change)="updateListPresences2(etudiant)"> <!--etudiant.personne.idPersonne -->
+              <select class='form-control' id="{{etudiant.idEtudiant}}" (change)="updateListPresences(etudiant)"> <!--etudiant.personne.idPersonne -->
                 <option value='pre'>Présent</option>
                 <option value='ret'>En retard</option>
                 <option value='abs'>Absent</option>
@@ -64,13 +64,13 @@
     </div>
   </div>
   <div class="row justify-content-center align-items-center" style="margin-top: 20px">
-   <!-- <button class="btn btn-enregistrer" (click)="enregistrer(cours)">
+   <button class="btn btn-enregistrer" (click)="enregistrer()">
       <div *ngIf="updating" class="spinner-border text-dark" role="status">
       </div>
       <span *ngIf="!updating">
         ENREGISTRER
       </span>
 
-    </button>-->
+    </button>
   </div>
 </div>

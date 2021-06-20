@@ -48,6 +48,7 @@ import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matier
 import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
 import {AdminPanelComponent} from './pages/gestion-administrateur/admin-panel/admin-panel.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {EmargementCoursComponent} from "./pages/emargement-cours/emargement-cours.component";
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     AccueilMatiereComponent,
     VisualisationMatiereComponent,
     CreationMatiereComponent,
+    EmargementCoursComponent
   ],
   imports: [
     BrowserModule,
@@ -154,6 +156,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
         component: ModificationEleveComponentComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'professeur/emargement-cours',
+        component: EmargementCoursComponent,
+        canActivate: [AuthGuard]
+      }
     ]),
     OrderModule,
     NgDragDropModule.forRoot(),

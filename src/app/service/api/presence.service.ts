@@ -21,7 +21,7 @@ export class PresenceService extends ParentApiService {
   }
 
   createList(listPresences: Presence[]): Observable<Presence[]> {
-    return this.httpClient.patch<Presence[]>(environment.apiUrl + '/rest/api/presence/createList', listPresences
+    return this.httpClient.post<Presence[]>(environment.apiUrl + '/rest/api/presence/createList', listPresences
     );
   }
 

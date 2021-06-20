@@ -14,6 +14,10 @@ export class CoursService extends ParentApiService {
     super();
   }
 
+  create(cours: Cours): Observable<Cours>{
+    return this.httpClient.post<Cours>(environment.apiUrl + '/rest/api/cours/create', cours);
+  }
+
   read(idCours: number): Observable<Cours> {
     return this.httpClient.get<Cours>(environment.apiUrl + '/rest/api/cours/read?idCours=' + idCours);
   }

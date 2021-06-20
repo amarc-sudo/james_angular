@@ -18,6 +18,8 @@ import {getTime} from 'ngx-bootstrap/chronos/utils/date-getters';
 import {formatDate} from "@angular/common";
 import {Etudiant} from '../../api/objects/Etudiant';
 import {reflectTypeEntityToDeclaration} from '@angular/compiler-cli/src/ngtsc/reflection';
+import {Format} from "@angular-devkit/build-angular/src/extract-i18n/schema";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-emargement-cours',
@@ -37,8 +39,8 @@ export class EmargementCoursComponent implements OnInit {
   listFormations: Formation[];
 
   listMatieres: Matiere[];
-
-  listPresences: Presence[];
+  listeMatieresFiltrees: Matiere[] = [];
+  listPresencesToSave: Presence[] = [];
   listEtudiants: Etudiant[];
   etudiantsFormation: Etudiant[] = [];
 
@@ -54,16 +56,29 @@ export class EmargementCoursComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private coursService: CoursService, private presenceService: PresenceService,
               private matiereService: MatiereService,
-              private professeurService: ProfesseurService, private etudiantService: EtudiantService, private router: Router) {
+              private professeurService: ProfesseurService, private etudiantService: EtudiantService, private router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
     this.professeurService.read(9).subscribe(result => { // changer pour mettre idProf que pour les profs et pas la secrétaire;
       this.professeur = result;
       this.listFormations = this.professeur.formations;
-      this.etudiantService.listByFormations(this.listFormations).subscribe(etudiants => {
+      this.formationSelectionnee = this.listFormations[0].idFormation;
+      this.matiereService.listByListFormation(this.listFormations).subscribe(matieres => {
+        this.listMatieres = matieres;
+        this.listeMatieresFiltrees = this.listMatieres.filter(matiere => matiere.formation.idFormation == this.formationSelectionnee);
+      });
+      this.etudiantService.listByFormation(this.listFormations).subscribe(etudiants => {
         this.listEtudiants = etudiants;
-
+        this.etudiantsFormation = this.listEtudiants.filter(etudiant => etudiant.formation.idFormation == this.formationSelectionnee);
+        this.etudiantsFormation.forEach(etudiant => {
+          const presence = new Presence();
+          const data = new TableData();
+          data.code = 'pre';
+          presence.etudiant = etudiant;
+          presence.etatPresence = data;
+          this.listPresencesToSave.push(presence);
+        });
       });
     });
     const hourBeginning = new Date().getHours();
@@ -72,58 +87,34 @@ export class EmargementCoursComponent implements OnInit {
     const heureCompleteFinTexte = (hourBeginning + 1) + ':' + minuteZero;
     this.heureDebut = this.conversionModel(heureCompleteDebutTexte);
     this.heureFin = this.conversionModel(heureCompleteFinTexte);
-
-
-    // this.idCours = 40;
-    /*if (this.idCours != null) {
-      this.cours$ = this.coursService.read(this.idCours).pipe(tap(cours => {
-         // this.professeurService.listByFormation(cours.matiere.formation.idFormation).subscribe(result => this.listProfesseurs = result);
-          this.matiereService.listByFormation(cours.matiere.formation.idFormation).subscribe(result => this.listMatieres = result);
-          this.positionProfesseur = cours.professeur.idProfesseur;
-          this.positionMatiere = cours.matiere.idMatiere;
-          this.listPresences = cours.presences;
-          this.heureDebut = this.conversionModel(cours.begin);
-          this.heureFin = this.conversionModel(cours.end);
-          if (cours.etat.code === 'env') {
-            this.router.navigate(['accueil']);
-          }
-        }
-      ));
-    }*/
   }
 
-  enregistrer(cours: Cours): void {
-
+  enregistrer(): void {
+    const cours = new Cours();
     this.listMatieres.forEach(matiere => {
         if (matiere.idMatiere == this.getValueOfElementSelectID('matiere')) {
           cours.matiere = matiere;
         }
       }
     );
-
     cours.begin = this.conversionInverse(this.heureDebut);
     cours.end = this.conversionInverse(this.heureFin);
-
     this.errorTime = false;
     this.updating = true;
-    const coursId = new Cours();
-    coursId.idCours = cours.idCours;
-    this.listPresences.forEach(presence => presence.cours = coursId);
-    // this.presenceService.update(this.listPresences).subscribe();
-    this.presenceService.createList(this.listPresences).subscribe();
-    this.coursService.update(cours).subscribe(() => {
-        const date = new Date(cours.date);
-        date.setTime(date.getTime() + 3000 * 60 * 60);
-        this.updating = false;
-        this.router.navigate(['accueil/gestion-abs/fiche-presence'], {
-          queryParams: {
-            id: cours.matiere.formation.idFormation,
-            date: date.toISOString().substring(0, 10)
-          }
-        });
-      }
-    );
-
+    console.log(cours);
+    cours.professeur = this.professeur;
+    const data = new TableData();
+    data.code = 'non_env';
+    cours.etat = data;
+    this.coursService.create(cours).pipe(tap(c => {
+      this.listPresencesToSave.forEach(presence => presence.cours = c);
+      this.presenceService.createList(this.listPresencesToSave).subscribe(c1 => {});
+    })).subscribe(
+      this.updating = false;
+      this.snackBar.open('Le cours du ' + c1.date + ' de la formation ' + c1.matiere.formation.intitule + ' a bien été ajouté', 'OK', {
+        duration: 3000
+      });
+    });
   }
 
   getValueOfElementSelectID(id: string): any {
@@ -145,61 +136,43 @@ export class EmargementCoursComponent implements OnInit {
     return horaireModel.hour + ':' + horaireModel.minute + ':00';
   }
 
-  updateListPresences(idPresence: number): void {
+  updateListPresences(etudiant: Etudiant): void {
     const tableData = new TableData();
-    tableData.code = (document.getElementById(String(idPresence)) as HTMLSelectElement).value;
-    this.listPresences[this.getPresenceIndexByID(idPresence)].etatPresence = tableData;
-  }
-
-  updateListPresences2(etudiant: Etudiant): void {
-    const tableData = new TableData();
-    tableData.code = (document.getElementById(String(etudiant.personne.idPersonne)) as HTMLSelectElement).value;
-    console.log(tableData.code + '/');
-    this.listPresences.push(etudiant.personne.idPersonne);
-    console.log(this.listPresences[this.getPresenceIndexByID2(etudiant.personne.idPersonne)].etatPresence);
-    // this.listPresences[this.getPresenceIndexByID(idPresence)].etatPresence = tableData;
+    tableData.code = (document.getElementById(String(etudiant.idEtudiant)) as HTMLSelectElement).value;
+    this.listPresencesToSave.forEach(presence => {
+      if (presence.etudiant.idEtudiant == etudiant.idEtudiant) {
+        presence.etatPresence = tableData;
+      }
+    });
   }
 
   updateListEtudiants(idFormationSelectionnee: number): void {
     this.etudiantsFormation = [];
-    this.etudiantService.listByFormations(this.listFormations).subscribe(etudiants => {
-      this.listEtudiants = etudiants;
-      this.listEtudiants.forEach(etudiant => {
-        if (etudiant.formation.idFormation == idFormationSelectionnee && this.etudiantsFormation.includes(etudiant) == false) {
-          this.etudiantsFormation.push(etudiant);
-        }
-      });
+    this.etudiantsFormation = this.listEtudiants.filter(etudiant => etudiant.formation.idFormation == idFormationSelectionnee);
+    this.listPresencesToSave = [];
+    this.etudiantsFormation.forEach(etudiant => {
+      const presence = new Presence();
+      const data = new TableData();
+      data.code = 'pre';
+      presence.etudiant = etudiant;
+      presence.etatPresence = data;
+      this.listPresencesToSave.push(presence);
     });
   }
 
   updateListMatieres(): void {
-    this.listFormations.forEach(formation => {
-        if (formation.idFormation == this.getValueOfElementSelectID('formation')) {
-          const idFormation = formation.idFormation;
-          this.matiereService.listByFormation(idFormation).subscribe(result => {
-            this.listMatieres = result;
-          });
-        }
-      }
-    );
-    this.updateListEtudiants(this.getValueOfElementSelectID('formation'));
+    this.formationSelectionnee = parseInt((document.getElementById('formation') as HTMLSelectElement).value, 10);
+    this.listeMatieresFiltrees = this.listMatieres.filter(matiere => matiere.formation.idFormation == this.formationSelectionnee);
+    this.updateListEtudiants(this.formationSelectionnee);
   }
 
   getPresenceIndexByID(idPresence: number): number {
     for (let i = 0; i < idPresence; i++) {
-      if (this.listPresences[i].idPresence === idPresence) {
+      if (this.listPresencesToSave[i].idPresence === idPresence) {
         return i;
       }
     }
     return 0;
   }
 
-  getPresenceIndexByID2(idPersonne: number): number {
-    for (let i = 0; i < idPersonne; i++) {
-      if (this.listPresences[i].etudiant.personne.idPersonne === idPersonne) {
-        return i;
-      }
-    }
-    return 0;
-  }
 }
