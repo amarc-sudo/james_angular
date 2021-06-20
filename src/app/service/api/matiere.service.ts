@@ -21,4 +21,12 @@ export class MatiereService extends ParentApiService {
   listByListFormation(listFormation: Formation[]): Observable<Matiere[]> {
     return this.httpClient.post<Matiere[]>(this.api + '/rest/api/matiere/listMatiere', listFormation);
   }
+
+  delete(matiere: Matiere): Observable<void> {
+    return this.httpClient.delete<void>(this.api + '/rest/api/matiere/delete?id=' + matiere.idMatiere);
+  }
+
+  create(matiere: Matiere): Observable<Matiere> {
+    return this.httpClient.post<Matiere>(this.api + '/rest/api/matiere/create', matiere);
+  }
 }

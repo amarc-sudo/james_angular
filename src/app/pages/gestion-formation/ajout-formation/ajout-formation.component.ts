@@ -65,6 +65,7 @@ export class AjoutFormationComponent implements OnInit {
         this.snackBar.open('La formation ' + intitule + ' ' + ' a bien été ajoutée', 'OK', {
           duration: 3000
         });
+        this.resetView.emit(0);
         (document.getElementById('nom') as HTMLInputElement).value = '';
       }
     );

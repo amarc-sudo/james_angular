@@ -117,6 +117,7 @@ export class AjoutClasseComponent implements OnInit {
       ).subscribe(() => {
         if (i === this.listEtudiants.length - 1) {
           this.uploading = false;
+          this.resetView.emit(0);
           this.snackBar.open('Les ' + this.listEtudiants.length + ' étudiants ont été ajoutés', 'OK', {
             duration: 3000
           });

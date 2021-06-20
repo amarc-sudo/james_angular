@@ -77,6 +77,7 @@ export class AjoutEleveComponent implements OnInit {
       this.snackBar.open('L\'étudiant(e) ' + personne.nom.toUpperCase() + ' ' + personne.prenom + ' a bien été ajouté(e)', 'OK', {
         duration: 3000
       });
+      this.resetView.emit(0);
       (document.getElementById('groupe' ) as HTMLSelectElement).value = '';
       (document.getElementById('adresse-mail') as HTMLInputElement).value = '';
       (document.getElementById('prenom') as HTMLInputElement).value = '';

@@ -3,6 +3,7 @@ import {Formation} from '../../../../api/objects/Formation';
 import {Matiere} from '../../../../api/objects/Matiere';
 import {MatiereService} from '../../../../service/api/matiere.service';
 import {tap} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-visualisation-matiere',
@@ -15,7 +16,8 @@ export class VisualisationMatiereComponent implements OnInit {
   matiereListComplete: Matiere[] = [];
   matiereListFiltered: Matiere[] = [];
 
-  constructor(private matiereService: MatiereService) {
+  constructor(private matiereService: MatiereService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -35,6 +37,13 @@ export class VisualisationMatiereComponent implements OnInit {
   }
 
   deleteMatiere(matiere: Matiere): void {
-
+    this.matiereService.delete(matiere).pipe(tap(() => {
+      this.snackBar.open('La matière ' + matiere.intitule + ' a été supprimée', 'OK', {
+        duration: 3000
+      });
+      this.matiereListComplete = this.matiereListComplete.filter(mat => mat.idMatiere != matiere.idMatiere);
+      console.log(this.matiereListComplete);
+      this.onChange(matiere.formation.idFormation);
+    })).subscribe();
   }
 }
