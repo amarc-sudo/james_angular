@@ -1,0 +1,39 @@
+<div class="recap" *ngIf="listLog$ | async as listLogs">
+  <div class="table table-striped">
+    <div class="form-group" style="margin-bottom: 20px;">
+      <input type="text" class="form-control" placeholder="Filtrer par type" [(ngModel)]="term" (ngModelChange)="refreshList()">
+    </div>
+    <table class="table table-striped" data-toggle="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Heure</th>
+        <th scope="col">Type</th>
+        <th scope="col">Commentaire</th>
+        <th scope="col">IP</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let elements of this.listLog">
+
+        <th scope="row">{{ elements.id }}</th>
+          <td>{{elements.dateHeure | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+          <td>{{elements.type}}</td>
+          <td>{{elements.commentaire}}</td>
+          <td>{{elements.ip}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshList()">
+      </ngb-pagination>
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshList()">
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="25">25 items per page</option>
+        <option [ngValue]="50">50 items per page</option>
+        <option [ngValue]="75">75 items per page</option>
+        <option [ngValue]="100">100 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>
