@@ -47,16 +47,13 @@ import {SousMenuGestionFormationComponent} from './pages/gestion-formation/sous-
 import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
 import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matiere/creation-matiere/creation-matiere.component';
 import {VisualisationMatiereComponent} from './pages/gestion-formation/gestion-matiere/visualisation-matiere/visualisation-matiere.component';
-import { SousMenuGestionProfesseurComponent } from './pages/gestion-formation/sous-menu-gestion-professeur/sous-menu-gestion-professeur.component';
+import {SousMenuGestionProfesseurComponent} from './pages/gestion-formation/sous-menu-gestion-professeur/sous-menu-gestion-professeur.component';
 import {GestionProfesseurComponent} from './pages/gestion-formation/sous-menu-gestion-professeur/gestion-professeur/gestion-professeur.component';
 import {AjoutProfesseurComponent} from './pages/gestion-formation/sous-menu-gestion-professeur/ajout-professeur/ajout-professeur.component';
-import {ConsultationEleveComponent} from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
-import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
-
-import {EmargementCoursComponent} from "./pages/emargement/emargement-cours/emargement-cours.component";
-import { EmargementLoginComponent } from './pages/emargement/emargement-login/emargement-login.component';
+import {EmargementCoursComponent} from './pages/emargement/emargement-cours/emargement-cours.component';
+import {EmargementLoginComponent} from './pages/emargement/emargement-login/emargement-login.component';
 import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.guard';
-import { AdminLoginComponent } from './pages/gestion-administrateur/admin-login/admin-login.component';
+import {AdminLoginComponent} from './pages/gestion-administrateur/admin-login/admin-login.component';
 import {AuthAdminGuard} from './service/auth-admin/auth-admin.guard';
 
 @NgModule({
@@ -90,6 +87,11 @@ import {AuthAdminGuard} from './service/auth-admin/auth-admin.guard';
     AccueilMatiereComponent,
     VisualisationMatiereComponent,
     CreationMatiereComponent,
+    EmargementCoursComponent,
+    EmargementLoginComponent,
+    AdminLoginComponent,
+    SousMenuGestionFormationComponent,
+    SousMenuGestionProfesseurComponent
   ],
   imports: [
     BrowserModule,
@@ -164,6 +166,24 @@ import {AuthAdminGuard} from './service/auth-admin/auth-admin.guard';
         component: ModificationEleveComponentComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'professeur/emargement-cours',
+        component: EmargementCoursComponent,
+        canActivate: [AuthEmargementGuard]
+      },
+      {
+        path: 'professeur',
+        component: EmargementLoginComponent
+      },
+      {
+        path: 'loginAdmin',
+        component: AdminLoginComponent
+      },
+      {
+        path: 'admin-panel',
+        component: AdminPanelComponent,
+        canActivate: [AuthAdminGuard]
+      }
     ]),
     OrderModule,
     NgDragDropModule.forRoot(),
@@ -177,7 +197,7 @@ import {AuthAdminGuard} from './service/auth-admin/auth-admin.guard';
     Ng2SearchPipeModule
 
   ],
-  providers: [AuthService, AuthGuard, MatSnackBar],
+  providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard, AuthAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
