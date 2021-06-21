@@ -15,11 +15,11 @@ import {TableData} from '../../../api/objects/TableData';
 import {Formation} from '../../../api/objects/Formation';
 import {Form} from '@angular/forms';
 import {getTime} from 'ngx-bootstrap/chronos/utils/date-getters';
-import {formatDate} from "@angular/common";
+import {formatDate} from '@angular/common';
 import {Etudiant} from '../../../api/objects/Etudiant';
 import {reflectTypeEntityToDeclaration} from '@angular/compiler-cli/src/ngtsc/reflection';
-import {Format} from "@angular-devkit/build-angular/src/extract-i18n/schema";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {Format} from '@angular-devkit/build-angular/src/extract-i18n/schema';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-emargement-cours',
@@ -101,7 +101,6 @@ export class EmargementCoursComponent implements OnInit {
     cours.end = this.conversionInverse(this.heureFin);
     this.errorTime = false;
     this.updating = true;
-    console.log(cours);
     cours.professeur = this.professeur;
     const data = new TableData();
     data.code = 'non_env';
@@ -110,7 +109,7 @@ export class EmargementCoursComponent implements OnInit {
       this.listPresencesToSave.forEach(presence => presence.cours = c);
       this.presenceService.createList(this.listPresencesToSave).subscribe(c1 => {
         this.updating = false;
-        this.snackBar.open('Le cours du ' + c.date + ' de la formation ' + c.matiere.formation.intitule + ' a bien été ajouté', 'OK', {
+        this.snackBar.open('Le cours du ' + c.date + ' de la formation ' + this.listFormations.filter(formation => formation.idFormation == this.formationSelectionnee)[0].intitule + ' a bien été ajouté', 'OK', {
           duration: 3000
         });
       });
