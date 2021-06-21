@@ -22,7 +22,7 @@ export class AppComponent {
     return sessionStorage.getItem('loggedIn') === 'true';
   }
   get responsableLogged(): boolean {
-    return sessionStorage.getItem('role') === 'responsable';
+    return sessionStorage.getItem('responsable') === 'true';
   }
 
   getCurrentRoute(): any {
@@ -50,6 +50,8 @@ export class AppComponent {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('responsable');
+
     this.changeRoute('');
   }
 

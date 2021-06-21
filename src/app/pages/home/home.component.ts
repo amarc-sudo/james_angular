@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   get responsableLogged(): boolean {
-    return sessionStorage.getItem('role') === 'responsable';
+    return sessionStorage.getItem('responsable') === 'true';
   }
 
   isLogged(): boolean{
@@ -43,6 +43,8 @@ export class HomeComponent implements OnInit {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('responsable');
+
   }
 
 }

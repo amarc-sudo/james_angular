@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         }
         this.tokenConnexionService.generateToken(email).pipe(tap(result => {
           sessionStorage.setItem('token', result.token);
+          sessionStorage.setItem('responsable', 'true');
           this.router.navigate(['accueil']);
         })).subscribe();
 
