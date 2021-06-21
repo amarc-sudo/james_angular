@@ -9,7 +9,9 @@
             </div>
             <div class="col-12 col-md-1 text-center d-xl-flex justify-content-xl-center align-items-xl-center container-bouton">
               <button class="btn btn-hover-color-white" type="button" (click)="change('login')" *ngIf="!logged()" >Se connecter</button>
-              <button class="btn btn-hover-color-white" type="button" (click)="change('accueil')" *ngIf="logged()" >Accueil</button>
+              <button class="btn btn-hover-color-white" type="button" (click)="disconnect()" *ngIf="logged() && !responsableLogged" >Se déconnecter</button>
+
+              <button class="btn btn-hover-color-white" type="button" (click)="change('accueil')" *ngIf="logged() && responsableLogged" >Accueil</button>
             </div>
           </div>
         </div>
@@ -22,7 +24,7 @@
             <li class="list-group-item menu_item"><span>Le code</span></li>
             <li class="list-group-item menu_item" (click)="goToSite('https://play.google.com/store/apps/details?id=com.iut.james_mobile')"><span>L'application</span></li>
             <li class="list-group-item menu_item"><span>Gestion d'établisement</span></li>
-            <li class="list-group-item menu_item" (click)="change('admin-panel')"><span>Administration du site</span></li>
+            <li class="list-group-item menu_item" (click)="change('loginAdmin')"><span>Administration du site</span></li>
             <li class="list-group-item menu_item" (click)="change('professeur')"><span>Emargement en ligne</span></li>
           </ul>
         </div>

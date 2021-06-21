@@ -46,6 +46,15 @@ export class AuthService extends ParentApiService{
     }
   }
 
+  loggedInAdmin(value: boolean, email: string, poste: string): void {
+    this.loggedInStatus = value;
+    if (value) {
+      sessionStorage.setItem('tokenLogin', this.tokenLog);
+      sessionStorage.setItem('loggedIn', 'true');
+      sessionStorage.setItem('email', email);
+      sessionStorage.setItem('poste', poste);
+    }
+  }
 
   loggedOut(): void {
     sessionStorage.clear();
@@ -63,6 +72,13 @@ export class AuthService extends ParentApiService{
       password
     });
   }
+  getUserDetailsAdmin(email, password): Observable<any> {
+    return this.httpClient.post(environment.apiUrl + '/rest/api/admin/correctLogin', {
+      email,
+      password
+    });
+  }
+
   getUserDetailsProfesseur(email, password): Observable<any> {
     return this.httpClient.post(environment.apiUrl + '/rest/api/professeur/correctLogin', {
       email,

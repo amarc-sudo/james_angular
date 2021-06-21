@@ -51,6 +51,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {EmargementCoursComponent} from "./pages/emargement/emargement-cours/emargement-cours.component";
 import { EmargementLoginComponent } from './pages/emargement/emargement-login/emargement-login.component';
 import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.guard';
+import { AdminLoginComponent } from './pages/gestion-administrateur/admin-login/admin-login.component';
+import {AuthAdminGuard} from './service/auth-admin/auth-admin.guard';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,8 @@ import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.gua
     VisualisationMatiereComponent,
     CreationMatiereComponent,
     EmargementCoursComponent,
-    EmargementLoginComponent
+    EmargementLoginComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -119,10 +122,6 @@ import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.gua
         path: 'accueil/gestion-abs',
         component: AppGestionAbsComponent,
         canActivate: [AuthGuard]
-      },
-      {
-        path: 'admin-panel',
-        component: AdminPanelComponent,
       },
       {
         path: 'accueil/gestion-abs/fiche-presence',
@@ -167,6 +166,15 @@ import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.gua
       {
         path: 'professeur',
         component: EmargementLoginComponent
+      },
+      {
+        path: 'loginAdmin',
+        component: AdminLoginComponent
+      },
+      {
+        path: 'admin-panel',
+        component: AdminPanelComponent,
+        canActivate: [AuthAdminGuard]
       }
     ]),
     OrderModule,
@@ -181,7 +189,7 @@ import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.gua
     Ng2SearchPipeModule
 
   ],
-  providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard],
+  providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard, AuthAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

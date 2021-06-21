@@ -9,13 +9,13 @@
         <button class="btn btn_menu" id="dropdownBasic1" ngbDropdownToggle>Menu</button>
         <div ngbDropdownMenu class="dropdown-menu-group">
           <ul class="list-group menu_list_groupe" style="height: 100%">
-            <li class="list-group-item menu_item" (click)="changeRoute('accueil')"><span>Accueil</span></li>
-            <li class="list-group-item menu_item" (click)="changeRoute('')"><span>Gestion</span></li>
-            <li class="list-group-item menu_item" (click)="changeRoute('accueil/gestion-abs')">
+            <li class="list-group-item menu_item" (click)="changeRoute('accueil')" *ngIf="responsableLogged"><span>Accueil</span></li>
+            <li class="list-group-item menu_item" (click)="changeRoute('')" *ngIf="responsableLogged"><span>Gestion</span></li>
+            <li class="list-group-item menu_item" (click)="changeRoute('accueil/gestion-abs')" *ngIf="responsableLogged">
               <span>Fiche d'absence</span></li>
-            <li class="list-group-item menu_item" (click)="changeRoute('accueil/historique')"><span>Historique</span>
+            <li class="list-group-item menu_item" (click)="changeRoute('accueil/historique')" *ngIf="responsableLogged"><span>Historique</span>
             </li>
-            <li class="list-group-item menu_item" (click)="changeRoute('accueil/historique')"><span>Mon profil</span>
+            <li class="list-group-item menu_item" (click)="changeRoute('accueil/historique')" *ngIf="responsableLogged"><span>Mon profil</span>
             </li>
             <li class="list-group-item menu_item" (click)="disconnect()"><span>Deconnexion</span></li>
           </ul>

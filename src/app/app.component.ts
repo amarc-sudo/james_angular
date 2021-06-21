@@ -21,6 +21,9 @@ export class AppComponent {
   get logged(): any {
     return sessionStorage.getItem('loggedIn') === 'true';
   }
+  get responsableLogged(): boolean {
+    return sessionStorage.getItem('role') === 'responsable';
+  }
 
   getCurrentRoute(): any {
     this.path = this.router.url.split('/');

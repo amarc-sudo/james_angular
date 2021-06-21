@@ -24,8 +24,13 @@ export class TokenConnexionService extends ParentApiService {
   generateTokenProfesseur(mail: string): Observable<TokenConnexion> {
     return this.httpClient.get<TokenConnexion>(this.api + '/rest/api/token/generateTokenProfesseur?mail=' + mail);
   }
-
   checkConnexionProfesseur(mail: string, token: string): Observable<boolean> {
     return this.httpClient.get<boolean>(this.api + '/rest/api/token/checkConnexionProfesseur?mail=' + mail + '&token=' + token);
+  }
+  generateTokenAdmin(mail: string): Observable<TokenConnexion> {
+    return this.httpClient.get<TokenConnexion>(this.api + '/rest/api/token/generateTokenAdmin?mail=' + mail);
+  }
+  checkConnexionAdmin(mail: string, token: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.api + '/rest/api/token/checkConnexionAdmin?mail=' + mail + '&token=' + token);
   }
 }

@@ -24,6 +24,10 @@ export class HomeComponent implements OnInit {
     return sessionStorage.getItem('loggedIn') === 'true';
   }
 
+  get responsableLogged(): boolean {
+    return sessionStorage.getItem('role') === 'responsable';
+  }
+
   isLogged(): boolean{
     if (sessionStorage.getItem('tokenLogin') !== null){
       return true;
@@ -32,6 +36,13 @@ export class HomeComponent implements OnInit {
   }
 
   goToSite(s: string): void {
-    //document.location.href = s;
+    document.location.href = s;
   }
+  disconnect(): void {
+    sessionStorage.removeItem('loggedIn');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('token');
+  }
+
 }
