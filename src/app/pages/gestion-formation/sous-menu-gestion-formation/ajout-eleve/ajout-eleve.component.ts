@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Formation} from '../../../api/objects/Formation';
-import {Etudiant} from '../../../api/objects/Etudiant';
-import {Personne} from '../../../api/objects/Personne';
+import {Formation} from '../../../../api/objects/Formation';
+import {Etudiant} from '../../../../api/objects/Etudiant';
+import {Personne} from '../../../../api/objects/Personne';
 import {switchMapTo, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
-import {PersonneService} from '../../../service/api/personne.service';
-import {EtudiantService} from '../../../service/api/etudiant.service';
+import {PersonneService} from '../../../../service/api/personne.service';
+import {EtudiantService} from '../../../../service/api/etudiant.service';
 import {ToastrService} from 'ngx-toastr';
 import {MatSnackBar} from '@angular/material/snack-bar';
 

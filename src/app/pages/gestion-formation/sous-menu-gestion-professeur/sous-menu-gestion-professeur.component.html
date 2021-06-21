@@ -1,0 +1,13 @@
+<mat-tab-group mat-align-tabs="center" style="margin-top: 25px;">
+  <mat-tab label="Affectation aux Formations">
+    <mat-card>
+      <app-gestion-professeur></app-gestion-professeur>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Ajouter Professeur">
+    <mat-card>
+      <app-ajout-professeur (resetView)="reloadComponent()"></app-ajout-professeur>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
+

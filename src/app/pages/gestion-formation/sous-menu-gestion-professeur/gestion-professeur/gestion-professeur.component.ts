@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Formation} from '../../../api/objects/Formation';
+import {Formation} from '../../../../api/objects/Formation';
 import {HttpClient} from '@angular/common/http';
-import {Professeur} from '../../../api/objects/Professeur';
-import {ProfesseurService} from '../../../service/api/professeur.service';
+import {Professeur} from '../../../../api/objects/Professeur';
+import {ProfesseurService} from '../../../../service/api/professeur.service';
 import {tap} from 'rxjs/operators';
 import {DropEvent} from 'ng-drag-drop';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';

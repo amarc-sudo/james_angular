@@ -1,13 +1,13 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Secretaire} from '../../../api/objects/Secretaire';
-import {SecretaireService} from '../../../service/api/secretaire.service';
+import {Secretaire} from '../../../../api/objects/Secretaire';
+import {SecretaireService} from '../../../../service/api/secretaire.service';
 import {switchMap, switchMapTo, tap} from 'rxjs/operators';
-import {Professeur} from '../../../api/objects/Professeur';
-import {ProfesseurService} from '../../../service/api/professeur.service';
-import {FormationService} from '../../../service/api/formation.service';
-import {Etudiant} from '../../../api/objects/Etudiant';
-import {Formation} from '../../../api/objects/Formation';
-import {Personne} from '../../../api/objects/Personne';
+import {Professeur} from '../../../../api/objects/Professeur';
+import {ProfesseurService} from '../../../../service/api/professeur.service';
+import {FormationService} from '../../../../service/api/formation.service';
+import {Etudiant} from '../../../../api/objects/Etudiant';
+import {Formation} from '../../../../api/objects/Formation';
+import {Personne} from '../../../../api/objects/Personne';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

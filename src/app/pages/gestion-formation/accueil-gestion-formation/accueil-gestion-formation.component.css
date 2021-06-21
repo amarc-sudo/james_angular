@@ -4,3 +4,7 @@
 .mat-tab-label, .mat-tab-link{
   color : black !important;
 }
+
+:host {
+  width: 100%;
+}

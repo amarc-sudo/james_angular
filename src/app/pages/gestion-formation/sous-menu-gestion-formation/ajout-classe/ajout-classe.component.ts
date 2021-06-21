@@ -1,10 +1,10 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {Formation} from '../../../api/objects/Formation';
-import {Etudiant} from '../../../api/objects/Etudiant';
-import {Personne} from '../../../api/objects/Personne';
+import {Formation} from '../../../../api/objects/Formation';
+import {Etudiant} from '../../../../api/objects/Etudiant';
+import {Personne} from '../../../../api/objects/Personne';
 import {Subscription} from 'rxjs';
-import {PersonneService} from '../../../service/api/personne.service';
-import {EtudiantService} from '../../../service/api/etudiant.service';
+import {PersonneService} from '../../../../service/api/personne.service';
+import {EtudiantService} from '../../../../service/api/etudiant.service';
 import {switchMapTo, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
