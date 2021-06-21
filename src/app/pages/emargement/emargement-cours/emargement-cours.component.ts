@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Cours} from '../../api/objects/Cours';
-import {CoursService} from '../../service/api/cours.service';
-import {PresenceService} from '../../service/api/presence.service';
+import {Cours} from '../../../api/objects/Cours';
+import {CoursService} from '../../../service/api/cours.service';
+import {PresenceService} from '../../../service/api/presence.service';
 import {Observable} from 'rxjs';
-import {Professeur} from '../../api/objects/Professeur';
-import {ProfesseurService} from '../../service/api/professeur.service';
-import {EtudiantService} from '../../service/api/etudiant.service';
+import {Professeur} from '../../../api/objects/Professeur';
+import {ProfesseurService} from '../../../service/api/professeur.service';
+import {EtudiantService} from '../../../service/api/etudiant.service';
 import {materialize, tap} from 'rxjs/operators';
-import {Matiere} from '../../api/objects/Matiere';
-import {MatiereService} from '../../service/api/matiere.service';
-import {Presence} from '../../api/objects/Presence';
-import {TableData} from '../../api/objects/TableData';
-import {Formation} from '../../api/objects/Formation';
+import {Matiere} from '../../../api/objects/Matiere';
+import {MatiereService} from '../../../service/api/matiere.service';
+import {Presence} from '../../../api/objects/Presence';
+import {TableData} from '../../../api/objects/TableData';
+import {Formation} from '../../../api/objects/Formation';
 import {Form} from '@angular/forms';
 import {getTime} from 'ngx-bootstrap/chronos/utils/date-getters';
 import {formatDate} from "@angular/common";
-import {Etudiant} from '../../api/objects/Etudiant';
+import {Etudiant} from '../../../api/objects/Etudiant';
 import {reflectTypeEntityToDeclaration} from '@angular/compiler-cli/src/ngtsc/reflection';
 import {Format} from "@angular-devkit/build-angular/src/extract-i18n/schema";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -60,7 +60,7 @@ export class EmargementCoursComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.professeurService.read(9).subscribe(result => { // changer pour mettre idProf que pour les profs et pas la secrétaire;
+    this.professeurService.read(Number(sessionStorage.getItem('id'))).subscribe(result => { // changer pour mettre idProf que pour les profs et pas la secrétaire;
       this.professeur = result;
       this.listFormations = this.professeur.formations;
       this.formationSelectionnee = this.listFormations[0].idFormation;

@@ -63,6 +63,12 @@ export class AuthService extends ParentApiService{
       password
     });
   }
+  getUserDetailsProfesseur(email, password): Observable<any> {
+    return this.httpClient.post(environment.apiUrl + '/rest/api/professeur/correctLogin', {
+      email,
+      password
+    });
+  }
 
   /**
    * Fonction qui appelle l'API qui reset le password

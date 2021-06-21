@@ -48,7 +48,9 @@ import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matier
 import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
 import {AdminPanelComponent} from './pages/gestion-administrateur/admin-panel/admin-panel.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {EmargementCoursComponent} from "./pages/emargement-cours/emargement-cours.component";
+import {EmargementCoursComponent} from "./pages/emargement/emargement-cours/emargement-cours.component";
+import { EmargementLoginComponent } from './pages/emargement/emargement-login/emargement-login.component';
+import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.guard';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ import {EmargementCoursComponent} from "./pages/emargement-cours/emargement-cour
     AccueilMatiereComponent,
     VisualisationMatiereComponent,
     CreationMatiereComponent,
-    EmargementCoursComponent
+    EmargementCoursComponent,
+    EmargementLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -159,7 +162,11 @@ import {EmargementCoursComponent} from "./pages/emargement-cours/emargement-cour
       {
         path: 'professeur/emargement-cours',
         component: EmargementCoursComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthEmargementGuard]
+      },
+      {
+        path: 'professeur',
+        component: EmargementLoginComponent
       }
     ]),
     OrderModule,
@@ -174,7 +181,7 @@ import {EmargementCoursComponent} from "./pages/emargement-cours/emargement-cour
     Ng2SearchPipeModule
 
   ],
-  providers: [AuthService, AuthGuard, MatSnackBar],
+  providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
