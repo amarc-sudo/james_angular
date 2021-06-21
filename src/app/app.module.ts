@@ -24,15 +24,12 @@ import {OrderModule} from 'ngx-order-pipe';
 import {ModifFicheComponent} from './pages/gestion-abs/fiche-absence/modif-fiche/modif-fiche.component';
 import {AdminCardComponent} from './annexe-component/admin-card/admin-card.component';
 import {CookieBarComponent} from './annexe-component/cookie-bar/cookie-bar.component';
-import {AjoutClasseComponent} from './pages/gestion-formation/ajout-classe/ajout-classe.component';
+import {AjoutClasseComponent} from './pages/gestion-formation/sous-menu-gestion-formation/ajout-classe/ajout-classe.component';
 import {AccueilGestionFormationComponent} from './pages/gestion-formation/accueil-gestion-formation/accueil-gestion-formation.component';
-import {AjoutEleveComponent} from './pages/gestion-formation/ajout-eleve/ajout-eleve.component';
-import {VisualisationFormationComponent} from './pages/gestion-formation/visualisation-formation/visualisation-formation.component';
-import {AjoutFormationComponent} from './pages/gestion-formation/ajout-formation/ajout-formation.component';
-import {GestionProfesseurComponent} from './pages/gestion-formation/gestion-professeur/gestion-professeur.component';
+import {AjoutEleveComponent} from './pages/gestion-formation/sous-menu-gestion-formation/ajout-eleve/ajout-eleve.component';
+import {VisualisationFormationComponent} from './pages/gestion-formation/sous-menu-gestion-formation/visualisation-formation/visualisation-formation.component';
+import {AjoutFormationComponent} from './pages/gestion-formation/sous-menu-gestion-formation/ajout-formation/ajout-formation.component';
 import {NgDragDropModule} from 'ng-drag-drop';
-import {ConsultationEleveComponent} from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
-import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatOptionModule} from '@angular/material/core';
@@ -42,12 +39,18 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {GestionSecretaireComponent} from './pages/gestion-administrateur/gestion-secretaire/gestion-secretaire.component';
 import {AjoutSecretaireComponent} from './pages/gestion-administrateur/ajout-secretaire/ajout-secretaire.component';
-import {AjoutProfesseurComponent} from './pages/gestion-formation/ajout-professeur/ajout-professeur.component';
-import {VisualisationMatiereComponent} from './pages/gestion-formation/gestion-matiere/visualisation-matiere/visualisation-matiere.component';
-import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matiere/creation-matiere/creation-matiere.component';
-import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
 import {AdminPanelComponent} from './pages/gestion-administrateur/admin-panel/admin-panel.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {SousMenuGestionFormationComponent} from './pages/gestion-formation/sous-menu-gestion-formation/sous-menu-gestion-formation.component';
+import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
+import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matiere/creation-matiere/creation-matiere.component';
+import {VisualisationMatiereComponent} from './pages/gestion-formation/gestion-matiere/visualisation-matiere/visualisation-matiere.component';
+import { SousMenuGestionProfesseurComponent } from './pages/gestion-formation/sous-menu-gestion-professeur/sous-menu-gestion-professeur.component';
+import {GestionProfesseurComponent} from './pages/gestion-formation/sous-menu-gestion-professeur/gestion-professeur/gestion-professeur.component';
+import {AjoutProfesseurComponent} from './pages/gestion-formation/sous-menu-gestion-professeur/ajout-professeur/ajout-professeur.component';
+import {ConsultationEleveComponent} from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
+import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
+
 
 @NgModule({
   declarations: [
@@ -80,6 +83,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     AccueilMatiereComponent,
     VisualisationMatiereComponent,
     CreationMatiereComponent,
+    SousMenuGestionFormationComponent,
+    SousMenuGestionProfesseurComponent,
+    GestionProfesseurComponent,
+    AjoutProfesseurComponent,
   ],
   imports: [
     BrowserModule,

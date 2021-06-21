@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Formation} from '../../../api/objects/Formation';
-import {Etudiant} from '../../../api/objects/Etudiant';
-import {EtudiantService} from '../../../service/api/etudiant.service';
+import {Formation} from '../../../../api/objects/Formation';
+import {Etudiant} from '../../../../api/objects/Etudiant';
+import {EtudiantService} from '../../../../service/api/etudiant.service';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';

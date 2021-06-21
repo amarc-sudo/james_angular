@@ -1,0 +1,22 @@
+<mat-tab-group mat-align-tabs="center" style="margin-top: 25px;">
+  <mat-tab label="Visualisation">
+    <mat-card>
+      <app-visualisation-formation></app-visualisation-formation>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Ajouter Formation">
+    <mat-card>
+      <app-ajout-formation (resetView)="reloadComponent()"></app-ajout-formation>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Ajout Classe">
+    <mat-card>
+      <app-ajout-classe (resetView)="reloadComponent()"></app-ajout-classe>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Ajout Etudiant">
+    <mat-card>
+      <app-ajout-eleve (resetView)="reloadComponent()"></app-ajout-eleve>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
