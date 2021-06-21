@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {filter} from 'rxjs/operators';
 import {NavigationEnd, Router} from '@angular/router';
+import {Formation} from '../../../api/objects/Formation';
 
 @Component({
   selector: 'app-accueil-gestion-formation',
@@ -11,10 +12,13 @@ export class AccueilGestionFormationComponent implements OnInit {
 
   switchView = 0;
 
+  poste: string;
+
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+    this.poste = sessionStorage.getItem('poste');
   }
 
   change(s: string): void {
@@ -29,7 +33,12 @@ export class AccueilGestionFormationComponent implements OnInit {
         }
       });
   }
-
+  reloadComponent(): void {
+    const currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
+  }
   changeView(switchView: number): void {
     this.switchView = switchView;
   }

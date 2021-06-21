@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log('HomeComponent');
   }
 
 
@@ -20,10 +21,30 @@ export class HomeComponent implements OnInit {
 
 
   logged(): any{
-    return sessionStorage.getItem('loggedIn');
+    return sessionStorage.getItem('loggedIn') === 'true';
+  }
+
+  get responsableLogged(): boolean {
+    return sessionStorage.getItem('responsable') === 'true';
+  }
+
+  isLogged(): boolean{
+    if (sessionStorage.getItem('tokenLogin') !== null){
+      return true;
+    }
+    return false;
   }
 
   goToSite(s: string): void {
     document.location.href = s;
   }
+  disconnect(): void {
+    sessionStorage.removeItem('loggedIn');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('responsable');
+
+  }
+
 }

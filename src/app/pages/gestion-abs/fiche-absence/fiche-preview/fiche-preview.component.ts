@@ -10,6 +10,8 @@ import {faAngleRight, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
 import {TableData} from '../../../../api/objects/TableData';
 import {TableDataService} from '../../../../service/api/table.data.service';
+import {HistoriqueFicheService} from '../../../../service/api/historique-fiche.service';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-fiche-preview',
@@ -43,7 +45,7 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
   nombreCours: number;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private coursService: CoursService, private tableDataService: TableDataService, private route: ActivatedRoute, private router: Router) {
+  constructor(private coursService: CoursService, private historiqueFicheService: HistoriqueFicheService, private tableDataService: TableDataService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -61,7 +63,6 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
           this.nombreCours = list.length;
         }
       })).subscribe());
-
       this.subscriptions.push(this.tableDataService.readByCode('env').subscribe(result => this.envoye = result));
     }
   }
@@ -72,6 +73,7 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
   nombreAbsents(presences: Presence[]): number {
     return (presences.filter(presence => presence.etatPresence.code === 'abs')).length;
+
   }
 
   nombreRetards(presences: Presence[]): number {
@@ -80,21 +82,29 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
   pdfGeneration(listCours: Cours[]): void {
     this.loadingPDF = true;
-    listCours.forEach(cours => {
-        cours.etat = this.envoye;
-        // @ts-ignore
-        this.subscriptions.push(this.coursService.update(cours).subscribe());
-      }
-    )
-    ;
-    this.subscriptions.push(this.coursService.readFichePresence(this.idFormation, this.date).pipe(
-      tap(response => {
-        const file = new Blob([response], {type: 'application/pdf'});
-        const fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
-        this.loadingPDF = false;
-      })
-    ).subscribe());
+    if (listCours.filter(cours => cours.etat.idData != this.envoye.idData).length > 0) {
+      listCours.forEach(cours => {
+          cours.etat = this.envoye;
+          // @ts-ignore
+          this.subscriptions.push(this.coursService.update(cours).subscribe());
+        }
+      );
+      this.subscriptions.push(this.coursService.readFichePresence(this.idFormation, this.date).pipe(
+        tap(response => {
+          FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
+          this.loadingPDF = false;
+        })
+      ).subscribe());
+    } else {
+      this.subscriptions.push(this.historiqueFicheService.readFichePresence(this.idFormation, this.date).pipe(
+        tap(response => {
+          FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
+          this.loadingPDF = false;
+        })
+      ).subscribe());
+    }
+
+
   }
 
   increasePositionDiapo(): void {

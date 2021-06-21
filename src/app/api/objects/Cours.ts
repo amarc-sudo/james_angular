@@ -3,6 +3,7 @@ import {Matiere} from './Matiere';
 import {Professeur} from './Professeur';
 import {TableData} from './TableData';
 import {Presence} from './Presence';
+import {Personne} from './Personne';
 
 export class Cours{
   idCours: number;
@@ -13,4 +14,6 @@ export class Cours{
   professeur: Professeur;
   etat: TableData;
   presences: Presence[];
+  lastModifDate: Date;
+  lastModifId: Personne;
 }

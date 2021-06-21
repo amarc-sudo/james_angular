@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import Popper from 'popper.js';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 
 @Component({
@@ -16,11 +15,16 @@ export class AppComponent {
   constructor(private router: Router) {
 
   }
+
   faBars = faBars;
 
-  logged(): any{
-    return sessionStorage.getItem('loggedIn');
+  get logged(): any {
+    return sessionStorage.getItem('loggedIn') === 'true';
   }
+  get responsableLogged(): boolean {
+    return sessionStorage.getItem('responsable') === 'true';
+  }
+
   getCurrentRoute(): any {
     this.path = this.router.url.split('/');
     this.path.shift();
@@ -37,7 +41,7 @@ export class AppComponent {
     return finalPath;
   }
 
-  changeRoute(route: string): void{
+  changeRoute(route: string): void {
     this.router.navigate([route]);
   }
 
@@ -45,14 +49,16 @@ export class AppComponent {
     sessionStorage.removeItem('loggedIn');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('responsable');
+
     this.changeRoute('');
   }
 
-  formatingNavtext(navtext: string): string{
-    if(navtext.indexOf('?') == -1){
+  formatingNavtext(navtext: string): string {
+    if (navtext.indexOf('?') == -1) {
       return navtext;
-    }
-    else{
+    } else {
       return navtext.slice(0, navtext.indexOf('?'));
     }
   }
