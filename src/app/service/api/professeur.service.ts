@@ -34,4 +34,8 @@ export class ProfesseurService extends ParentApiService {
   create(professeur: Professeur): Observable<Professeur> {
     return this.httpClient.post<Professeur>(environment.apiUrl + '/rest/api/professeur/create', professeur);
   }
+
+  read(idProf: number): Observable<Professeur>{
+    return this.httpClient.get<Professeur>(environment.apiUrl + '/rest/api/professeur/read?id=' + idProf);
+  }
 }

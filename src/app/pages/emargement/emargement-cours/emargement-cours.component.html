@@ -1,0 +1,76 @@
+<div *ngIf="formationSelectionnee!=null" class="container justify-content-center align-items-center">
+  <div class="card">
+    <div class="card-body">
+      <div class="label-select justify-content-center align-items-center">
+        <label for="formation">
+          Formation:
+        </label>
+        <select id="formation" class='form-control' (change)="updateListMatieres()" [(ngModel)]='formationSelectionnee'>
+          <option *ngFor="let formation of listFormations" [value]="formation.idFormation">
+            {{formation.intitule}}
+          </option>
+        </select>
+      </div>
+      <div class="label-select justify-content-center align-items-center">
+        <label for="matiere">
+          Matiere:
+        </label>
+        <select id="matiere" class='form-control'>
+          <option *ngFor="let matiere of listeMatieresFiltrees" [value]="matiere.idMatiere">
+            {{matiere.intitule}}
+          </option>
+        </select>
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <span class="error" *ngIf="errorTime">Veuillez séléctionner une heure de début et de fin</span>
+      </div>
+      <div class="row">
+        <div class="col justify-content-center align-items-center" style="text-align: center">
+          <span>Heure début</span>
+          <div class="row justify-content-center align-items-center">
+            <ngb-timepicker class="timepick" [(ngModel)]="heureDebut">{{ heureDebut}}</ngb-timepicker>
+          </div>
+        </div>
+        <div class="col" style="text-align: center">
+          <span>Heure fin</span>
+          <div class="row justify-content-center align-items-center">
+            <ngb-timepicker class="timepick btn-enregistrer" [(ngModel)]="heureFin"></ngb-timepicker>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>ETUDIANTS</th>
+            <th>STATUT</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let etudiant of etudiantsFormation| orderBy: 'etudiant.personne.nom': false;">
+            <td>{{etudiant.personne.nom |uppercase}} {{etudiant.personne.prenom}}</td>
+            <td>
+              <select class='form-control' id="{{etudiant.idEtudiant}}" (change)="updateListPresences(etudiant)"> <!--etudiant.personne.idPersonne -->
+                <option value='pre'>Présent</option>
+                <option value='ret'>En retard</option>
+                <option value='abs'>Absent</option>
+              </select>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center" style="margin-top: 20px">
+   <button class="btn btn-enregistrer" (click)="enregistrer()">
+      <div *ngIf="updating" class="spinner-border text-dark" role="status">
+      </div>
+      <span *ngIf="!updating">
+        ENREGISTRER
+      </span>
+
+    </button>
+  </div>
+</div>

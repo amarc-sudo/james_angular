@@ -1,0 +1,48 @@
+
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: 12px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+.spinnertext{
+  font-size:0;
+
+}
+
+.container-login {
+  margin-top: 3%;
+  border-style: none;
+}
+
+.cellule-login {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  background: black;
+  padding: 22px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-width: 1px;
+  border-style: none;
+  height: 247px;
+}
+
+.container-alert {
+  width: 30%;
+}

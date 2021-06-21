@@ -48,6 +48,11 @@ import {CreationMatiereComponent} from './pages/gestion-formation/gestion-matier
 import {AccueilMatiereComponent} from './pages/gestion-formation/gestion-matiere/accueil-matiere/accueil-matiere.component';
 import {AdminPanelComponent} from './pages/gestion-administrateur/admin-panel/admin-panel.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {EmargementCoursComponent} from "./pages/emargement/emargement-cours/emargement-cours.component";
+import { EmargementLoginComponent } from './pages/emargement/emargement-login/emargement-login.component';
+import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.guard';
+import { AdminLoginComponent } from './pages/gestion-administrateur/admin-login/admin-login.component';
+import {AuthAdminGuard} from './service/auth-admin/auth-admin.guard';
 
 @NgModule({
   declarations: [
@@ -80,6 +85,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     AccueilMatiereComponent,
     VisualisationMatiereComponent,
     CreationMatiereComponent,
+    EmargementCoursComponent,
+    EmargementLoginComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -116,10 +124,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
         canActivate: [AuthGuard]
       },
       {
-        path: 'admin-panel',
-        component: AdminPanelComponent,
-      },
-      {
         path: 'accueil/gestion-abs/fiche-presence',
         component: FichePreviewComponent,
         canActivate: [AuthGuard]
@@ -154,6 +158,24 @@ import {MatSnackBar} from '@angular/material/snack-bar';
         component: ModificationEleveComponentComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'professeur/emargement-cours',
+        component: EmargementCoursComponent,
+        canActivate: [AuthEmargementGuard]
+      },
+      {
+        path: 'professeur',
+        component: EmargementLoginComponent
+      },
+      {
+        path: 'loginAdmin',
+        component: AdminLoginComponent
+      },
+      {
+        path: 'admin-panel',
+        component: AdminPanelComponent,
+        canActivate: [AuthAdminGuard]
+      }
     ]),
     OrderModule,
     NgDragDropModule.forRoot(),
@@ -167,7 +189,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     Ng2SearchPipeModule
 
   ],
-  providers: [AuthService, AuthGuard, MatSnackBar],
+  providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard, AuthAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

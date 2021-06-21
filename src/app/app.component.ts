@@ -21,6 +21,9 @@ export class AppComponent {
   get logged(): any {
     return sessionStorage.getItem('loggedIn') === 'true';
   }
+  get responsableLogged(): boolean {
+    return sessionStorage.getItem('responsable') === 'true';
+  }
 
   getCurrentRoute(): any {
     this.path = this.router.url.split('/');
@@ -47,6 +50,8 @@ export class AppComponent {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('responsable');
+
     this.changeRoute('');
   }
 
