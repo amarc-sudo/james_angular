@@ -46,7 +46,7 @@ export class AdminComponent implements OnInit{
   }
 
   getPrenom(): string {
-    return this.prenom + ' ' + this.nom;
+    return this.prenom + ' ' + this.nom.toUpperCase();
   }
 
   change(s: string): void {

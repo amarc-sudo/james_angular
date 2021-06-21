@@ -24,7 +24,27 @@ export class HomeComponent implements OnInit {
     return sessionStorage.getItem('loggedIn') === 'true';
   }
 
-  goToSite(s: string): void {
-    //document.location.href = s;
+  get responsableLogged(): boolean {
+    return sessionStorage.getItem('responsable') === 'true';
   }
+
+  isLogged(): boolean{
+    if (sessionStorage.getItem('tokenLogin') !== null){
+      return true;
+    }
+    return false;
+  }
+
+  goToSite(s: string): void {
+    document.location.href = s;
+  }
+  disconnect(): void {
+    sessionStorage.removeItem('loggedIn');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('responsable');
+
+  }
+
 }

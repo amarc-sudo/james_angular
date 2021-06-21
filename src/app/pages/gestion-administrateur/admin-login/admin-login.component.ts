@@ -1,18 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../service/api/auth.service';
+import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../../service/api/auth.service';
+import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenConnexionService} from '../../../service/api/token-connexion.service';
 import {NgForm} from '@angular/forms';
-import {FormsModule} from '@angular/forms';
-import {Router, RouterModule} from '@angular/router';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {tap} from 'rxjs/operators';
-import {TokenConnexionService} from '../../service/api/token-connexion.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
 
 
   constructor(private Auth: AuthService, private router: Router, private modalService: NgbModal, private tokenConnexionService: TokenConnexionService) {
@@ -33,17 +32,13 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm): void {
     const email = form.value.email;
     const password = form.value.password;
-    this.Auth.getUserDetails(email, password).pipe(tap(data => {
+    this.Auth.getUserDetailsAdmin(email, password).pipe(tap(data => {
       if (data != null) {
-        if (data[0] === 'secretaire') {
-          this.Auth.loggedIn(true, email, data[1]['idSecretaire'], data[1]['formations'], data[1]['personne'], 'sec');
-        } else if (data[0] === 'professeur') {
-          this.Auth.loggedIn(true, email, data[2].idProfesseur, data[1], data[2].personne, 'prof');
-        }
-        this.tokenConnexionService.generateToken(email).pipe(tap(result => {
+         this.Auth.loggedInAdmin(true, email, 'admin');
+
+         this.tokenConnexionService.generateTokenAdmin(email).pipe(tap(result => {
           sessionStorage.setItem('token', result.token);
-          sessionStorage.setItem('responsable', 'true');
-          this.router.navigate(['accueil']);
+          this.router.navigate(['admin-panel']);
         })).subscribe();
 
       } else {

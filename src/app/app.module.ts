@@ -30,6 +30,8 @@ import {AjoutEleveComponent} from './pages/gestion-formation/sous-menu-gestion-f
 import {VisualisationFormationComponent} from './pages/gestion-formation/sous-menu-gestion-formation/visualisation-formation/visualisation-formation.component';
 import {AjoutFormationComponent} from './pages/gestion-formation/sous-menu-gestion-formation/ajout-formation/ajout-formation.component';
 import {NgDragDropModule} from 'ng-drag-drop';
+import {ConsultationEleveComponent} from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
+import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatOptionModule} from '@angular/material/core';
@@ -51,6 +53,11 @@ import {AjoutProfesseurComponent} from './pages/gestion-formation/sous-menu-gest
 import {ConsultationEleveComponent} from './pages/gestion-eleves/consultation-eleve/consultation-eleve.component';
 import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modification-eleve-component/modification-eleve-component.component';
 
+import {EmargementCoursComponent} from "./pages/emargement/emargement-cours/emargement-cours.component";
+import { EmargementLoginComponent } from './pages/emargement/emargement-login/emargement-login.component';
+import {AuthEmargementGuard} from './service/auth-emargement/auth-emargement.guard';
+import { AdminLoginComponent } from './pages/gestion-administrateur/admin-login/admin-login.component';
+import {AuthAdminGuard} from './service/auth-admin/auth-admin.guard';
 
 @NgModule({
   declarations: [
@@ -83,10 +90,6 @@ import {ModificationEleveComponentComponent} from './pages/gestion-eleves/modifi
     AccueilMatiereComponent,
     VisualisationMatiereComponent,
     CreationMatiereComponent,
-    SousMenuGestionFormationComponent,
-    SousMenuGestionProfesseurComponent,
-    GestionProfesseurComponent,
-    AjoutProfesseurComponent,
   ],
   imports: [
     BrowserModule,

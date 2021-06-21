@@ -1,0 +1,28 @@
+
+.label-select {
+  display: flex;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+label {
+  margin-right: 15px;
+}
+
+span {
+  font-size: 16px;
+}
+
+.modif-fiche {
+  text-align: center;
+}
+
+.btn-enregistrer {
+  width: auto;
+  padding: 5px;
+}
+
+.btn-enregistrer:hover {
+  color: white !important;
+}
