@@ -37,9 +37,9 @@ export class AuthService extends ParentApiService{
       sessionStorage.setItem('tokenLogin', this.tokenLog);
       sessionStorage.setItem('loggedIn', 'true');
       sessionStorage.setItem('email', email);
-      // sessionStorage.setItem('nom', personne.nom);
+      sessionStorage.setItem('nom', personne['nom']);
       sessionStorage.setItem('formations', JSON.stringify(formation));
-      // sessionStorage.setItem('prenom', personne.prenom);
+      sessionStorage.setItem('prenom', personne['prenom']);
       sessionStorage.setItem('poste', poste);
       sessionStorage.setItem('id', idProf);
       sessionStorage.setItem('idPersonne', personne['idPersonne']);
