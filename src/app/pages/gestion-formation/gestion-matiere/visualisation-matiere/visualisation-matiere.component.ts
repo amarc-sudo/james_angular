@@ -22,6 +22,7 @@ export class VisualisationMatiereComponent implements OnInit {
 
   ngOnInit(): void {
     const storedArray = JSON.parse(sessionStorage.getItem('formations'));
+    this.listFormations = [];
     for (let i = 0; i < storedArray.length; i++) {
       this.listFormations.push(storedArray[i] as Formation);
     }
