@@ -56,6 +56,8 @@ import {CookieBarComponent} from './annexe-component/cookie-bar/cookie-bar.compo
 import {NotfoundComponent} from './pages/notfound/notfound.component';
 import {AjoutClasseComponent} from './pages/gestion-formation/sous-menu-gestion-formation/ajout-classe/ajout-classe.component';
 import {AjoutEleveComponent} from './pages/gestion-formation/sous-menu-gestion-formation/ajout-eleve/ajout-eleve.component';
+import { AdminLogComponent } from './pages/gestion-administrateur/admin-log/admin-log.component';
+import {DecimalPipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -93,7 +95,8 @@ import {AjoutEleveComponent} from './pages/gestion-formation/sous-menu-gestion-f
     EmargementLoginComponent,
     AdminLoginComponent,
     SousMenuGestionFormationComponent,
-    SousMenuGestionProfesseurComponent
+    SousMenuGestionProfesseurComponent,
+    AdminLogComponent
   ],
   imports: [
     BrowserModule,
@@ -187,6 +190,11 @@ import {AjoutEleveComponent} from './pages/gestion-formation/sous-menu-gestion-f
         canActivate: [AuthAdminGuard]
       },
       {
+        path: 'admin-log',
+        component: AdminLogComponent,
+        canActivate: [AuthAdminGuard]
+      },
+      {
         path: '',
         component: HomeComponent
       },
@@ -207,7 +215,7 @@ import {AjoutEleveComponent} from './pages/gestion-formation/sous-menu-gestion-f
     Ng2SearchPipeModule
 
   ],
-  providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard, AuthAdminGuard],
+  providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard, AuthAdminGuard, DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

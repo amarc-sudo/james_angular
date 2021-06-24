@@ -12,6 +12,7 @@ import {TableData} from '../../../../api/objects/TableData';
 import {TableDataService} from '../../../../service/api/table.data.service';
 import {HistoriqueFicheService} from '../../../../service/api/historique-fiche.service';
 import * as FileSaver from 'file-saver';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-fiche-preview',
@@ -41,11 +42,12 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
 
   envoye: TableData;
+  non_envoye: TableData;
 
   nombreCours: number;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private coursService: CoursService, private historiqueFicheService: HistoriqueFicheService, private tableDataService: TableDataService, private route: ActivatedRoute, private router: Router) {
+  constructor(private coursService: CoursService, private historiqueFicheService: HistoriqueFicheService, private tableDataService: TableDataService, private route: ActivatedRoute, private router: Router,  private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -64,6 +66,7 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
         }
       })).subscribe());
       this.subscriptions.push(this.tableDataService.readByCode('env').subscribe(result => this.envoye = result));
+      this.tableDataService.readByCode('non_env').subscribe(result => this.non_envoye = result);
     }
   }
 
@@ -82,7 +85,7 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
 
   pdfGeneration(listCours: Cours[]): void {
     this.loadingPDF = true;
-    if (listCours.filter(cours => cours.etat.idData != this.envoye.idData).length > 0) {
+    if (listCours.filter(cours => cours.etat.idData !== this.envoye.idData).length > 0) {
       listCours.forEach(cours => {
           cours.etat = this.envoye;
           // @ts-ignore
@@ -91,15 +94,43 @@ export class FichePreviewComponent implements OnInit, OnDestroy {
       );
       this.subscriptions.push(this.coursService.readFichePresence(this.idFormation, this.date).pipe(
         tap(response => {
-          FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
-          this.loadingPDF = false;
+          if ( response.size !== 0) {
+            FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
+            this.loadingPDF = false;
+          }else{
+            listCours.forEach(cours => {
+                cours.etat = this.non_envoye;
+                // @ts-ignore
+                this.subscriptions.push(this.coursService.update(cours).subscribe());
+              }
+            );
+            this.snackBar.open('Erreur de la génération : contacter l\'administrateur', 'OK', {
+              duration: 3000
+            });
+            this.loadingPDF = false;
+          }
         })
       ).subscribe());
     } else {
       this.subscriptions.push(this.historiqueFicheService.readFichePresence(this.idFormation, this.date).pipe(
         tap(response => {
-          FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
-          this.loadingPDF = false;
+          console.log(response);
+          if ( response.size !== 0) {
+            FileSaver.saveAs(new Blob([response], {type: 'application/pdf'}), this.date + '-' + this.formation.intitule);
+            this.loadingPDF = false;
+          }else{
+            listCours.forEach(cours => {
+                cours.etat = this.non_envoye;
+                console.log(cours.etat);
+                // @ts-ignore
+                this.subscriptions.push(this.coursService.update(cours).subscribe());
+              }
+            );
+            this.snackBar.open('Erreur de la génération : contacter l\'administrateur', 'OK', {
+              duration: 3000
+            });
+            this.loadingPDF = false;
+          }
         })
       ).subscribe());
     }
