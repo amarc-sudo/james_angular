@@ -19,11 +19,10 @@
       <div class="row">
         <div class="col-sm-4 offset-1" style="margin-top: 20px;">
           <ul class="list-group">
-            <li class="list-group-item menu_item"><span>Le groupe</span></li>
-            <li class="list-group-item menu_item"><span>Le rapport</span></li>
-            <li class="list-group-item menu_item"><span>Le code</span></li>
+            <li class="list-group-item menu_item" (click)="change('groupe')"><span>Le groupe</span></li>
+            <li class="list-group-item menu_item" (click)="change('rapport')"><span>Le rapport</span></li>
+            <li class="list-group-item menu_item" (click)="goToSite('https://github.com/amarc-sudo/james_angular')"><span>Le code</span></li>
             <li class="list-group-item menu_item" (click)="goToSite('https://play.google.com/store/apps/details?id=com.iut.james_mobile')"><span>L'application</span></li>
-            <li class="list-group-item menu_item"><span>Gestion d'établisement</span></li>
             <li class="list-group-item menu_item" (click)="change('loginAdmin')"><span>Administration du site</span></li>
             <li class="list-group-item menu_item" (click)="change('professeur')"><span>Emargement en ligne</span></li>
           </ul>

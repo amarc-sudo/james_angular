@@ -58,6 +58,9 @@ import {AjoutClasseComponent} from './pages/gestion-formation/sous-menu-gestion-
 import {AjoutEleveComponent} from './pages/gestion-formation/sous-menu-gestion-formation/ajout-eleve/ajout-eleve.component';
 import { AdminLogComponent } from './pages/gestion-administrateur/admin-log/admin-log.component';
 import {DecimalPipe} from '@angular/common';
+import { GroupeComponent } from './pages/groupe/groupe.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { RapportComponent } from './pages/rapport/rapport.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +99,9 @@ import {DecimalPipe} from '@angular/common';
     AdminLoginComponent,
     SousMenuGestionFormationComponent,
     SousMenuGestionProfesseurComponent,
-    AdminLogComponent
+    AdminLogComponent,
+    GroupeComponent,
+    RapportComponent
   ],
   imports: [
     BrowserModule,
@@ -199,6 +204,14 @@ import {DecimalPipe} from '@angular/common';
         component: HomeComponent
       },
       {
+        path: 'groupe',
+        component: GroupeComponent
+      },
+      {
+        path: 'rapport',
+        component: RapportComponent
+      },
+      {
         path: '**',
         component: NotfoundComponent
       },
@@ -212,7 +225,8 @@ import {DecimalPipe} from '@angular/common';
     MatSelectModule,
     MatCardModule,
     DragDropModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatDividerModule
 
   ],
   providers: [AuthService, AuthGuard, MatSnackBar, AuthEmargementGuard, AuthAdminGuard, DecimalPipe],

@@ -57,8 +57,8 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center align-content-center flex-fill">
-        <router-outlet class="router" style="width: 100%"></router-outlet>
+      <div class="row justify-content-center align-content-center flex-fill" >
+        <router-outlet class="router" style="width: 100%; min-width: 100%;"></router-outlet>
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@
             class="col-4">
             <ul class="list-inline float-right cgu-block">
               <li class="list-inline-item"><a class="cgu-text" href="#">CGU</a></li>
-              <li class="list-inline-item"><a class="cgu-text" href="#">Le groupe</a></li>
+              <li class="list-inline-item"><a class="cgu-text" (click)="changeRoute('rapport')">Le groupe</a></li>
               <li class="list-inline-item"><a class="cgu-text"
                                               href="https://www.iut-velizy-rambouillet.uvsq.fr/">l'IUT</a></li>
             </ul>
